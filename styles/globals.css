@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .background {
+    position: fixed;
+    z-index: -1;
+    inset: 0px;
+    height: 100%;
+    width: 100%;
+    opacity: 0.4;
+    background: rgba(0, 0, 0, 0) url('../components/background/Matrix6.a6633af3.gif') repeat fixed
+        0% 0%;
+} */
+
+html {
+    cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAh0lEQVRYhe2WSwrAIAxEJ6H3v3K6MaX110WbzCYPRNTFPKOIAGAgoq2nSSgAmBlNwitAk9D7gCGh/US2xCCQLTEVyJRYCmRJbAUyJI7VgogMLgCGya88KjAJla79ziXQwsUlUi+hh0eHLQW68NQqKEg7d3bh1ioQekSv7wAbA/nHVBRFURThnD/uMROGdeAFAAAAAElFTkSuQmCC'),
+        auto;
+}
+
+body {
+    font-family: 'VT323', monospace;
+}
