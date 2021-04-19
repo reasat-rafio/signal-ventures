@@ -2,8 +2,8 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import Draggable from 'react-draggable'
 import { Button } from 'react95'
-import { useCtx } from '../../store'
-import { CLOSE_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../store/types'
+import { useCtx } from '../../../store'
+import { CLOSE_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../store/types'
 import { WindowWrapper, Header, Body } from '../../styles/Styles'
 
 interface WindowProps {

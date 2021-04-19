@@ -1,11 +1,7 @@
 import { useState } from 'react'
 import { Button, ListItem, Tooltip } from 'react95'
 import Image from 'next/image'
-import { useDate } from '../../libs/hooks'
 import Link from 'next/link'
-import { nav } from './_data'
-import { useCtx } from '../../store'
-import { CREATE_WINDOW_BOX } from '../../store/types'
 import {
     NavBar,
     NavList,
@@ -14,10 +10,19 @@ import {
     StartButton,
     ToolbarWrapper,
 } from '../../styles/Styles'
+import { SanityImg } from 'sanity-react-extra'
+import { useDate } from '../../../libs/hooks'
+import { CREATE_WINDOW_BOX } from '../../../store/types'
+import { imageUrlBuilder } from '../../../utils/sanity'
+import { useCtx } from '../../../store'
 
-interface NavbarProps {}
+interface NavbarProps {
+    nav: Inavs[]
+}
 
-export const Navbar: React.FC<NavbarProps> = ({}) => {
+export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
+    console.log('nav', nav)
+
     const {
         dispatch,
         state: { openWindows },
@@ -42,10 +47,10 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
                             width={20}
                             layout="intrinsic"
                         />
-                        <p style={{ marginLeft: '5px' }}>Start</p>
+                        <p className="ml-1">Start</p>
                     </StartButton>
 
-                    {openWindows.map(({ icon, name, index }: any) => (
+                    {openWindows.map(({ icon, name, index }) => (
                         <NavTabs
                             primary
                             key={index}
@@ -56,14 +61,14 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
                                 })
                             }
                         >
-                            <Image
-                                src={icon}
-                                alt={`${name} logo`}
+                            <SanityImg
+                                builder={imageUrlBuilder}
+                                image={icon}
+                                alt={name + 'logo'}
                                 height={20}
                                 width={20}
-                                layout="intrinsic"
                             />
-                            <p style={{ marginLeft: '5px' }}>{name}</p>
+                            <p className="ml-1">{name}</p>
                         </NavTabs>
                     ))}
 
@@ -81,28 +86,38 @@ export const Navbar: React.FC<NavbarProps> = ({}) => {
                                 </span>
                             </ListItem>
 
-                            {nav &&
-                                nav.map(({ name, icon }, index: number) => (
+                            {nav?.map(
+                                (
+                                    {
+                                        title,
+                                        logo: {
+                                            asset: { _ref },
+                                        },
+                                    }: Inavs,
+                                    index: number,
+                                ) => (
                                     <ListItem style={{ width: '14rem' }} key={index}>
                                         <span
                                             className="flex items-center gap-4"
                                             onClick={() =>
                                                 dispatch({
                                                     type: CREATE_WINDOW_BOX,
-                                                    payload: { name, icon, index },
+                                                    payload: { name: title, icon: _ref, index },
                                                 })
                                             }
                                         >
-                                            <Image
-                                                src={icon}
-                                                height="30"
-                                                width="30"
-                                                layout="intrinsic"
+                                            <SanityImg
+                                                builder={imageUrlBuilder}
+                                                image={_ref}
+                                                alt={title + 'logo'}
+                                                height={30}
+                                                width={30}
                                             />
-                                            <p>{name}</p>
+                                            <p>{title}</p>
                                         </span>
                                     </ListItem>
-                                ))}
+                                ),
+                            )}
                             <ListItem style={{ width: '14rem' }}>
                                 <Link href="www.twitter.com">
                                     <a className="flex items-center gap-4">

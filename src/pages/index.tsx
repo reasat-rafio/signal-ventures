@@ -1,21 +1,21 @@
-import { imageUrlBuilder, sanityStaticProps, useSanityQuery } from '../utils/sanity'
 import { groq } from 'next-sanity'
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
-import { withDimensions, SanityImg } from 'sanity-react-extra'
 import { SanityProps } from 'next-sanity-extra'
-import axios from 'axios'
 import { Window_ } from '../components/window/Window'
-import { Navbar } from '../components/navbar/Navbar'
 import { Home } from '../components/landing/Home'
-import { useCtx } from '../store'
+import { Navbar } from '../components/navbar/Navbar'
+import { useCtx } from '../../store'
+import { siteQuery } from '../../libs/query'
+import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
 
 const query = groq`{
-  "site": *[_id == "site"][0] {
-    ...,
-    "logo": ${withDimensions('logo')}
-  },
-  "landingPage": *[_id == "landingPage"][0]
+  "site": ${siteQuery},
+  "landingPage": *[_id == "landingPage"][0]{
+    seo,
+    heading,
+    description
+  }
 }`
 
 export const getStaticProps: GetStaticProps = async (context) => ({
@@ -28,22 +28,26 @@ export default function Index(props: SanityProps) {
     } = useSanityQuery(query, props)
 
     const {
-        state: { activeWindows, openWindows },
+        state: { activeWindows },
     } = useCtx()
 
     return (
         <div
             className="h-screen opacity-99 w-screen overflow-hidden relative"
-            style={{ background: '#0E1C3D' }}
+            style={{ backgroundColor: '#0E1C3D' }}
         >
             <NextSeo title={landingPage.seo.title} description={landingPage.seo.description} />
 
             <div className="container mx-auto flex flex-col items-center ">
-                <Home />
+                <Home
+                    title={landingPage.heading}
+                    description={landingPage.description}
+                    logo={site.sites.logo.asset.url}
+                />
                 {activeWindows.map(({ index }: any) => (
                     <Window_ key={index} index={index} />
                 ))}
-                <Navbar />
+                <Navbar nav={site.sites.nav} />
             </div>
         </div>
     )

@@ -1,0 +1,23 @@
+import React from 'react'
+import { Button } from 'react95'
+import { SanityImg } from 'sanity-react-extra'
+import { imageUrlBuilder } from '../../../utils/sanity'
+
+export const Home: React.FC<HomeProps> = ({ description, title, logo }) => {
+    return (
+        <section className="flex flex-col justify-center items-center transform  -translate-y-5  h-screen text-white gap-5 z-0 px-2 md:px-0">
+            <SanityImg
+                builder={imageUrlBuilder}
+                image={logo}
+                alt={'signal ventures logo'}
+                height={124}
+                width={110}
+            />
+            <h1 className="text-6xl">{title}</h1>
+            <p className="text-gray-300 text-2xl text-center max-w-5xl ">{description}</p>
+            <Button style={{ padding: '5px 30px' }} size="lg">
+                Read More
+            </Button>
+        </section>
+    )
+}

@@ -1,3 +1,7 @@
+interface PropIsChildren {
+    children: React.ReactNode
+}
+
 interface WindowsProps {
     name: string
     icon: string
@@ -14,8 +18,19 @@ type Action = {
     payload: any
 }
 
-interface PropIsChildren {
-    children: React.ReactNode
+interface HomeProps {
+    title: string
+    description: string
+    logo: string
+}
+
+interface Inavs {
+    title: string
+    logo: {
+        asset: {
+            _ref: string
+        }
+    }
 }
 
 declare module '*.png'

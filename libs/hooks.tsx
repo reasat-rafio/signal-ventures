@@ -19,7 +19,6 @@ export const useDate = () => {
     })}\n\n`
 
     const hour = today.getHours()
-    const wish = `Good ${(hour < 12 && 'Morning') || (hour < 17 && 'Afternoon') || 'Evening'}, `
 
     const time = today.toLocaleTimeString(locale, {
         hour: 'numeric',
@@ -31,7 +30,6 @@ export const useDate = () => {
     return {
         date,
         time,
-        wish,
         year,
     }
 }
