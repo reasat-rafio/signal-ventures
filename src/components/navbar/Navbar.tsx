@@ -21,8 +21,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
-    console.log('nav', nav)
-
+ 
     const {
         dispatch,
         state: { openWindows },

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import Draggable from 'react-draggable'
 import { Button } from 'react95'
+import useMousePosition from '../../../libs/hooks'
 import { useCtx } from '../../../store'
 import { CLOSE_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../store/types'
 import { WindowWrapper, Header, Body } from '../../styles/Styles'
@@ -20,11 +21,27 @@ export const Window_: React.FC<WindowProps> = ({ index }) => {
         }
     }, [])
 
+    // const { xaxis, yaxis }: { xaxis: any; yaxis: any } = useMousePosition()
+
+    const [xaxis, setXaxis] = useState<number>(0)
+    const [yaxis, setYaxis] = useState<number>(0)
+
+    const draggable = (e: any, data: DraggableData) => {
+        setXaxis(data.x)
+        setYaxis(data.y)
+    }
+
     return (
         <>
             {windowIsNotUndefined && (
-                <Draggable bounds="body">
-                    <WindowWrapper isExpanded={isExpanded}>
+                <Draggable
+                    onDrag={draggable}
+                    onStart={draggable}
+                    onStop={draggable}
+                    bounds="body"
+                    position={{ x: isExpanded ? 0 : xaxis, y: isExpanded ? 0 : yaxis }}
+                >
+                    <WindowWrapper isExpanded={isExpanded} xaxis={xaxis} yaxis={yaxis}>
                         <div className="cursor-move ">
                             <Header>
                                 <span>Blog.exe</span>

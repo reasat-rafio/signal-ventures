@@ -29,12 +29,12 @@ export const NavList = styled(List)`
     bottom: 43px;
 `
 
-export const WindowWrapper = styled(Window)<{ isExpanded: boolean }>`
+export const WindowWrapper = styled(Window)`
     width: ${(props) => (props.isExpanded === true ? '100vw' : '32rem')};
     min-height: ${(props) => (props.isExpanded === true ? '100vh' : '47rem')};
     position: absolute;
-    top: ${(props) => (props.isExpanded === true ? '0' : '10rem')};
-    left: ${(props) => (props.isExpanded === true ? '0' : '20rem')};
+    top: ${(props) => (props.isExpanded === true ? '0px' : '10rem')};
+    left: ${(props) => (props.isExpanded === true ? '0px' : '20rem')};
 `
 
 export const Header = styled(WindowHeader)`

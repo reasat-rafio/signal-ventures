@@ -33,3 +33,24 @@ export const useDate = () => {
         year,
     }
 }
+
+export const useMousePosition = () => {
+    const [mousePosition, setMousePosition] = useState<{
+        xaxis: number | null
+        yaxis: number | null
+    }>({ xaxis: null, yaxis: null })
+
+    const updateMousePosition = (ev) => {
+        setMousePosition({ xaxis: ev.clientX, yaxis: ev.clientY })
+    }
+
+    useEffect(() => {
+        window.addEventListener('mousemove', updateMousePosition)
+
+        return () => window.removeEventListener('mousemove', updateMousePosition)
+    }, [])
+
+    return mousePosition
+}
+
+export default useMousePosition
