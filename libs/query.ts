@@ -6,6 +6,7 @@ export const siteQuery = groq`{
         "logo": ${withDimensions('logo')},
         "nav": menu[0..3] {
             title,
+            _key,
             logo{
                 asset {
                 _ref

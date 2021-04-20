@@ -5,16 +5,16 @@ interface PropIsChildren {
 interface WindowsProps {
     name: string
     icon: string
-    index: number
+    index: string
 }
 
 interface InitalState {
     openWindows: WindowsProps[]
     activeWindows: WindowsProps[]
+    focusWindow: null | string
 }
-
 type Action = {
-    type: 'CREATE_WINDOW_BOX' | 'MINIMIZE_WINDOW_BOX' | 'CLOSE_WINDOW_BOX'
+    type: 'CREATE_WINDOW_BOX' | 'MINIMIZE_WINDOW_BOX' | 'CLOSE_WINDOW_BOX' | 'FOCUS_WINDOW_BOX'
     payload: any
 }
 
@@ -26,6 +26,7 @@ interface HomeProps {
 
 interface Inavs {
     title: string
+    _key: string
     logo: {
         asset: {
             _ref: string
@@ -41,6 +42,11 @@ type DraggableData = {
     deltaY: number
     lastX: number
     lastY: number
+}
+
+interface IWindowWrapper {
+    isExpanded: boolean
+    windowIsFocused: boolean
 }
 
 declare module '*.png'

@@ -8,6 +8,8 @@ import { Navbar } from '../components/navbar/Navbar'
 import { useCtx } from '../../store'
 import { siteQuery } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
+import { useRef } from 'react'
+import { useSiteHeightAndWidth } from '../../libs/hooks'
 
 const query = groq`{
   "site": ${siteQuery},
@@ -18,7 +20,7 @@ const query = groq`{
   }
 }`
 
-export const getStaticProps: GetStaticProps = async (context) => ({
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => ({
     props: await sanityStaticProps({ query, context }),
 })
 
@@ -31,8 +33,12 @@ export default function Index(props: SanityProps) {
         state: { activeWindows },
     } = useCtx()
 
+    const siteRef = useRef<HTMLDivElement>(null)
+    const { height, width } = useSiteHeightAndWidth(siteRef)
+
     return (
         <div
+            ref={siteRef}
             className="h-screen opacity-99 w-screen overflow-hidden relative"
             style={{ backgroundColor: '#0E1C3D' }}
         >
@@ -44,8 +50,9 @@ export default function Index(props: SanityProps) {
                     description={landingPage.description}
                     logo={site.sites.logo.asset.url}
                 />
-                {activeWindows.map(({ index }: any) => (
-                    <Window_ key={index} index={index} />
+
+                {activeWindows.map(({ index }: WindowsProps) => (
+                    <Window_ key={index} index={index} width={width} />
                 ))}
                 <Navbar nav={site.sites.nav} />
             </div>

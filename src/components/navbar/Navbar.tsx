@@ -21,10 +21,9 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
- 
     const {
         dispatch,
-        state: { openWindows },
+        state: { openWindows, focusWindow },
     } = useCtx()
 
     const [open, setOpen] = useState<boolean>(false)
@@ -49,9 +48,11 @@ export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
                         <p className="ml-1">Start</p>
                     </StartButton>
 
+                    {/* THIS WILL SHOW ALL THE TABS THAT ARE OPEN IN THE NAVBAR  */}
                     {openWindows.map(({ icon, name, index }) => (
                         <NavTabs
                             primary
+                            active={index == focusWindow ? true : false}
                             key={index}
                             onClick={() =>
                                 dispatch({
@@ -85,38 +86,28 @@ export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
                                 </span>
                             </ListItem>
 
-                            {nav?.map(
-                                (
-                                    {
-                                        title,
-                                        logo: {
-                                            asset: { _ref },
-                                        },
-                                    }: Inavs,
-                                    index: number,
-                                ) => (
-                                    <ListItem style={{ width: '14rem' }} key={index}>
-                                        <span
-                                            className="flex items-center gap-4"
-                                            onClick={() =>
-                                                dispatch({
-                                                    type: CREATE_WINDOW_BOX,
-                                                    payload: { name: title, icon: _ref, index },
-                                                })
-                                            }
-                                        >
-                                            <SanityImg
-                                                builder={imageUrlBuilder}
-                                                image={_ref}
-                                                alt={title + 'logo'}
-                                                height={30}
-                                                width={30}
-                                            />
-                                            <p>{title}</p>
-                                        </span>
-                                    </ListItem>
-                                ),
-                            )}
+                            {nav?.map(({ title, _key, logo: { asset: { _ref } } }: Inavs) => (
+                                <ListItem style={{ width: '14rem' }} key={_key}>
+                                    <span
+                                        className="flex items-center gap-4"
+                                        onClick={() =>
+                                            dispatch({
+                                                type: CREATE_WINDOW_BOX,
+                                                payload: { name: title, icon: _ref, index: _key },
+                                            })
+                                        }
+                                    >
+                                        <SanityImg
+                                            builder={imageUrlBuilder}
+                                            image={_ref}
+                                            alt={title + 'logo'}
+                                            height={30}
+                                            width={30}
+                                        />
+                                        <p>{title}</p>
+                                    </span>
+                                </ListItem>
+                            ))}
                             <ListItem style={{ width: '14rem' }}>
                                 <Link href="www.twitter.com">
                                     <a className="flex items-center gap-4">

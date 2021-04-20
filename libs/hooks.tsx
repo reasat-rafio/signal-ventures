@@ -34,23 +34,22 @@ export const useDate = () => {
     }
 }
 
-export const useMousePosition = () => {
-    const [mousePosition, setMousePosition] = useState<{
-        xaxis: number | null
-        yaxis: number | null
-    }>({ xaxis: null, yaxis: null })
-
-    const updateMousePosition = (ev) => {
-        setMousePosition({ xaxis: ev.clientX, yaxis: ev.clientY })
-    }
+export const useSiteHeightAndWidth = (myRef: any) => {
+    const [width, setWidth] = useState<number>(0)
+    const [height, setHeight] = useState<number>(0)
 
     useEffect(() => {
-        window.addEventListener('mousemove', updateMousePosition)
+        setWidth(myRef.current.offsetWidth)
+        setHeight(myRef.current.offsetHeight)
+        const handleResize = () => {
+            setWidth(myRef.current.offsetWidth)
+            setHeight(myRef.current.offsetHeight)
+        }
+        window.addEventListener('resize', handleResize)
 
-        return () => window.removeEventListener('mousemove', updateMousePosition)
-    }, [])
-
-    return mousePosition
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [myRef])
+    return { height, width }
 }
-
-export default useMousePosition

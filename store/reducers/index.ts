@@ -1,8 +1,14 @@
-import { CREATE_WINDOW_BOX, MINIMIZE_WINDOW_BOX, CLOSE_WINDOW_BOX } from '../types'
+import {
+    CREATE_WINDOW_BOX,
+    MINIMIZE_WINDOW_BOX,
+    CLOSE_WINDOW_BOX,
+    FOCUS_WINDOW_BOX,
+} from '../types'
 
 export const initialState: InitalState = {
     openWindows: [],
     activeWindows: [],
+    focusWindow: null,
 }
 
 export const reducer = (state: InitalState, action: Action) => {
@@ -25,7 +31,7 @@ export const reducer = (state: InitalState, action: Action) => {
                 activeWindows.push(action.payload)
             }
 
-            return { ...state, openWindows, activeWindows }
+            return { ...state, openWindows, activeWindows, focusWindow: action.payload.index }
         }
         case MINIMIZE_WINDOW_BOX: {
             let { activeWindows } = state
@@ -49,6 +55,13 @@ export const reducer = (state: InitalState, action: Action) => {
                 activeWindows,
             }
         }
+
+        case FOCUS_WINDOW_BOX:
+            return {
+                ...state,
+                focusWindow: action.payload,
+            }
+
         default:
             return state
     }
