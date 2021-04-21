@@ -4,3 +4,8 @@ export const breakpoints = {
     md: '992px',
     lg: '1200px',
 }
+
+export const font_size_for_nav = {
+    sm: '14px',
+    lg: '20px',
+}

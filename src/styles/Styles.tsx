@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Button, List, Window, WindowHeader } from 'react95'
 import styled from 'styled-components'
 import { respondTo } from '../../libs/mixin'
+import { font_size_for_nav } from '../../libs/_variables'
 
 export const NavBar = styled(AppBar)`
     position: fixed;
@@ -20,9 +21,18 @@ export const StartBar = styled.div`
 `
 export const StartButton = styled(Button)`
     font-weight: bold;
+    font-size: ${font_size_for_nav.sm};
+    ${respondTo.md`
+    font-size: ${font_size_for_nav.lg};
+  `}
 `
 export const NavTabs = styled(Button)<{ index: number }>`
+    margin: 0 3px;
+    font-size: ${font_size_for_nav.sm};
+    ${respondTo.md`
+    font-size: ${font_size_for_nav.lg};
     margin: 0 5px;
+  `}
 `
 
 export const NavList = styled(List)`
@@ -40,7 +50,7 @@ export const WindowWrapper = styled(Window)<IWindowWrapper>`
     ${respondTo.md`
     min-height: ${(props: IWindowWrapper) => (props.isExpanded ? '100vh' : '47rem')};
     left: ${(props: IWindowWrapper) => (props.isExpanded ? '0px' : '20rem')};
-    top: ${(props: IWindowWrapper) => (props.isExpanded ? '0px' : '10rem')};
+    top: ${(props: IWindowWrapper) => (props.isExpanded ? '0px' : '7rem')};
     width: ${(props: IWindowWrapper) => (props.isExpanded ? '100vw' : '32rem')};
   `}
     z-index: ${(props: IWindowWrapper) => (props.windowIsFocused ? '10' : '0')};

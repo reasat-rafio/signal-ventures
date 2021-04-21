@@ -13,8 +13,10 @@ export const Home: React.FC<HomeProps> = ({ description, title, logo }) => {
                 height={124}
                 width={110}
             />
-            <h1 className="text-6xl">{title}</h1>
-            <p className="text-gray-300 text-2xl text-center max-w-5xl ">{description}</p>
+            <h1 className="md:text-6xl text-5xl text-center">{title}</h1>
+            <p className="text-gray-300 md:text-2xl text-xl  text-center max-w-5xl ">
+                {description}
+            </p>
             <Button style={{ padding: '5px 30px' }} size="lg">
                 Read More
             </Button>

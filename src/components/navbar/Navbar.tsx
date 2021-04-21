@@ -68,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
                                 height={20}
                                 width={20}
                             />
-                            <p className="ml-1">{name}</p>
+                            <p className="ml-1 md:block hidden">{name}</p>
                         </NavTabs>
                     ))}
 

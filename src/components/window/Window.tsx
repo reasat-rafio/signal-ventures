@@ -12,15 +12,13 @@ interface WindowProps {
 }
 
 export const Window_: React.FC<WindowProps> = ({ index, width }) => {
-    console.log(width)
-
     const {
         dispatch,
         state: { focusWindow },
     } = useCtx()
 
-    const [isExpanded, setIsExpanded] = useState(false)
-    const [windowIsNotUndefined, setWindowIsNotUndefined] = useState(false)
+    const [isExpanded, setIsExpanded] = useState<boolean>(false)
+    const [windowIsNotUndefined, setWindowIsNotUndefined] = useState<boolean>(false)
     const [xaxis, setXaxis] = useState<number>(0)
     const [yaxis, setYaxis] = useState<number>(0)
     const [windowIsFocused, setWindowIsFocused] = useState<boolean>(false)
@@ -45,9 +43,6 @@ export const Window_: React.FC<WindowProps> = ({ index, width }) => {
         setYaxis(data.y)
     }
 
-    if (mdScreenBreakpoint) {
-    }
-
     return (
         <>
             {windowIsNotUndefined && (
@@ -56,7 +51,6 @@ export const Window_: React.FC<WindowProps> = ({ index, width }) => {
                     onStart={draggable}
                     onStop={draggable}
                     bounds="body"
-                    // position={{ x: isExpanded ? 0 : xaxis, y: isExpanded ? 0 : yaxis }}
                     position={{
                         x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
                         y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
