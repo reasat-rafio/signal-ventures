@@ -17,7 +17,8 @@ const query = groq`{
   "landingPage": *[_id == "landingPage"][0]{
     seo,
     heading,
-    description
+    description,
+    ctaButton
   }
 }`
 
@@ -46,12 +47,13 @@ export default function Index(props: SanityProps) {
                     title={landingPage.heading}
                     description={landingPage.description}
                     logo={site.sites.logo.asset.url}
+                    button={landingPage.ctaButton}
                 />
 
                 {activeWindows.map(({ index }: WindowsProps) => (
                     <Window_ key={index} index={index} width={width} />
                 ))}
-                <Navbar nav={site.sites.nav} />
+                <Navbar navs={site.sites.nav} />
             </div>
         </Container>
     )

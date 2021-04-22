@@ -18,6 +18,11 @@ export default {
             title: 'Description',
             type: 'text',
         },
+        {
+            name: 'ctaButton',
+            title: 'CTA Button',
+            type: 'ctaButton',
+        },
     ],
     preview: {
         select: {

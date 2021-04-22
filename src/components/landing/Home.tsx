@@ -3,7 +3,7 @@ import { Button } from 'react95'
 import { SanityImg } from 'sanity-react-extra'
 import { imageUrlBuilder } from '../../../utils/sanity'
 
-export const Home: React.FC<HomeProps> = ({ description, title, logo }) => {
+export const Home: React.FC<HomeProps> = ({ description, title, logo, button }) => {
     return (
         <section className="flex flex-col justify-center items-center transform  -translate-y-5  h-screen text-white gap-5  px-2 md:px-0 z-10">
             <SanityImg
@@ -18,7 +18,7 @@ export const Home: React.FC<HomeProps> = ({ description, title, logo }) => {
                 {description}
             </p>
             <Button style={{ padding: '5px 30px' }} size="lg">
-                Read More
+                {button.title}
             </Button>
         </section>
     )

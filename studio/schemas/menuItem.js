@@ -8,6 +8,7 @@ export default {
     fields: [
         { name: 'title', title: 'Title', type: 'string' },
         { name: 'href', title: 'Link', type: 'string' },
+        { name: 'dark_mode', title: 'Dark Mode', type: 'number' },
         {
             name: 'logo',
             title: 'Logo',

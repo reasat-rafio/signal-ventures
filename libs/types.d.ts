@@ -28,6 +28,11 @@ interface HomeProps {
     title: string
     description: string
     logo: string
+    button: {
+        _type: string
+        title: string
+        href?: string
+    }
 }
 
 interface Inavs {
@@ -38,6 +43,8 @@ interface Inavs {
             _ref: string
         }
     }
+    dark_mode?: number
+    href?: string
 }
 
 type DraggableData = {

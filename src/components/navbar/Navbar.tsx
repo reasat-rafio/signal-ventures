@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, ListItem, Tooltip } from 'react95'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,17 +17,59 @@ import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 
 interface NavbarProps {
-    nav: Inavs[]
+    navs: Inavs[]
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
+export const Navbar: React.FC<NavbarProps> = ({ navs }) => {
     const {
         dispatch,
         state: { openWindows, focusWindow, darkMode },
     } = useCtx()
-
+    const [navigation, setNavigation] = useState<Inavs[]>([])
     const [open, setOpen] = useState<boolean>(false)
     const { date, time, year } = useDate()
+
+    useEffect(() => {
+        const _navs = navs.filter((n) => n.dark_mode == undefined)
+        const dark_and_light_navs = navs.filter((n) => n.dark_mode != undefined)
+        setNavigation(_navs)
+
+        if (darkMode) {
+            const _dark_nav = dark_and_light_navs.filter((d) => !d.dark_mode)
+            const newNav = [..._navs.reverse(), ..._dark_nav].sort((n) =>
+                n.dark_mode != undefined ? -1 : 1,
+            )
+            setNavigation(newNav)
+        } else {
+            const _light_nav = dark_and_light_navs.filter((d) => d.dark_mode)
+            const newNav = [..._navs.reverse(), ..._light_nav].sort((n) =>
+                n.dark_mode != undefined ? -1 : 1,
+            )
+            setNavigation(newNav)
+        }
+    }, [darkMode])
+
+    const navbarAction = (
+        title: string,
+        _ref: string,
+        _key: string,
+        dark_mode: number | undefined,
+    ) => {
+        if (dark_mode == undefined) {
+            dispatch({
+                type: CREATE_WINDOW_BOX,
+                payload: {
+                    name: title,
+                    icon: _ref,
+                    index: _key,
+                },
+            })
+        } else {
+            dispatch({
+                type: TOGGLE_DARK_MODE,
+            })
+        }
+    }
 
     return (
         <NavBar>
@@ -72,66 +114,42 @@ export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
                         </NavTabs>
                     ))}
 
+                    {/*  DROPDOWN LIST ITEMS */}
                     {open && (
                         <NavList onClick={() => setOpen(false)}>
-                            <ListItem
-                                style={{ width: '14rem' }}
-                                onClick={() =>
-                                    dispatch({
-                                        type: TOGGLE_DARK_MODE,
-                                    })
-                                }
-                            >
-                                <span className="flex items-center gap-4">
-                                    <Image
-                                        src={'/img/static/network_normal_two_pcs-2.png'}
-                                        height="30"
-                                        width="30"
-                                        layout="intrinsic"
-                                    />
-                                    <p>Switch to {darkMode ? 'lightmode' : 'darkmode'} Mode </p>
-                                </span>
-                            </ListItem>
-
-                            {nav?.map(({ title, _key, logo: { asset: { _ref } } }: Inavs) => (
-                                <ListItem style={{ width: '14rem' }} key={_key}>
-                                    <span
-                                        className="flex items-center gap-4"
-                                        onClick={() =>
-                                            dispatch({
-                                                type: CREATE_WINDOW_BOX,
-                                                payload: { name: title, icon: _ref, index: _key },
-                                            })
-                                        }
-                                    >
-                                        <SanityImg
-                                            builder={imageUrlBuilder}
-                                            image={_ref}
-                                            alt={title + 'logo'}
-                                            height={30}
-                                            width={30}
-                                        />
-                                        <p>{title}</p>
-                                    </span>
-                                </ListItem>
-                            ))}
-                            <ListItem style={{ width: '14rem' }}>
-                                <Link href="www.twitter.com">
-                                    <a className="flex items-center gap-4">
-                                        <Image
-                                            src={'/img/static/twitter 1.png'}
-                                            height="30"
-                                            width="30"
-                                            layout="intrinsic"
-                                        />
-                                        <p>Twitter</p>
-                                    </a>
-                                </Link>
-                            </ListItem>
+                            {navigation?.map(
+                                ({
+                                    title,
+                                    _key,
+                                    logo: {
+                                        asset: { _ref },
+                                    },
+                                    dark_mode,
+                                }: Inavs) => (
+                                    <ListItem style={{ width: '14rem' }} key={_key}>
+                                        <span
+                                            className="flex items-center gap-4"
+                                            onClick={() =>
+                                                navbarAction(title, _ref, _key, dark_mode)
+                                            }
+                                        >
+                                            <SanityImg
+                                                builder={imageUrlBuilder}
+                                                image={_ref}
+                                                alt={title + 'logo'}
+                                                height={30}
+                                                width={30}
+                                            />
+                                            <p>{title}</p>
+                                        </span>
+                                    </ListItem>
+                                ),
+                            )}
                         </NavList>
                     )}
                 </StartBar>
 
+                {/* TIME VIEW */}
                 <Tooltip
                     text={date + year}
                     enterDelay={100}
