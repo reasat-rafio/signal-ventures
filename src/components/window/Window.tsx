@@ -1,20 +1,19 @@
-import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
-import Draggable from 'react-draggable'
-import { Button } from 'react95'
 import { useCtx } from '../../../store'
-import { CLOSE_WINDOW_BOX, FOCUS_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../store/types'
-import { WindowWrapper, Header, Body } from '../../styles/Styles'
+import { Articles } from './articles/Articles'
+import { Contact } from './contact/Contact'
+import { Portfolio } from './portfolio/Portfolio'
 
 interface WindowProps {
     index: string
     width: number
+    blogInfo: any
 }
 
-export const Window_: React.FC<WindowProps> = ({ index, width }) => {
+export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo }) => {
     const {
         dispatch,
-        state: { focusWindow },
+        state: { focusWindow, activeWindows },
     } = useCtx()
 
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
@@ -23,10 +22,34 @@ export const Window_: React.FC<WindowProps> = ({ index, width }) => {
     const [yaxis, setYaxis] = useState<number>(0)
     const [windowIsFocused, setWindowIsFocused] = useState<boolean>(false)
     const [mdScreenBreakpoint, setMdScreenBreakpoint] = useState<boolean>(false)
+    const [windowName, setWindowName] = useState<string>('')
+    const [windowIcon, setWindowIcon] = useState<string>('')
+    const [windowID, setWindowID] = useState<string>('')
+
+    const findWindowDetails = (id: string) => {
+        const findWin: WindowsProps[] = activeWindows.filter((i) => i.index == id)
+        setWindowName(findWin[0].name)
+        setWindowIcon(findWin[0].icon)
+        setWindowID(findWin[0].index)
+    }
 
     useEffect(() => {
         if (window !== undefined) {
             setWindowIsNotUndefined(true)
+        }
+        switch (index) {
+            case '0ca5a8f1cfbb':
+                findWindowDetails('0ca5a8f1cfbb')
+                break
+            case 'ad5661f253fe':
+                findWindowDetails('ad5661f253fe')
+                break
+            case '5345c8fcdf0e':
+                findWindowDetails('5345c8fcdf0e')
+                break
+            default:
+                setWindowName('...')
+                break
         }
     }, [])
 
@@ -38,77 +61,31 @@ export const Window_: React.FC<WindowProps> = ({ index, width }) => {
         focusWindow === index ? setWindowIsFocused(true) : setWindowIsFocused(false)
     }, [focusWindow])
 
-    const draggable = (e: any, data: DraggableData) => {
+    const draggable = (e, data: DraggableData) => {
         setXaxis(data.x)
         setYaxis(data.y)
     }
 
+    const props = {
+        windowID,
+        windowIsFocused,
+        isExpanded,
+        index,
+        windowName,
+        windowIcon,
+        setIsExpanded,
+        draggable,
+        mdScreenBreakpoint,
+        xaxis,
+        yaxis,
+    }
+
     return (
         <>
-            {windowIsNotUndefined && (
-                <Draggable
-                    onDrag={draggable}
-                    onStart={draggable}
-                    onStop={draggable}
-                    bounds="body"
-                    position={{
-                        x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
-                        y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
-                    }}
-                >
-                    <WindowWrapper
-                        windowIsFocused={windowIsFocused}
-                        isExpanded={isExpanded}
-                        onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
-                    >
-                        <Header active={windowIsFocused ? true : false}>
-                            <strong className="cursor">
-                                <div>{focusWindow}</div>
-                            </strong>
-                            <div className="flex justify-end flex-1">
-                                <Button
-                                    size="sm"
-                                    onClick={() =>
-                                        dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
-                                    }
-                                >
-                                    <Image
-                                        src="/img/static/close.png"
-                                        layout="intrinsic"
-                                        width="27%"
-                                        height="27%"
-                                        alt="minimize"
-                                    />
-                                </Button>
-                                <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
-                                    <Image
-                                        src="/img/static/maximize.png"
-                                        layout="intrinsic"
-                                        width="18"
-                                        height="18"
-                                        alt="maximize"
-                                    />
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    onClick={() =>
-                                        dispatch({ type: CLOSE_WINDOW_BOX, payload: index })
-                                    }
-                                >
-                                    <Image
-                                        src="/img/static/cross.png"
-                                        layout="intrinsic"
-                                        width="30%"
-                                        height="27%"
-                                        alt="close"
-                                    />
-                                </Button>
-                            </div>
-                        </Header>
-
-                        <Body isExpanded={isExpanded}>Demo Body</Body>
-                    </WindowWrapper>
-                </Draggable>
+            {windowIsNotUndefined && windowID === '0ca5a8f1cfbb' && <Portfolio {...props} />}
+            {windowIsNotUndefined && windowID === '5345c8fcdf0e' && <Contact {...props} />}
+            {windowIsNotUndefined && windowID === 'ad5661f253fe' && (
+                <Articles {...props} blogInfo={blogInfo} />
             )}
         </>
     )

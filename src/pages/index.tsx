@@ -8,10 +8,11 @@ import { Navbar } from '../components/navbar/Navbar'
 import { useCtx } from '../../store'
 import { siteQuery } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
-import { useRef } from 'react'
-import { useSiteHeightAndWidth } from '../../libs/hooks'
+import { useEffect, useRef } from 'react'
+import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
 import { Container } from '../styles/Styles'
-
+import Parser from 'rss-parser'
+import axios from 'axios'
 const query = groq`{
   "site": ${siteQuery},
   "landingPage": *[_id == "landingPage"][0]{
@@ -21,23 +22,31 @@ const query = groq`{
     ctaButton
   }
 }`
+// let parser = new Parser()
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
-export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => ({
-    props: await sanityStaticProps({ query, context }),
-})
+    return {
+        props: {
+            blog: data,
+            sanityData: await sanityStaticProps({ query, context }),
+        },
+    }
+}
 
-export default function Index(props: SanityProps) {
+export default function Index({ blog, sanityData }) {
     const {
         data: { site, landingPage },
-    } = useSanityQuery(query, props)
+    } = useSanityQuery(query, sanityData)
 
     const {
         state: { activeWindows, darkMode },
     } = useCtx()
-    console.log('darkMode:', darkMode)
 
     const siteRef = useRef<HTMLDivElement>(null)
     const { height, width } = useSiteHeightAndWidth(siteRef)
+
+    const { blogInfo } = useToText(blog.items, blog.feed)
 
     return (
         <Container ref={siteRef} darkMode={darkMode}>
@@ -51,7 +60,7 @@ export default function Index(props: SanityProps) {
                 />
 
                 {activeWindows.map(({ index }: WindowsProps) => (
-                    <Window_ key={index} index={index} width={width} />
+                    <Window_ key={index} index={index} width={width} blogInfo={blogInfo} />
                 ))}
                 <Navbar navs={site.sites.nav} />
             </div>

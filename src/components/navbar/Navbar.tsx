@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Button, ListItem, Tooltip } from 'react95'
 import Image from 'next/image'
-import Link from 'next/link'
 import {
     NavBar,
     NavList,

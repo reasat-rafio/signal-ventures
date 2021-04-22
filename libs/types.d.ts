@@ -60,6 +60,31 @@ type DraggableData = {
 interface IWindowWrapper {
     isExpanded: boolean
     windowIsFocused: boolean
+    windowID: string
+}
+
+interface IWindowsProps {
+    windowID: string
+    windowIsFocused: boolean
+    isExpanded: boolean
+    index: string
+    windowName: string
+    windowIcon: string
+    setIsExpanded: any
+    draggable: (e, data: DraggableData) => void
+    mdScreenBreakpoint: boolean
+    xaxis: number
+    yaxis: number
+}
+
+interface BlogItems {
+    author: string
+    content: string
+    image: string
+    pubDate: string
+    thumbnail: string
+    title: string
+    url: string
 }
 
 declare module '*.png'

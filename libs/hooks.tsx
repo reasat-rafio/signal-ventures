@@ -53,3 +53,26 @@ export const useSiteHeightAndWidth = (myRef: any) => {
     }, [myRef])
     return { height, width }
 }
+
+export const useToText = (item: BlogItems[], feed: { image: string; link: string }) => {
+    const [blogInfo, setBlogInfo] = useState({})
+    const { image, link } = feed
+
+    useEffect(() => {
+        const newArr = item.map(({ content, author, pubDate, title, thumbnail }: BlogItems) => {
+            let tag = document.createElement('div')
+            tag.innerHTML = content
+            return {
+                content: tag.innerText.slice(0, 600) + '...',
+                pubDate,
+                title,
+                thumbnail,
+                author,
+                image,
+                link,
+            }
+        })
+        setBlogInfo(newArr)
+    }, [])
+    return { blogInfo }
+}
