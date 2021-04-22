@@ -15,7 +15,7 @@ export const Container = styled.div<{ darkMode: boolean }>`
         `
         &:after {
             content: '';
-            opacity: 0.7;
+            opacity: 0.8;
             background-color: #000;
             top: 0;
             left: 0;
