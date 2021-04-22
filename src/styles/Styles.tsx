@@ -86,7 +86,7 @@ export const WindowWrapper = styled(Window)<IWindowWrapper>`
     top: ${(props: IWindowWrapper) => (props.isExpanded ? '0px' : '7rem')};
     width: ${(props: IWindowWrapper) => (props.isExpanded ? '100vw' : '32rem')};
   `}
-    z-index: ${(props: IWindowWrapper) => (props.windowIsFocused ? '10' : '0')};
+    z-index: ${(props: IWindowWrapper) => (props.windowIsFocused ? '40' : '30')};
 `
 
 export const Header = styled(WindowHeader)`
