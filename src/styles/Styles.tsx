@@ -3,6 +3,39 @@ import styled from 'styled-components'
 import { respondTo } from '../../libs/mixin'
 import { font_size_for_nav } from '../../libs/_variables'
 
+export const Container = styled.div<{ darkMode: boolean }>`
+    min-height: 100vh;
+    background: ${(props: { darkMode: boolean }) =>
+        props.darkMode === true
+            ? 'url(/img/static/darkbg.png) no-repeat center center / cover '
+            : '#0E1C3D'};
+
+    ${({ darkMode }) =>
+        darkMode &&
+        `
+        &:after {
+            content: '';
+            opacity: 0.7;
+            background-color: #000;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            background-size: contain;
+            background-repeat: repeat;
+        } `}
+`
+export const BackgroundMask = styled.div`
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background-size: contain;
+    background-color: #fdf5eb;
+`
+
 export const NavBar = styled(AppBar)`
     position: fixed;
     left: 0;
@@ -59,8 +92,6 @@ export const WindowWrapper = styled(Window)<IWindowWrapper>`
 export const Header = styled(WindowHeader)`
     display: flex;
     align-items: center;
-    background-color: #050071;
-    color: #ffffff;
     padding-right: 0;
 `
 export const Body = styled.div<{ isExpanded: boolean }>`

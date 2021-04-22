@@ -3,12 +3,14 @@ import {
     MINIMIZE_WINDOW_BOX,
     CLOSE_WINDOW_BOX,
     FOCUS_WINDOW_BOX,
+    TOGGLE_DARK_MODE,
 } from '../types'
 
 export const initialState: InitalState = {
     openWindows: [],
     activeWindows: [],
     focusWindow: null,
+    darkMode: false,
 }
 
 export const reducer = (state: InitalState, action: Action) => {
@@ -60,6 +62,13 @@ export const reducer = (state: InitalState, action: Action) => {
             return {
                 ...state,
                 focusWindow: action.payload,
+            }
+
+        case TOGGLE_DARK_MODE:
+            const { darkMode } = state
+            return {
+                ...state,
+                darkMode: !darkMode,
             }
 
         default:

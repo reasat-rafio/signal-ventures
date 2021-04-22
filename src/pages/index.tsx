@@ -10,6 +10,7 @@ import { siteQuery } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
 import { useRef } from 'react'
 import { useSiteHeightAndWidth } from '../../libs/hooks'
+import { Container } from '../styles/Styles'
 
 const query = groq`{
   "site": ${siteQuery},
@@ -30,20 +31,16 @@ export default function Index(props: SanityProps) {
     } = useSanityQuery(query, props)
 
     const {
-        state: { activeWindows },
+        state: { activeWindows, darkMode },
     } = useCtx()
+    console.log('darkMode:', darkMode)
 
     const siteRef = useRef<HTMLDivElement>(null)
     const { height, width } = useSiteHeightAndWidth(siteRef)
 
     return (
-        <div
-            ref={siteRef}
-            className="h-screen opacity-99 w-screen overflow-hidden relative"
-            style={{ backgroundColor: '#0E1C3D' }}
-        >
+        <Container ref={siteRef} darkMode={darkMode}>
             <NextSeo title={landingPage.seo.title} description={landingPage.seo.description} />
-
             <div className="container mx-auto flex flex-col items-center ">
                 <Home
                     title={landingPage.heading}
@@ -56,6 +53,6 @@ export default function Index(props: SanityProps) {
                 ))}
                 <Navbar nav={site.sites.nav} />
             </div>
-        </div>
+        </Container>
     )
 }

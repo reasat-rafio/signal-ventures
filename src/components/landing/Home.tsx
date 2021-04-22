@@ -5,7 +5,7 @@ import { imageUrlBuilder } from '../../../utils/sanity'
 
 export const Home: React.FC<HomeProps> = ({ description, title, logo }) => {
     return (
-        <section className="flex flex-col justify-center items-center transform  -translate-y-5  h-screen text-white gap-5 z-0 px-2 md:px-0">
+        <section className="flex flex-col justify-center items-center transform  -translate-y-5  h-screen text-white gap-5  px-2 md:px-0 z-10">
             <SanityImg
                 builder={imageUrlBuilder}
                 image={logo}

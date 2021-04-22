@@ -12,7 +12,7 @@ import {
 } from '../../styles/Styles'
 import { SanityImg } from 'sanity-react-extra'
 import { useDate } from '../../../libs/hooks'
-import { CREATE_WINDOW_BOX } from '../../../store/types'
+import { CREATE_WINDOW_BOX, TOGGLE_DARK_MODE } from '../../../store/types'
 import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 
@@ -23,7 +23,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
     const {
         dispatch,
-        state: { openWindows, focusWindow },
+        state: { openWindows, focusWindow, darkMode },
     } = useCtx()
 
     const [open, setOpen] = useState<boolean>(false)
@@ -74,7 +74,14 @@ export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
 
                     {open && (
                         <NavList onClick={() => setOpen(false)}>
-                            <ListItem style={{ width: '14rem' }}>
+                            <ListItem
+                                style={{ width: '14rem' }}
+                                onClick={() =>
+                                    dispatch({
+                                        type: TOGGLE_DARK_MODE,
+                                    })
+                                }
+                            >
                                 <span className="flex items-center gap-4">
                                     <Image
                                         src={'/img/static/network_normal_two_pcs-2.png'}
@@ -82,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ nav }) => {
                                         width="30"
                                         layout="intrinsic"
                                     />
-                                    <p>Switch to Light Mode</p>
+                                    <p>Switch to {darkMode ? 'lightmode' : 'darkmode'} Mode </p>
                                 </span>
                             </ListItem>
 

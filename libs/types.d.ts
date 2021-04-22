@@ -12,10 +12,16 @@ interface InitalState {
     openWindows: WindowsProps[]
     activeWindows: WindowsProps[]
     focusWindow: null | string
+    darkMode: boolean
 }
 type Action = {
-    type: 'CREATE_WINDOW_BOX' | 'MINIMIZE_WINDOW_BOX' | 'CLOSE_WINDOW_BOX' | 'FOCUS_WINDOW_BOX'
-    payload: any
+    type:
+        | 'CREATE_WINDOW_BOX'
+        | 'MINIMIZE_WINDOW_BOX'
+        | 'CLOSE_WINDOW_BOX'
+        | 'FOCUS_WINDOW_BOX'
+        | 'TOGGLE_DARK_MODE'
+    payload?: any
 }
 
 interface HomeProps {
