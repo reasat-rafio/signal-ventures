@@ -55,7 +55,7 @@ export default function Index({ blog, sanityData }) {
                 <Home
                     title={landingPage.heading}
                     description={landingPage.description}
-                    logo={site.sites.logo.asset.url}
+                    logo={site.sites.logo}
                     button={landingPage.ctaButton}
                 />
 
