@@ -61,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
         logo: string,
         key: string,
         dark_mode: number | undefined,
-        href: string,
+        href?: string,
     ) => {
         if (key != undefined) {
             dispatch({
@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
             })
         } else {
             if (dark_mode == undefined) {
-                if (typeof window !== 'undefined') {
+                if (typeof window !== 'undefined' && typeof href !== 'undefined') {
                     document.location.href = href
                 }
             } else {
@@ -130,21 +130,21 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                     {open && (
                         <NavList onClick={() => setOpen(false)}>
                             {navigation?.map(({ title, key, logo, dark_mode, href }: Inavs) => (
-                                <ListItem
-                                    style={{ width: '14rem' }}
-                                    key={key}
+                                <div
                                     onClick={() => navbarAction(title, logo, key, dark_mode, href)}
                                 >
-                                    <span className="flex items-center gap-4">
-                                        <SanityImg
-                                            builder={imageUrlBuilder}
-                                            image={logo}
-                                            alt={title + 'logo'}
-                                            width={30}
-                                        />
-                                        <p>{title}</p>
-                                    </span>
-                                </ListItem>
+                                    <ListItem style={{ width: '14rem' }} key={key}>
+                                        <div className="flex items-center gap-4">
+                                            <SanityImg
+                                                builder={imageUrlBuilder}
+                                                image={logo}
+                                                alt={title + 'logo'}
+                                                width={30}
+                                            />
+                                            <p>{title}</p>
+                                        </div>
+                                    </ListItem>
+                                </div>
                             ))}
                         </NavList>
                     )}
