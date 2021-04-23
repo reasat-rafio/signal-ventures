@@ -22,7 +22,7 @@ export const Window_: React.FC<WindowProps> = ({
     const {
         state: { focusWindow, activeWindows },
     } = useCtx()
-    // State for window is expanded or not
+    // State to find out this window is expanded or not
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
     const [windowIsNotUndefined, setWindowIsNotUndefined] = useState<boolean>(false)
 
@@ -30,18 +30,19 @@ export const Window_: React.FC<WindowProps> = ({
     const [xaxis, setXaxis] = useState<number>(0)
     const [yaxis, setYaxis] = useState<number>(0)
 
-    //Window that is focused right now | clicked (for styling and header active)
+    //Window that is focused right now | clicked (for stylings and setting the window header active)
     const [windowIsFocused, setWindowIsFocused] = useState<boolean>(false)
 
-    // Md screen (992) or less breakpoint
+    // Md screen (992) or less breakpoint (for stylings)
     const [mdScreenBreakpoint, setMdScreenBreakpoint] = useState<boolean>(false)
 
-    // This window name icon and key
+    // THIS windows name icon and key
     const [windowName, setWindowName] = useState<string>('')
     const [windowIcon, setWindowIcon] = useState<string>('')
     const [windowKey, setWindowKey] = useState<string>('')
 
     const findWindowDetails = (key: string) => {
+        // Finding THIS windows info from global store by key and setting them to state
         const findWin: WindowsProps[] = activeWindows.filter((i) => i.key == key)
         setWindowName(findWin[0].name)
         setWindowIcon(findWin[0].icon)
