@@ -33,6 +33,7 @@ export const Contact: React.FC<ContactProps> = ({
     const { dispatch } = useCtx()
     return (
         <Draggable
+            handle="strong"
             onDrag={draggable}
             onStart={draggable}
             onStop={draggable}
@@ -48,8 +49,8 @@ export const Contact: React.FC<ContactProps> = ({
                 isExpanded={isExpanded}
                 onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
             >
-                <Header active={windowIsFocused ? true : false}>
-                    <strong className="cursor flex gap-2">
+                <strong className="cursor-move">
+                    <Header active={windowIsFocused ? true : false}>
                         <SanityImg
                             className="py-1"
                             builder={imageUrlBuilder}
@@ -57,45 +58,47 @@ export const Contact: React.FC<ContactProps> = ({
                             alt={windowName + 'logo'}
                         />
                         <p>{windowName}</p>
-                    </strong>
-                    <div className="flex justify-end flex-1">
-                        <Button
-                            size="sm"
-                            onClick={() => dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })}
-                        >
-                            <Image
-                                src="/img/static/close.png"
-                                layout="intrinsic"
-                                width="27%"
-                                height="27%"
-                                alt="minimize"
-                            />
-                        </Button>
-                        <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
-                            <Image
-                                src="/img/static/maximize.png"
-                                layout="intrinsic"
-                                width="18"
-                                height="18"
-                                alt="maximize"
-                            />
-                        </Button>
-                        <Button
-                            size="sm"
-                            onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
-                        >
-                            <Image
-                                src="/img/static/cross.png"
-                                layout="intrinsic"
-                                width="30%"
-                                height="27%"
-                                alt="close"
-                            />
-                        </Button>
-                    </div>
-                </Header>
 
-                <div
+                        <div className="flex justify-end flex-1">
+                            <Button
+                                size="sm"
+                                onClick={() =>
+                                    dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
+                                }
+                            >
+                                <Image
+                                    src="/img/static/close.png"
+                                    layout="intrinsic"
+                                    width="27%"
+                                    height="27%"
+                                    alt="minimize"
+                                />
+                            </Button>
+                            <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
+                                <Image
+                                    src="/img/static/maximize.png"
+                                    layout="intrinsic"
+                                    width="18"
+                                    height="18"
+                                    alt="maximize"
+                                />
+                            </Button>
+                            <Button
+                                size="sm"
+                                onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
+                            >
+                                <Image
+                                    src="/img/static/cross.png"
+                                    layout="intrinsic"
+                                    width="30%"
+                                    height="27%"
+                                    alt="close"
+                                />
+                            </Button>
+                        </div>
+                    </Header>
+                </strong>
+                <form
                     className="grid grid-cols-12 absolute mx-auto gap-2"
                     style={{ height: '90%', width: '99%' }}
                 >
@@ -132,12 +135,15 @@ export const Contact: React.FC<ContactProps> = ({
                         </div>
                         <div className="grid grid-cols-12  gap-4">
                             <div className="col-span-2" />
-                            <Button style={{ gridColumn: 'span 10 / span 10', width: '90px' }}>
+                            <Button
+                                type="submit"
+                                style={{ gridColumn: 'span 10 / span 10', width: '90px' }}
+                            >
                                 {ctaButton.title}
                             </Button>
                         </div>
                     </div>
-                </div>
+                </form>
             </ContactWindowsWrapper>
         </Draggable>
     )

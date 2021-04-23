@@ -36,6 +36,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
 
     return (
         <Draggable
+            handle="strong"
             onDrag={draggable}
             onStart={draggable}
             onStop={draggable}
@@ -51,8 +52,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                 isExpanded={isExpanded}
                 onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
             >
-                <Header active={windowIsFocused ? true : false}>
-                    <strong className="cursor flex gap-2">
+                <strong className="cursor-move">
+                    <Header active={windowIsFocused ? true : false}>
                         <SanityImg
                             className="py-1"
                             builder={imageUrlBuilder}
@@ -60,44 +61,47 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                             alt={windowName + 'logo'}
                         />
                         <p>{windowName}</p>
-                    </strong>
-                    <div className="flex justify-end flex-1">
-                        <Button
-                            size="sm"
-                            onClick={() => dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })}
-                        >
-                            <Image
-                                src="/img/static/close.png"
-                                layout="intrinsic"
-                                width="27%"
-                                height="27%"
-                                alt="minimize"
-                            />
-                        </Button>
-                        <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
-                            <Image
-                                src="/img/static/maximize.png"
-                                layout="intrinsic"
-                                width="18"
-                                height="18"
-                                alt="maximize"
-                            />
-                        </Button>
-                        <Button
-                            size="sm"
-                            onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
-                        >
-                            <Image
-                                src="/img/static/cross.png"
-                                layout="intrinsic"
-                                width="30%"
-                                height="27%"
-                                alt="close"
-                            />
-                        </Button>
-                    </div>
-                </Header>
-                {/* <div className="absolute overflow-auto h-full w-full px-1 "> */}
+
+                        <div className="flex justify-end flex-1">
+                            <Button
+                                size="sm"
+                                onClick={() =>
+                                    dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
+                                }
+                            >
+                                <Image
+                                    src="/img/static/close.png"
+                                    layout="intrinsic"
+                                    width="27%"
+                                    height="27%"
+                                    alt="minimize"
+                                />
+                            </Button>
+                            <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
+                                <Image
+                                    src="/img/static/maximize.png"
+                                    layout="intrinsic"
+                                    width="18"
+                                    height="18"
+                                    alt="maximize"
+                                />
+                            </Button>
+                            <Button
+                                size="sm"
+                                onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
+                            >
+                                <Image
+                                    src="/img/static/cross.png"
+                                    layout="intrinsic"
+                                    width="30%"
+                                    height="27%"
+                                    alt="close"
+                                />
+                            </Button>
+                        </div>
+                    </Header>
+                </strong>
+
                 <PortfolioContentWrapper isExpanded={isExpanded}>
                     <PortfolioBody>
                         <div className="grid grid-cols-20 justify-center items-center my-9 h-full">

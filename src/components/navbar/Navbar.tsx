@@ -28,6 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
         dispatch,
         state: { openWindows, focusWindow, darkMode },
     } = useCtx()
+
     const [navigation, setNavigation] = useState<Inavs[]>([])
     const [open, setOpen] = useState<boolean>(false)
     const { date, time, year } = useDate()
@@ -57,8 +58,9 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
         logo: string,
         key: string,
         dark_mode: number | undefined,
+        href: string,
     ) => {
-        if (dark_mode == undefined) {
+        if (key != undefined) {
             dispatch({
                 type: CREATE_WINDOW_BOX,
                 payload: {
@@ -68,9 +70,15 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                 },
             })
         } else {
-            dispatch({
-                type: TOGGLE_DARK_MODE,
-            })
+            if (dark_mode == undefined) {
+                if (typeof window !== 'undefined') {
+                    document.location.href = href
+                }
+            } else {
+                dispatch({
+                    type: TOGGLE_DARK_MODE,
+                })
+            }
         }
     }
 
@@ -118,12 +126,13 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                     {/*  DROPDOWN LIST ITEMS */}
                     {open && (
                         <NavList onClick={() => setOpen(false)}>
-                            {navigation?.map(({ title, key, logo, dark_mode }: Inavs) => (
-                                <ListItem style={{ width: '14rem' }} key={key}>
-                                    <span
-                                        className="flex items-center gap-4"
-                                        onClick={() => navbarAction(title, logo, key, dark_mode)}
-                                    >
+                            {navigation?.map(({ title, key, logo, dark_mode, href }: Inavs) => (
+                                <ListItem
+                                    style={{ width: '14rem' }}
+                                    key={key}
+                                    onClick={() => navbarAction(title, logo, key, dark_mode, href)}
+                                >
+                                    <span className="flex items-center gap-4">
                                         <SanityImg
                                             builder={imageUrlBuilder}
                                             image={logo}
