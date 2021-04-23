@@ -11,6 +11,7 @@ import { useRef } from 'react'
 import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
 import { Container } from '../styles/Styles'
 import axios from 'axios'
+import { withDimensions } from 'sanity-react-extra'
 
 const query = groq`{
   "site": ${siteQuery},
@@ -19,6 +20,10 @@ const query = groq`{
     heading,
     description,
     ctaButton,
+  },
+  "portfolio": *[_type == "portfolioItem"] {
+      ...,
+      "logo": ${withDimensions('logo')}
   }
 }`
 
@@ -36,12 +41,14 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
 export default function Index({ blog, sanityData }) {
     const {
-        data: { site, landingPage },
+        data: { site, landingPage, portfolio },
     } = useSanityQuery(query, sanityData)
 
     const {
-        state: { activeWindows, darkMode },
+        state: { activeWindows, darkMode, focusWindow },
     } = useCtx()
+
+    console.log(focusWindow)
 
     const siteRef = useRef<HTMLDivElement>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
@@ -60,7 +67,13 @@ export default function Index({ blog, sanityData }) {
                 />
 
                 {activeWindows.map(({ key }: WindowsProps, index: number) => (
-                    <Window_ key={index} index={key} width={width} blogInfo={blogInfo} />
+                    <Window_
+                        key={index}
+                        index={key}
+                        width={width}
+                        blogInfo={blogInfo}
+                        portfolioItems={portfolio}
+                    />
                 ))}
                 <Navbar navs={site.sites.nav} startMenu={site.sites.startButton} />
             </div>

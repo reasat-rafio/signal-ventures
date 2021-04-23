@@ -11,6 +11,7 @@ import {
     ArticleBody,
     ArticleContent,
     ArticleImg,
+    ArticleBodyWrapper,
     Body,
     Header,
 } from '../../../styles/Styles'
@@ -106,56 +107,56 @@ export const Articles: React.FC<ArticleProps> = ({
                     </Header>
                 </strong>
 
-                <Body isExpanded={isExpanded}>
+                <ArticleBodyWrapper>
                     {blogInfo.map(
                         (
                             { thumbnail, title, link, pubDate, image, author, content },
                             index: number,
                         ) => (
-                            <React.Fragment key={index}>
-                                <ArticleBody>
-                                    <ArticleImg thumbnail={thumbnail}>
-                                        <ArticleAvatar size={60} src={image} />
-                                    </ArticleImg>
-                                    <ArticleContent>
-                                        <h3 className="text-2xl font-bold my-2">{title}</h3>
-                                        <p className="text-lg text-gray-600">
-                                            {content}{' '}
-                                            <a
-                                                className="text-blue-500"
-                                                href={link}
-                                                target="_blank"
-                                            >
-                                                [Read more...]
-                                            </a>
+                            <ArticleBody key={index}>
+                                <ArticleImg thumbnail={thumbnail}>
+                                    <ArticleAvatar size={60} src={image} />
+                                </ArticleImg>
+                                <ArticleContent>
+                                    <h3 className="md:text-2xl text-xl font-bold my-2">{title}</h3>
+                                    <p className="md:text-lg text-gray-600 text-base">
+                                        {content}{' '}
+                                        <a
+                                            className="text-blue-500 md:text-lg text-base"
+                                            href={link}
+                                            target="_blank"
+                                        >
+                                            [Read more...]
+                                        </a>
+                                    </p>
+                                    <div className="flex gap-2 mt-3">
+                                        <Image
+                                            src="/img/static/person.png"
+                                            layout="intrinsic"
+                                            height="20"
+                                            width="20"
+                                            alt="date icon"
+                                        />
+                                        <p className="text-sm md:text-base">{author}</p>
+                                    </div>
+                                    <div className="flex gap-2 mb-3">
+                                        <Image
+                                            src="/img/static/date.png"
+                                            layout="intrinsic"
+                                            height="20"
+                                            width="20"
+                                            alt="date icon"
+                                        />
+                                        <p className="text-sm md:text-base">
+                                            {moment(pubDate).format('ll')}
                                         </p>
-                                        <div className="flex gap-2 mt-3">
-                                            <Image
-                                                src="/img/static/person.png"
-                                                layout="intrinsic"
-                                                height="20"
-                                                width="20"
-                                                alt="date icon"
-                                            />
-                                            <p>{author}</p>
-                                        </div>
-                                        <div className="flex gap-2 mb-3">
-                                            <Image
-                                                src="/img/static/date.png"
-                                                layout="intrinsic"
-                                                height="20"
-                                                width="20"
-                                                alt="date icon"
-                                            />
-                                            <p>{moment(pubDate).format('ll')}</p>
-                                        </div>
-                                        {/* <Button>Listen</Button> */}
-                                    </ArticleContent>
-                                </ArticleBody>
-                            </React.Fragment>
+                                    </div>
+                                    {/* <Button>Listen</Button> */}
+                                </ArticleContent>
+                            </ArticleBody>
                         ),
                     )}
-                </Body>
+                </ArticleBodyWrapper>
             </ArticelWindowWrapper>
         </Draggable>
     )

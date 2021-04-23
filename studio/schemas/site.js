@@ -9,7 +9,7 @@ export default {
             type: 'image',
         },
         {
-            name: "startButton",
+            name: 'startButton',
             title: 'Start Button',
             type: 'startButton',
         },
@@ -19,7 +19,6 @@ export default {
             type: 'array',
             of: [{ type: 'menuItem' }],
         },
-    
     ],
     preview: {
         select: {

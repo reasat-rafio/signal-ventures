@@ -86,8 +86,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                         <SanityImg
                             builder={imageUrlBuilder}
                             image={startMenu.logo}
-                            alt={'Start menu logo'}
-                            height={20}
+                            alt="Start menu logo"
                             width={20}
                         />
                         <p className="ml-1">{startMenu.title}</p>
@@ -110,7 +109,6 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                                 builder={imageUrlBuilder}
                                 image={icon}
                                 alt={name + 'logo'}
-                                height={20}
                                 width={20}
                             />
                             <p className="ml-1 md:block hidden">{name}</p>
@@ -130,7 +128,6 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                                             builder={imageUrlBuilder}
                                             image={logo}
                                             alt={title + 'logo'}
-                                            height={30}
                                             width={30}
                                         />
                                         <p>{title}</p>

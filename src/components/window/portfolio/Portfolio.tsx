@@ -1,14 +1,24 @@
-import { Button } from 'react95'
+import { Button, TabBody } from 'react95'
 import Image from 'next/image'
 import React from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { CLOSE_WINDOW_BOX, FOCUS_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../../store/types'
 import { imageUrlBuilder } from '../../../../utils/sanity'
-import { Body, Header, ArticelWindowWrapper } from '../../../styles/Styles'
+import {
+    Header,
+    PorfolioWindowWrapper,
+    PortfolioBody,
+    Body,
+    PortfolioContentWrapper,
+} from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 
-export const Portfolio: React.FC<IWindowsProps> = ({
+interface PortfolioProps extends IWindowsProps {
+    portfolioItems: any
+}
+
+export const Portfolio: React.FC<PortfolioProps> = ({
     windowKey,
     windowIsFocused,
     isExpanded,
@@ -20,8 +30,10 @@ export const Portfolio: React.FC<IWindowsProps> = ({
     mdScreenBreakpoint,
     xaxis,
     yaxis,
+    portfolioItems,
 }) => {
     const { dispatch } = useCtx()
+    console.log(portfolioItems)
 
     return (
         <Draggable
@@ -34,7 +46,7 @@ export const Portfolio: React.FC<IWindowsProps> = ({
                 y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
             }}
         >
-            <ArticelWindowWrapper
+            <PorfolioWindowWrapper
                 windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
@@ -87,8 +99,30 @@ export const Portfolio: React.FC<IWindowsProps> = ({
                     </div>
                 </Header>
 
-                <Body isExpanded={isExpanded}>Demo Body</Body>
-            </ArticelWindowWrapper>
+                {/* <div className="absolute overflow-auto h-full w-full px-1 "> */}
+                <PortfolioContentWrapper isExpanded={isExpanded}>
+                    <PortfolioBody>
+                        <div className="grid grid-cols-20 justify-center items-center my-9 h-full">
+                            {portfolioItems.map(({ _id, href, logo, title }) => (
+                                <a
+                                    key={_id}
+                                    className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center  gap-3 "
+                                    href={href}
+                                >
+                                    <SanityImg
+                                        builder={imageUrlBuilder}
+                                        image={logo}
+                                        alt={'signal ventures logo'}
+                                        width={45}
+                                    />
+                                    <p className="text-base">{title}</p>
+                                </a>
+                            ))}
+                        </div>
+                    </PortfolioBody>
+                    {/* </div> */}
+                </PortfolioContentWrapper>
+            </PorfolioWindowWrapper>
         </Draggable>
     )
 }

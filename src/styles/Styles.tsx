@@ -60,7 +60,7 @@ export const ToolbarWrapper = styled(Toolbar)`
 
 export const StartBar = styled.div`
     position: relative;
-    display: inline-block;
+    display: flex;
 `
 export const StartButton = styled(Button)`
     font-weight: bold;
@@ -74,7 +74,7 @@ export const NavTabs = styled(Button)<{ index: number }>`
     font-size: ${font_size_for_nav.sm};
     ${respondTo.md`
     font-size: ${font_size_for_nav.lg};
-    margin: 0 5px;
+
   `}
 `
 
@@ -84,6 +84,28 @@ export const NavList = styled(List)`
     bottom: 43px;
 `
 
+export const Header = styled(WindowHeader)`
+    display: flex;
+    align-items: center;
+    padding-right: 0;
+`
+export const ArticleBodyWrapper = styled.div`
+    position: absolute;
+    height: 94%;
+    width: 99%;
+    overflow: auto;
+    padding: 0 5px;
+`
+
+export const Body = styled.div`
+    position: absolute;
+    height: 94%;
+    width: 99%;
+    overflow: auto;
+    padding: 0 5px;
+`
+
+// ARTICEL WINDOW STYLINGS
 export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     position: absolute;
     width: 100vw;
@@ -98,20 +120,6 @@ export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
-
-export const Header = styled(WindowHeader)`
-    display: flex;
-    align-items: center;
-    padding-right: 0;
-`
-export const Body = styled.div<{ isExpanded: boolean }>`
-    position: absolute;
-    height: 94%;
-    width: 99%;
-    overflow: auto;
-    padding: 0 5px;
-`
-
 export const ArticleBody = styled(TabBody)`
     display: grid;
     grid-template-rows: repeat(5, minmax(0, 1fr));
@@ -130,6 +138,7 @@ export const ArticleContent = styled(Cutout)`
     grid-row: span 3 / span 3;
     background: white;
     margin: 10px 0 0 0;
+
     > * {
         overflow: hidden;
     }
@@ -140,4 +149,34 @@ export const ArticleAvatar = styled(Avatar)`
     position: absolute;
     transform: translateY(40%);
     z-index: 10;
+`
+
+// PORTFOLIO WINDOW STYLINGS
+export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
+    position: absolute;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    min-height: 100vh;
+    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
+    overflow: hidden;
+    ${respondTo.md`
+    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '500px')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
+    width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
+  `}
+`
+
+export const PortfolioBody = styled(TabBody)`
+    margin: 0.5rem 0;
+    background: white;
+    overflow: auto;
+`
+export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
+    padding: 0 5px;
+    margin: auto;
+    position: ${(props) => props.isExpanded && 'absolute'};
+    width: ${(props) => props.isExpanded && '100%'};
+    height: ${(props) => props.isExpanded && '89%'};
 `

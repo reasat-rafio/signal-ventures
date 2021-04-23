@@ -1,10 +1,7 @@
-import { IoNavigate } from 'react-icons/io5'
-
 export default {
     name: 'nav',
     title: 'Navigation',
     type: 'document',
-    icon: IoNavigate,
     fields: [
         {
             name: 'menu',

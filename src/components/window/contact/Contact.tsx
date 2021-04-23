@@ -5,7 +5,7 @@ import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { CLOSE_WINDOW_BOX, FOCUS_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../../store/types'
 import { imageUrlBuilder } from '../../../../utils/sanity'
-import { Body, Header, ArticelWindowWrapper } from '../../../styles/Styles'
+import { Header, ArticelWindowWrapper, Body } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 
 export const Contact: React.FC<IWindowsProps> = ({
@@ -86,7 +86,7 @@ export const Contact: React.FC<IWindowsProps> = ({
                     </div>
                 </Header>
 
-                <Body isExpanded={isExpanded}>Demo Body</Body>
+                <Body></Body>
             </ArticelWindowWrapper>
         </Draggable>
     )
