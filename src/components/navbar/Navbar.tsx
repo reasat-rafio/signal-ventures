@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Button, ListItem, Tooltip } from 'react95'
-import Image from 'next/image'
 import {
     NavBar,
     NavList,
@@ -17,9 +16,14 @@ import { useCtx } from '../../../store'
 
 interface NavbarProps {
     navs: Inavs[]
+    startMenu: {
+        _type: string
+        title: string
+        logo: any
+    }
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ navs }) => {
+export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
     const {
         dispatch,
         state: { openWindows, focusWindow, darkMode },
@@ -50,8 +54,8 @@ export const Navbar: React.FC<NavbarProps> = ({ navs }) => {
 
     const navbarAction = (
         title: string,
-        _ref: string,
-        _key: string,
+        logo: string,
+        key: string,
         dark_mode: number | undefined,
     ) => {
         if (dark_mode == undefined) {
@@ -59,8 +63,8 @@ export const Navbar: React.FC<NavbarProps> = ({ navs }) => {
                 type: CREATE_WINDOW_BOX,
                 payload: {
                     name: title,
-                    icon: _ref,
-                    index: _key,
+                    icon: logo,
+                    key: key,
                 },
             })
         } else {
@@ -79,26 +83,26 @@ export const Navbar: React.FC<NavbarProps> = ({ navs }) => {
                         onClick={() => setOpen((prevState) => !prevState)}
                         active={open}
                     >
-                        <Image
-                            src="/img/static/Start Logo 1.png"
-                            alt="windowns 95 logo"
+                        <SanityImg
+                            builder={imageUrlBuilder}
+                            image={startMenu.logo}
+                            alt={'Start menu logo'}
                             height={20}
                             width={20}
-                            layout="intrinsic"
                         />
-                        <p className="ml-1">Start</p>
+                        <p className="ml-1">{startMenu.title}</p>
                     </StartButton>
 
                     {/* THIS WILL SHOW ALL THE TABS THAT ARE OPEN IN THE NAVBAR  */}
-                    {openWindows.map(({ icon, name, index }) => (
+                    {openWindows.map(({ icon, name, key }) => (
                         <NavTabs
                             primary
-                            active={index == focusWindow ? true : false}
-                            key={index}
+                            active={key == focusWindow ? true : false}
+                            key={key}
                             onClick={() =>
                                 dispatch({
                                     type: CREATE_WINDOW_BOX,
-                                    payload: { icon, name, index },
+                                    payload: { icon, name, key },
                                 })
                             }
                         >
@@ -116,34 +120,23 @@ export const Navbar: React.FC<NavbarProps> = ({ navs }) => {
                     {/*  DROPDOWN LIST ITEMS */}
                     {open && (
                         <NavList onClick={() => setOpen(false)}>
-                            {navigation?.map(
-                                ({
-                                    title,
-                                    _key,
-                                    logo: {
-                                        asset: { _ref },
-                                    },
-                                    dark_mode,
-                                }: Inavs) => (
-                                    <ListItem style={{ width: '14rem' }} key={_key}>
-                                        <span
-                                            className="flex items-center gap-4"
-                                            onClick={() =>
-                                                navbarAction(title, _ref, _key, dark_mode)
-                                            }
-                                        >
-                                            <SanityImg
-                                                builder={imageUrlBuilder}
-                                                image={_ref}
-                                                alt={title + 'logo'}
-                                                height={30}
-                                                width={30}
-                                            />
-                                            <p>{title}</p>
-                                        </span>
-                                    </ListItem>
-                                ),
-                            )}
+                            {navigation?.map(({ title, key, logo, dark_mode }: Inavs) => (
+                                <ListItem style={{ width: '14rem' }} key={key}>
+                                    <span
+                                        className="flex items-center gap-4"
+                                        onClick={() => navbarAction(title, logo, key, dark_mode)}
+                                    >
+                                        <SanityImg
+                                            builder={imageUrlBuilder}
+                                            image={logo}
+                                            alt={title + 'logo'}
+                                            height={30}
+                                            width={30}
+                                        />
+                                        <p>{title}</p>
+                                    </span>
+                                </ListItem>
+                            ))}
                         </NavList>
                     )}
                 </StartBar>

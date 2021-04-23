@@ -4,16 +4,14 @@ import { withDimensions } from 'sanity-react-extra'
 export const siteQuery = groq`{
     "sites": *[_id == "site"][0] {
         "logo": ${withDimensions('logo')},
-        "nav": menu[0..5] {
-            title,
-            _key,
-            href,
-            dark_mode,
-            logo{
-                asset {
-                _ref
-                },
-            },
-         },
+        "startButton": startButton {
+        ...,
+        "logo": ${withDimensions('logo')}
+        },
+        "nav": menu[] {
+            ...,
+            "logo": ${withDimensions('logo')}
+        
+      }
     }
 }`

@@ -19,26 +19,24 @@ export const reducer = (state: InitalState, action: Action) => {
             const { openWindows, activeWindows } = state
 
             if (
-                !openWindows
-                    .map((window: WindowsProps) => window.index)
-                    .includes(action.payload.index)
+                !openWindows.map((window: WindowsProps) => window.key).includes(action.payload.key)
             ) {
                 openWindows.push(action.payload)
             }
             if (
                 !activeWindows
-                    .map((window: WindowsProps) => window.index)
-                    .includes(action.payload.index)
+                    .map((window: WindowsProps) => window.key)
+                    .includes(action.payload.key)
             ) {
                 activeWindows.push(action.payload)
             }
 
-            return { ...state, openWindows, activeWindows, focusWindow: action.payload.index }
+            return { ...state, openWindows, activeWindows, focusWindow: action.payload.key }
         }
         case MINIMIZE_WINDOW_BOX: {
             let { activeWindows } = state
             activeWindows = activeWindows.filter(
-                (window: WindowsProps) => window.index !== action.payload,
+                (window: WindowsProps) => window.key !== action.payload,
             )
             return { ...state, activeWindows }
         }
@@ -46,10 +44,10 @@ export const reducer = (state: InitalState, action: Action) => {
         case CLOSE_WINDOW_BOX: {
             let { openWindows, activeWindows } = state
             activeWindows = activeWindows.filter(
-                (window: WindowsProps) => window.index !== action.payload,
+                (window: WindowsProps) => window.key !== action.payload,
             )
             openWindows = openWindows.filter(
-                (window: WindowsProps) => window.index !== action.payload,
+                (window: WindowsProps) => window.key !== action.payload,
             )
             return {
                 ...state,

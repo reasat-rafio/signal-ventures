@@ -9,7 +9,7 @@ import { Body, Header, ArticelWindowWrapper } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 
 export const Portfolio: React.FC<IWindowsProps> = ({
-    windowID,
+    windowKey,
     windowIsFocused,
     isExpanded,
     index,
@@ -35,7 +35,7 @@ export const Portfolio: React.FC<IWindowsProps> = ({
             }}
         >
             <ArticelWindowWrapper
-                windowID={windowID}
+                windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
                 onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}

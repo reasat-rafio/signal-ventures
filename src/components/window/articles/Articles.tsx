@@ -22,7 +22,7 @@ interface ArticleProps extends IWindowsProps {
 }
 
 export const Articles: React.FC<ArticleProps> = ({
-    windowID,
+    windowKey,
     windowIsFocused,
     isExpanded,
     index,
@@ -37,10 +37,9 @@ export const Articles: React.FC<ArticleProps> = ({
 }) => {
     const { dispatch } = useCtx()
 
-    console.log('asdasd', blogInfo)
-
     return (
         <Draggable
+            handle="strong"
             onDrag={draggable}
             onStart={draggable}
             onStop={draggable}
@@ -51,57 +50,61 @@ export const Articles: React.FC<ArticleProps> = ({
             }}
         >
             <ArticelWindowWrapper
-                windowID={windowID}
+                windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
                 onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
             >
-                <Header active={windowIsFocused ? true : false}>
-                    <strong className="cursor flex gap-2">
-                        <SanityImg
-                            className="py-1"
-                            builder={imageUrlBuilder}
-                            image={windowIcon}
-                            alt={windowName + 'logo'}
-                        />
-                        <p>{windowName}</p>
-                    </strong>
-                    <div className="flex justify-end flex-1">
-                        <Button
-                            size="sm"
-                            onClick={() => dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })}
-                        >
-                            <Image
-                                src="/img/static/close.png"
-                                layout="intrinsic"
-                                width="27%"
-                                height="27%"
-                                alt="minimize"
+                <strong className="cursor-move">
+                    <Header active={windowIsFocused ? true : false}>
+                        <div className="flex gap-2">
+                            <SanityImg
+                                className="py-1"
+                                builder={imageUrlBuilder}
+                                image={windowIcon}
+                                alt={windowName + 'logo'}
                             />
-                        </Button>
-                        <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
-                            <Image
-                                src="/img/static/maximize.png"
-                                layout="intrinsic"
-                                width="18"
-                                height="18"
-                                alt="maximize"
-                            />
-                        </Button>
-                        <Button
-                            size="sm"
-                            onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
-                        >
-                            <Image
-                                src="/img/static/cross.png"
-                                layout="intrinsic"
-                                width="30%"
-                                height="27%"
-                                alt="close"
-                            />
-                        </Button>
-                    </div>
-                </Header>
+                            <p>{windowName}</p>
+                        </div>
+                        <div className="flex justify-end flex-1">
+                            <Button
+                                size="sm"
+                                onClick={() =>
+                                    dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
+                                }
+                            >
+                                <Image
+                                    src="/img/static/close.png"
+                                    layout="intrinsic"
+                                    width="27%"
+                                    height="27%"
+                                    alt="minimize"
+                                />
+                            </Button>
+                            <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
+                                <Image
+                                    src="/img/static/maximize.png"
+                                    layout="intrinsic"
+                                    width="18"
+                                    height="18"
+                                    alt="maximize"
+                                />
+                            </Button>
+                            <Button
+                                size="sm"
+                                onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
+                            >
+                                <Image
+                                    src="/img/static/cross.png"
+                                    layout="intrinsic"
+                                    width="30%"
+                                    height="27%"
+                                    alt="close"
+                                />
+                            </Button>
+                        </div>
+                    </Header>
+                </strong>
 
                 <Body isExpanded={isExpanded}>
                     {blogInfo.map(
@@ -109,49 +112,47 @@ export const Articles: React.FC<ArticleProps> = ({
                             { thumbnail, title, link, pubDate, image, author, content },
                             index: number,
                         ) => (
-                            <ArticleBody key={index}>
-                                <ArticleImg thumbnail={thumbnail}>
-                                    <ArticleAvatar size={60} src={image} />
-                                </ArticleImg>
-                                {/* <div className="row-span-3 overflow-hidden">
-                                    <img
-                            
-                                        className="w-full"
-                                        src={thumbnail}
-                                        alt=""
-                                    />
-                                </div> */}
-                                <ArticleContent>
-                                    <h3 className="text-2xl font-bold my-2">{title}</h3>
-                                    <p className="text-lg text-gray-600">
-                                        {content}{' '}
-                                        <a className="text-blue-500" href={link} target="_blank">
-                                            [Read more...]
-                                        </a>
-                                    </p>
-                                    <div className="flex gap-2">
-                                        <Image
-                                            src="/img/static/person.png"
-                                            layout="intrinsic"
-                                            height="20"
-                                            width="20"
-                                            alt="date icon"
-                                        />
-                                        <p>{author}</p>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <Image
-                                            src="/img/static/date.png"
-                                            layout="intrinsic"
-                                            height="20"
-                                            width="20"
-                                            alt="date icon"
-                                        />
-                                        <p>{moment(pubDate).format('ll')}</p>
-                                    </div>
-                                    {/* <Button>Listen</Button> */}
-                                </ArticleContent>
-                            </ArticleBody>
+                            <React.Fragment key={index}>
+                                <ArticleBody>
+                                    <ArticleImg thumbnail={thumbnail}>
+                                        <ArticleAvatar size={60} src={image} />
+                                    </ArticleImg>
+                                    <ArticleContent>
+                                        <h3 className="text-2xl font-bold my-2">{title}</h3>
+                                        <p className="text-lg text-gray-600">
+                                            {content}{' '}
+                                            <a
+                                                className="text-blue-500"
+                                                href={link}
+                                                target="_blank"
+                                            >
+                                                [Read more...]
+                                            </a>
+                                        </p>
+                                        <div className="flex gap-2 mt-3">
+                                            <Image
+                                                src="/img/static/person.png"
+                                                layout="intrinsic"
+                                                height="20"
+                                                width="20"
+                                                alt="date icon"
+                                            />
+                                            <p>{author}</p>
+                                        </div>
+                                        <div className="flex gap-2 mb-3">
+                                            <Image
+                                                src="/img/static/date.png"
+                                                layout="intrinsic"
+                                                height="20"
+                                                width="20"
+                                                alt="date icon"
+                                            />
+                                            <p>{moment(pubDate).format('ll')}</p>
+                                        </div>
+                                        {/* <Button>Listen</Button> */}
+                                    </ArticleContent>
+                                </ArticleBody>
+                            </React.Fragment>
                         ),
                     )}
                 </Body>

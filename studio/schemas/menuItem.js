@@ -14,11 +14,13 @@ export default {
             title: 'Logo',
             type: 'image',
         },
+        { name: 'key', title: 'Key', type: 'string' },
     ],
     preview: {
         select: {
             title: 'title',
             subtitle: 'href',
+            media: 'logo',
         },
     },
 }

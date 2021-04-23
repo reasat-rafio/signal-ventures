@@ -9,11 +9,17 @@ export default {
             type: 'image',
         },
         {
+            name: "startButton",
+            title: 'Start Button',
+            type: 'startButton',
+        },
+        {
             name: 'menu',
             title: 'Menu',
             type: 'array',
             of: [{ type: 'menuItem' }],
         },
+    
     ],
     preview: {
         select: {

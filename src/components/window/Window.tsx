@@ -24,13 +24,13 @@ export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo }) => {
     const [mdScreenBreakpoint, setMdScreenBreakpoint] = useState<boolean>(false)
     const [windowName, setWindowName] = useState<string>('')
     const [windowIcon, setWindowIcon] = useState<string>('')
-    const [windowID, setWindowID] = useState<string>('')
+    const [windowKey, setWindowKey] = useState<string>('')
 
-    const findWindowDetails = (id: string) => {
-        const findWin: WindowsProps[] = activeWindows.filter((i) => i.index == id)
+    const findWindowDetails = (key: string) => {
+        const findWin: WindowsProps[] = activeWindows.filter((i) => i.key == key)
         setWindowName(findWin[0].name)
         setWindowIcon(findWin[0].icon)
-        setWindowID(findWin[0].index)
+        setWindowKey(findWin[0].key)
     }
 
     useEffect(() => {
@@ -38,14 +38,14 @@ export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo }) => {
             setWindowIsNotUndefined(true)
         }
         switch (index) {
-            case '0ca5a8f1cfbb':
-                findWindowDetails('0ca5a8f1cfbb')
+            case 'article':
+                findWindowDetails('article')
                 break
-            case 'ad5661f253fe':
-                findWindowDetails('ad5661f253fe')
+            case 'portfolio':
+                findWindowDetails('portfolio')
                 break
-            case '5345c8fcdf0e':
-                findWindowDetails('5345c8fcdf0e')
+            case 'contact':
+                findWindowDetails('contact')
                 break
             default:
                 setWindowName('...')
@@ -67,7 +67,7 @@ export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo }) => {
     }
 
     const props = {
-        windowID,
+        windowKey,
         windowIsFocused,
         isExpanded,
         index,
@@ -82,9 +82,9 @@ export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo }) => {
 
     return (
         <>
-            {windowIsNotUndefined && windowID === '0ca5a8f1cfbb' && <Portfolio {...props} />}
-            {windowIsNotUndefined && windowID === '5345c8fcdf0e' && <Contact {...props} />}
-            {windowIsNotUndefined && windowID === 'ad5661f253fe' && (
+            {windowIsNotUndefined && windowKey === 'portfolio' && <Portfolio {...props} />}
+            {windowIsNotUndefined && windowKey === 'contact' && <Contact {...props} />}
+            {windowIsNotUndefined && windowKey === 'article' && (
                 <Articles {...props} blogInfo={blogInfo} />
             )}
         </>

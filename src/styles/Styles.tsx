@@ -1,4 +1,3 @@
-import { url } from 'node:inspector'
 import {
     AppBar,
     Toolbar,
@@ -116,7 +115,7 @@ export const Body = styled.div<{ isExpanded: boolean }>`
 export const ArticleBody = styled(TabBody)`
     display: grid;
     grid-template-rows: repeat(5, minmax(0, 1fr));
-    height: 90%;
+    min-height: 90%;
     padding: 8px;
     margin: 1rem 0;
 `
@@ -131,6 +130,9 @@ export const ArticleContent = styled(Cutout)`
     grid-row: span 3 / span 3;
     background: white;
     margin: 10px 0 0 0;
+    > * {
+        overflow: hidden;
+    }
 `
 export const ArticleAvatar = styled(Avatar)`
     bottom: 0;

@@ -5,7 +5,7 @@ interface PropIsChildren {
 interface WindowsProps {
     name: string
     icon: string
-    index: string
+    key: string
 }
 
 interface InitalState {
@@ -37,12 +37,8 @@ interface HomeProps {
 
 interface Inavs {
     title: string
-    _key: string
-    logo: {
-        asset: {
-            _ref: string
-        }
-    }
+    key: string
+    logo: any
     dark_mode?: number
     href?: string
 }
@@ -60,11 +56,11 @@ type DraggableData = {
 interface IWindowWrapper {
     isExpanded: boolean
     windowIsFocused: boolean
-    windowID: string
+    windowKey: string
 }
 
 interface IWindowsProps {
-    windowID: string
+    windowKey: string
     windowIsFocused: boolean
     isExpanded: boolean
     index: string

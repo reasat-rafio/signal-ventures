@@ -1,28 +1,27 @@
 import { groq } from 'next-sanity'
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
-import { SanityProps } from 'next-sanity-extra'
 import { Window_ } from '../components/window/Window'
 import { Home } from '../components/landing/Home'
 import { Navbar } from '../components/navbar/Navbar'
 import { useCtx } from '../../store'
 import { siteQuery } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
 import { Container } from '../styles/Styles'
-import Parser from 'rss-parser'
 import axios from 'axios'
+
 const query = groq`{
   "site": ${siteQuery},
   "landingPage": *[_id == "landingPage"][0]{
     seo,
     heading,
     description,
-    ctaButton
+    ctaButton,
   }
 }`
-// let parser = new Parser()
+
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
@@ -31,6 +30,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
             blog: data,
             sanityData: await sanityStaticProps({ query, context }),
         },
+        revalidate: 1,
     }
 }
 
@@ -44,7 +44,7 @@ export default function Index({ blog, sanityData }) {
     } = useCtx()
 
     const siteRef = useRef<HTMLDivElement>(null)
-    const { height, width } = useSiteHeightAndWidth(siteRef)
+    const { width } = useSiteHeightAndWidth(siteRef)
 
     const { blogInfo } = useToText(blog.items, blog.feed)
 
@@ -55,14 +55,14 @@ export default function Index({ blog, sanityData }) {
                 <Home
                     title={landingPage.heading}
                     description={landingPage.description}
-                    logo={site.sites.logo.asset.url}
+                    logo={site.sites.logo}
                     button={landingPage.ctaButton}
                 />
 
-                {activeWindows.map(({ index }: WindowsProps) => (
-                    <Window_ key={index} index={index} width={width} blogInfo={blogInfo} />
+                {activeWindows.map(({ key }: WindowsProps, index: number) => (
+                    <Window_ key={index} index={key} width={width} blogInfo={blogInfo} />
                 ))}
-                <Navbar navs={site.sites.nav} />
+                <Navbar navs={site.sites.nav} startMenu={site.sites.startButton} />
             </div>
         </Container>
     )
