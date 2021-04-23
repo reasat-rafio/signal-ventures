@@ -14,3 +14,21 @@ export const siteQuery = groq`{
       }
     }
 }`
+
+export const query = groq`{
+    "site": ${siteQuery},
+    "landingPage": *[_id == "landingPage"][0]{
+      seo,
+      heading,
+      description,
+      ctaButton,
+    },
+    "contact": *[_type == "contact"] {
+      ...,
+      "logo": ${withDimensions('logo')}
+    },
+    "portfolio": *[_type == "portfolioItem"] {
+        ...,
+        "logo": ${withDimensions('logo')}
+    }
+  }`

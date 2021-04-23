@@ -30,9 +30,12 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
     } = useCtx()
 
     const [navigation, setNavigation] = useState<Inavs[]>([])
+    // Menu open | close state
     const [open, setOpen] = useState<boolean>(false)
+    // This will return the current time date and year
     const { date, time, year } = useDate()
 
+    // This whole useEffect will order the navs accounding to the <dark | light> mode
     useEffect(() => {
         const _navs = navs.filter((n) => n.dark_mode == undefined)
         const dark_and_light_navs = navs.filter((n) => n.dark_mode != undefined)

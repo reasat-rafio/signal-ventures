@@ -5,31 +5,12 @@ import { Window_ } from '../components/window/Window'
 import { Home } from '../components/landing/Home'
 import { Navbar } from '../components/navbar/Navbar'
 import { useCtx } from '../../store'
-import { siteQuery } from '../../libs/query'
+import { query } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
 import { useRef } from 'react'
 import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
 import { Container } from '../styles/Styles'
 import axios from 'axios'
-import { withDimensions } from 'sanity-react-extra'
-
-const query = groq`{
-  "site": ${siteQuery},
-  "landingPage": *[_id == "landingPage"][0]{
-    seo,
-    heading,
-    description,
-    ctaButton,
-  },
-  "contact": *[_type == "contact"] {
-    ...,
-    "logo": ${withDimensions('logo')}
-  },
-  "portfolio": *[_type == "portfolioItem"] {
-      ...,
-      "logo": ${withDimensions('logo')}
-  }
-}`
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
@@ -53,8 +34,10 @@ export default function Index({ blog, sanityData }) {
     } = useCtx()
 
     const siteRef = useRef<HTMLDivElement>(null)
-    const { width } = useSiteHeightAndWidth(siteRef)
 
+    // This will return current page width
+    const { width } = useSiteHeightAndWidth(siteRef)
+    // This will return an array of all the blogs from clients medium
     const { blogInfo } = useToText(blog.items, blog.feed)
 
     return (

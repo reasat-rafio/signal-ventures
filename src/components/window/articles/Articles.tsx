@@ -1,9 +1,8 @@
-import { Button } from 'react95'
 import Image from 'next/image'
 import React from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
-import { CLOSE_WINDOW_BOX, FOCUS_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../../store/types'
+import { FOCUS_WINDOW_BOX } from '../../../../store/types'
 import { imageUrlBuilder } from '../../../../utils/sanity'
 import {
     ArticelWindowWrapper,
@@ -12,11 +11,11 @@ import {
     ArticleContent,
     ArticleImg,
     ArticleBodyWrapper,
-    Body,
     Header,
 } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 import moment from 'moment'
+import { WindowHeaderButtons } from '../WindowHeaderButtons'
 
 interface ArticleProps extends IWindowsProps {
     blogInfo: any
@@ -67,43 +66,7 @@ export const Articles: React.FC<ArticleProps> = ({
                             />
                             <p>{windowName}</p>
                         </div>
-                        <div className="flex justify-end flex-1">
-                            <Button
-                                size="sm"
-                                onClick={() =>
-                                    dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
-                                }
-                            >
-                                <Image
-                                    src="/img/static/close.png"
-                                    layout="intrinsic"
-                                    width="27%"
-                                    height="27%"
-                                    alt="minimize"
-                                />
-                            </Button>
-                            <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
-                                <Image
-                                    src="/img/static/maximize.png"
-                                    layout="intrinsic"
-                                    width="18"
-                                    height="18"
-                                    alt="maximize"
-                                />
-                            </Button>
-                            <Button
-                                size="sm"
-                                onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}
-                            >
-                                <Image
-                                    src="/img/static/cross.png"
-                                    layout="intrinsic"
-                                    width="30%"
-                                    height="27%"
-                                    alt="close"
-                                />
-                            </Button>
-                        </div>
+                        <WindowHeaderButtons index={index} setIsExpanded={setIsExpanded} />
                     </Header>
                 </strong>
 
@@ -151,7 +114,6 @@ export const Articles: React.FC<ArticleProps> = ({
                                             {moment(pubDate).format('ll')}
                                         </p>
                                     </div>
-                                    {/* <Button>Listen</Button> */}
                                 </ArticleContent>
                             </ArticleBody>
                         ),
