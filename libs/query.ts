@@ -11,7 +11,6 @@ export const siteQuery = groq`{
         "nav": menu[] {
             ...,
             "logo": ${withDimensions('logo')}
-        
       }
     }
 }`
