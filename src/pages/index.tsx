@@ -21,6 +21,10 @@ const query = groq`{
     description,
     ctaButton,
   },
+  "contact": *[_type == "contact"] {
+    ...,
+    "logo": ${withDimensions('logo')}
+  },
   "portfolio": *[_type == "portfolioItem"] {
       ...,
       "logo": ${withDimensions('logo')}
@@ -41,14 +45,12 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
 export default function Index({ blog, sanityData }) {
     const {
-        data: { site, landingPage, portfolio },
+        data: { site, landingPage, portfolio, contact },
     } = useSanityQuery(query, sanityData)
 
     const {
         state: { activeWindows, darkMode, focusWindow },
     } = useCtx()
-
-    console.log(focusWindow)
 
     const siteRef = useRef<HTMLDivElement>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
@@ -73,6 +75,7 @@ export default function Index({ blog, sanityData }) {
                         width={width}
                         blogInfo={blogInfo}
                         portfolioItems={portfolio}
+                        contact={contact}
                     />
                 ))}
                 <Navbar navs={site.sites.nav} startMenu={site.sites.startButton} />

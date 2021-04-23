@@ -10,6 +10,7 @@ import menuItem from './menuItem'
 import ctaButton from './ctaButton'
 import startButton from './startButton'
 import portfolioItem from './portfolioItem'
+import contact from './contact'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -25,5 +26,6 @@ export default createSchema({
         ctaButton,
         startButton,
         portfolioItem,
+        contact,
     ]),
 })

@@ -11,7 +11,7 @@ import {
 } from 'react95'
 import styled from 'styled-components'
 import { respondTo } from '../../libs/mixin'
-import { font_size_for_nav } from '../../libs/_variables'
+import { font_size_for_nav, commonWindowStylings } from '../../libs/_variables'
 
 export const Container = styled.div<{ darkMode: boolean }>`
     min-height: 100vh;
@@ -107,11 +107,7 @@ export const Body = styled.div`
 
 // ARTICEL WINDOW STYLINGS
 export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
-    position: absolute;
-    width: 100vw;
-    left: 0;
-    top: 0;
-    min-height: 100vh;
+    ${commonWindowStylings}
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
     ${respondTo.md`
     min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '700px')};
@@ -153,11 +149,7 @@ export const ArticleAvatar = styled(Avatar)`
 
 // PORTFOLIO WINDOW STYLINGS
 export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
-    position: absolute;
-    width: 100vw;
-    left: 0;
-    top: 0;
-    min-height: 100vh;
+    ${commonWindowStylings}
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
     overflow: hidden;
     ${respondTo.md`
@@ -167,13 +159,39 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
+export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
+    padding: 0 5px;
+    margin: auto;
+    position: ${(props) => props.isExpanded && 'absolute'};
+    width: ${(props) => props.isExpanded && '100%'};
+    height: ${(props) => props.isExpanded && '89%'};
+`
 
 export const PortfolioBody = styled(TabBody)`
     margin: 0.5rem 0;
     background: white;
     overflow: auto;
 `
-export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
+
+// CONTACT WINDOW STYLINGS
+export const ContactWindowsWrapper = styled(Window)<IWindowWrapper>`
+    ${commonWindowStylings}
+    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
+    ${respondTo.md`
+    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '500px')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
+    width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
+  `}
+`
+
+export const ContactContentWrapper = styled.div<{ isExpanded: boolean }>`
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    justify-content: center;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    align-items: center;
     padding: 0 5px;
     margin: auto;
     position: ${(props) => props.isExpanded && 'absolute'};

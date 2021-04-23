@@ -1,7 +1,10 @@
+import { GiBookshelf } from 'react-icons/gi'
+
 export default {
-    name: 'portfolioItem',
+    name: 'portfolio',
     title: 'Portfolio',
     type: 'document',
+    icon: GiBookshelf,
     fields: [
         { name: 'title', title: 'Title', type: 'string' },
         { name: 'href', title: 'Link', type: 'string' },

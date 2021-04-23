@@ -33,7 +33,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
     portfolioItems,
 }) => {
     const { dispatch } = useCtx()
-    console.log(portfolioItems)
 
     return (
         <Draggable
@@ -98,7 +97,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                         </Button>
                     </div>
                 </Header>
-
                 {/* <div className="absolute overflow-auto h-full w-full px-1 "> */}
                 <PortfolioContentWrapper isExpanded={isExpanded}>
                     <PortfolioBody>
@@ -120,7 +118,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                             ))}
                         </div>
                     </PortfolioBody>
-                    {/* </div> */}
                 </PortfolioContentWrapper>
             </PorfolioWindowWrapper>
         </Draggable>

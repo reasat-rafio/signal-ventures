@@ -9,9 +9,16 @@ interface WindowProps {
     width: number
     blogInfo: any
     portfolioItems: any
+    contact: any
 }
 
-export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo, portfolioItems }) => {
+export const Window_: React.FC<WindowProps> = ({
+    index,
+    width,
+    blogInfo,
+    portfolioItems,
+    contact,
+}) => {
     const {
         dispatch,
         state: { focusWindow, activeWindows },
@@ -86,7 +93,9 @@ export const Window_: React.FC<WindowProps> = ({ index, width, blogInfo, portfol
             {windowIsNotUndefined && windowKey === 'portfolio' && (
                 <Portfolio {...props} portfolioItems={portfolioItems} />
             )}
-            {windowIsNotUndefined && windowKey === 'contact' && <Contact {...props} />}
+            {windowIsNotUndefined && windowKey === 'contact' && (
+                <Contact {...props} contact={contact} />
+            )}
             {windowIsNotUndefined && windowKey === 'article' && (
                 <Articles {...props} blogInfo={blogInfo} />
             )}

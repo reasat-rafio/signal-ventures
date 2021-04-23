@@ -1,14 +1,18 @@
-import { Button } from 'react95'
+import { Button, TextField } from 'react95'
 import Image from 'next/image'
 import React from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { CLOSE_WINDOW_BOX, FOCUS_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../../store/types'
 import { imageUrlBuilder } from '../../../../utils/sanity'
-import { Header, ArticelWindowWrapper, Body } from '../../../styles/Styles'
+import { Header, ContactWindowsWrapper, ContactContentWrapper } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 
-export const Contact: React.FC<IWindowsProps> = ({
+interface ContactProps extends IWindowsProps {
+    contact: any
+}
+
+export const Contact: React.FC<ContactProps> = ({
     windowKey,
     windowIsFocused,
     isExpanded,
@@ -20,7 +24,12 @@ export const Contact: React.FC<IWindowsProps> = ({
     mdScreenBreakpoint,
     xaxis,
     yaxis,
+    contact,
 }) => {
+    const { ctaButton, email, message, logo } = contact[0]
+
+    console.log(ctaButton)
+
     const { dispatch } = useCtx()
     return (
         <Draggable
@@ -33,7 +42,7 @@ export const Contact: React.FC<IWindowsProps> = ({
                 y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
             }}
         >
-            <ArticelWindowWrapper
+            <ContactWindowsWrapper
                 windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
@@ -86,8 +95,50 @@ export const Contact: React.FC<IWindowsProps> = ({
                     </div>
                 </Header>
 
-                <Body></Body>
-            </ArticelWindowWrapper>
+                <div
+                    className="grid grid-cols-12 absolute mx-auto gap-2"
+                    style={{ height: '90%', width: '99%' }}
+                >
+                    <div
+                        className="col-span-4 flex justify-center items-center  px-8  h-full w-full  "
+                        style={{ backgroundColor: '#56AAAA' }}
+                    >
+                        <SanityImg
+                            builder={imageUrlBuilder}
+                            image={logo}
+                            height={600}
+                            alt={'contact poster'}
+                        />
+                    </div>
+
+                    <div className="col-span-8  h-full w-full flex flex-col justify-center gap-4 px-3">
+                        <div className="grid grid-cols-12  gap-4">
+                            <p className="col-span-2 ">{email}</p>
+                            <TextField
+                                style={{ gridColumn: 'span 10 / span 10' }}
+                                placeholder="Type here..."
+                                fullWidth
+                            />
+                        </div>
+                        <div className="grid grid-cols-12  gap-4">
+                            <p className="col-span-2">{message}</p>
+                            <TextField
+                                style={{ gridColumn: 'span 10 / span 10' }}
+                                multiline
+                                placeholder="Type here..."
+                                fullWidth
+                                rows={4}
+                            />
+                        </div>
+                        <div className="grid grid-cols-12  gap-4">
+                            <div className="col-span-2" />
+                            <Button style={{ gridColumn: 'span 10 / span 10', width: '90px' }}>
+                                {ctaButton.title}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </ContactWindowsWrapper>
         </Draggable>
     )
 }
