@@ -7,7 +7,6 @@ import {
     Header,
     PorfolioWindowWrapper,
     PortfolioBody,
-    Body,
     PortfolioContentWrapper,
 } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
