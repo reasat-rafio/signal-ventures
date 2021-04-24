@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
             blog: data,
             sanityData: await sanityStaticProps({ query, context }),
         },
-        revalidate: 1,
+        revalidate: 10,
     }
 }
 

@@ -97,14 +97,6 @@ export const ArticleBodyWrapper = styled.div`
     padding: 0 5px;
 `
 
-export const Body = styled.div`
-    position: absolute;
-    height: 94%;
-    width: 99%;
-    overflow: auto;
-    padding: 0 5px;
-`
-
 // ARTICEL WINDOW STYLINGS
 export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     ${commonWindowStylings}

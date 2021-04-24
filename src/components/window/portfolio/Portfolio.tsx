@@ -14,7 +14,7 @@ import Draggable from 'react-draggable'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 
 interface PortfolioProps extends IWindowsProps {
-    portfolioItems: any
+    portfolioItems: IPorfolioItems[]
 }
 
 export const Portfolio: React.FC<PortfolioProps> = ({

@@ -7,9 +7,9 @@ import { Portfolio } from './portfolio/Portfolio'
 interface WindowProps {
     index: string
     width: number
-    blogInfo: any
-    portfolioItems: any
-    contact: any
+    blogInfo: IBloginfo[]
+    portfolioItems: IPorfolioItems[]
+    contact: Icontact[]
 }
 
 export const Window_: React.FC<WindowProps> = ({
@@ -19,6 +19,8 @@ export const Window_: React.FC<WindowProps> = ({
     portfolioItems,
     contact,
 }) => {
+    console.log(contact)
+
     const {
         state: { focusWindow, activeWindows },
     } = useCtx()

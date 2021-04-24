@@ -8,7 +8,7 @@ import Draggable from 'react-draggable'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 
 interface ContactProps extends IWindowsProps {
-    contact: any
+    contact: Icontact[]
 }
 
 export const Contact: React.FC<ContactProps> = ({

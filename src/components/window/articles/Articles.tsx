@@ -18,7 +18,7 @@ import moment from 'moment'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 
 interface ArticleProps extends IWindowsProps {
-    blogInfo: any
+    blogInfo: IBloginfo[]
 }
 
 export const Articles: React.FC<ArticleProps> = ({

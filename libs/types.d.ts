@@ -83,4 +83,76 @@ interface BlogItems {
     url: string
 }
 
+interface IBloginfo {
+    author: string
+    content: string
+    image: string
+    link: string
+    pubDate: Date
+    thumbnail: string
+    title: string
+}
+
 declare module '*.png'
+
+interface IPorfolioItems {
+    _createdAt: Date
+    _id: string
+    _rev: string
+    _type: string
+    _updatedAt: Date
+    href: string
+    logo: Logo
+    title: string
+}
+
+interface Logo {
+    _type: string
+    asset: Asset
+}
+
+interface Asset {
+    _createdAt: Date
+    _id: string
+    _rev: string
+    _type: string
+    _updatedAt: Date
+    assetId: string
+    extension: string
+    metadata: Metadata
+    mimeType: string
+    originalFilename: string
+    path: string
+    sha1hash: string
+    size: number
+    uploadId: string
+    url: string
+}
+
+interface Metadata {
+    dimensions: Dimensions
+}
+
+interface Dimensions {
+    _type: string
+    aspectRatio: number
+    height: number
+    width: number
+}
+
+interface Icontact {
+    _createdAt: Date
+    _id: string
+    _rev: string
+    _type: string
+    _updatedAt: Date
+    ctaButton: CtaButton
+    email: string
+    logo: Logo
+    message: string
+}
+
+interface CtaButton {
+    _type: string
+    title: string
+}
