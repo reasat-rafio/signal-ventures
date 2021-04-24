@@ -73,16 +73,6 @@ interface IWindowsProps {
     yaxis: number
 }
 
-interface BlogItems {
-    author: string
-    content: string
-    image: string
-    pubDate: string
-    thumbnail: string
-    title: string
-    url: string
-}
-
 interface IBloginfo {
     author: string
     content: string
@@ -92,8 +82,6 @@ interface IBloginfo {
     thumbnail: string
     title: string
 }
-
-declare module '*.png'
 
 interface IPorfolioItems {
     _createdAt: Date
