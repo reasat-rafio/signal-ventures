@@ -50,7 +50,8 @@ export default function Index({ blog, sanityData }) {
                     <Home
                         title={landingPage.heading}
                         description={landingPage.description}
-                        logo={site.sites.logo}
+                        darkLogo={site.sites.dark_logo}
+                        lightLogo={site.sites.light_logo}
                         button={landingPage.ctaButton}
                     />
 

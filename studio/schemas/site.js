@@ -4,8 +4,13 @@ export default {
     type: 'document',
     fields: [
         {
-            name: 'logo',
-            title: 'Logo',
+            name: 'lightLogo',
+            title: 'Light Logo',
+            type: 'image',
+        },
+        {
+            name: 'darkLogo',
+            title: 'Dark Logo',
             type: 'image',
         },
         {
@@ -22,7 +27,8 @@ export default {
     ],
     preview: {
         select: {
-            media: 'logo',
+            media: 'lightLogo',
+            media: 'darkLogo',
         },
     },
 }

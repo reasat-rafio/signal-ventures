@@ -27,7 +27,8 @@ type Action = {
 interface HomeProps {
     title: string
     description: string
-    logo: string
+    darkLogo: string
+    lightLogo: string
     button: {
         _type: string
         title: string

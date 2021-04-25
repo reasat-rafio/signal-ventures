@@ -3,7 +3,8 @@ import { withDimensions } from 'sanity-react-extra'
 
 export const siteQuery = groq`{
     "sites": *[_id == "site"][0] {
-        "logo": ${withDimensions('logo')},
+        "dark_logo": ${withDimensions('darkLogo')},
+        "light_logo": ${withDimensions('lightLogo')},
         "startButton": startButton {
         ...,
         "logo": ${withDimensions('logo')}

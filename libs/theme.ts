@@ -1,11 +1,11 @@
 export const dark_mode = {
-    name: 'azureOrange',
+    name: 'darkMode',
     anchor: '#1034a6',
     anchorVisited: '#440381',
-    borderDark: '#00534E',
-    borderDarkest: '#00534E',
-    borderLight: '#00F0FF',
-    borderLightest: '#00F0FF', // focus nav background
+    borderDark: '#49014B',
+    borderDarkest: '#49014B',
+    borderLight: '#E635EC',
+    borderLightest: '#E635EC', // focus nav background
     canvas: '#ffffff',
     canvasText: '#fff',
     canvasTextDisabled: '#05427f',
@@ -14,25 +14,25 @@ export const dark_mode = {
     checkmark: '#000000',
     checkmarkDisabled: '#05427f',
     flatDark: '#9e9e9e',
-    flatLight: '#052029', // time stamp button color
-    focusSecondary: '#171123',
-    headerBackground: '#171123',
-    headerNotActiveBackground: '#171123;',
+    flatLight: '#1F0220', // time stamp button color
+    focusSecondary: '#E635EC',
+    headerBackground: '#E635EC',
+    headerNotActiveBackground: 'E635EC',
     headerNotActiveText: '#7f7f7f',
     headerText: '#ffffff',
-    hoverBackground: '#00F0FF', // hover
-    material: '#052029', // nav and navbar color
+    hoverBackground: '#E635EC', // hover
+    material: '#1F0220', // nav and navbar color
     materialDark: '#9a9e9c',
     materialText: '#ffffff', // text color
     materialTextDisabled: '#05427f',
     materialTextDisabledShadow: '#c6c6c6',
     materialTextInvert: '#000000',
     progress: '#F46036',
-    tooltip: '#052029',
+    tooltip: '#1F0220',
 }
 
 export const light_mode = {
-    name: 'original',
+    name: 'lightMode',
     anchor: '#1034a6',
     anchorVisited: '#440381',
     borderDark: '#848584',
