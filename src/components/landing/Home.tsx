@@ -20,7 +20,7 @@ export const Home: React.FC<HomeProps> = ({ description, title, lightLogo, darkL
                     builder={imageUrlBuilder}
                     image={darkLogo}
                     alt={'signal ventures logo'}
-                    width={210}
+                    width={200}
                     className="transform translate-y-16"
                 />
             ) : (
