@@ -28,7 +28,7 @@ export const dark_mode = {
     materialTextDisabledShadow: '#c6c6c6',
     materialTextInvert: '#000000',
     progress: '#F46036',
-    tooltip: '#1F0220',
+    tooltip: '#E635EC',
 }
 
 export const light_mode = {
