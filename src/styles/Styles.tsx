@@ -100,6 +100,7 @@ export const ArticleBodyWrapper = styled.div`
 // ARTICEL WINDOW STYLINGS
 export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     ${commonWindowStylings}
+
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
     ${respondTo.md`
     min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '700px')};

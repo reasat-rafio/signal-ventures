@@ -27,8 +27,6 @@ export const Contact: React.FC<ContactProps> = ({
 }) => {
     const { ctaButton, email, message, logo } = contact[0]
 
-    console.log(ctaButton)
-
     const { dispatch } = useCtx()
     return (
         <Draggable

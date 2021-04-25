@@ -52,7 +52,7 @@ export const DesktopNavs: React.FC<DesktopNavsProps> = ({ navs }) => {
             <div className="flex flex-col justify-center items-center gap-6 ">
                 {navigations?.map(({ title, key, logo, dark_mode, href }: Inavs, i: number) => (
                     <div
-                        className="flex flex-col justify-center items-center gap-1 "
+                        className="flex flex-col justify-center items-center gap-1 cursor-pointer"
                         key={i}
                         onClick={() => navbarAction(title, logo, key, dark_mode, href)}
                     >
