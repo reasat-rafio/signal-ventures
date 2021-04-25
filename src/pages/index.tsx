@@ -3,7 +3,7 @@ import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
 import { Window_ } from '../components/window/Window'
 import { Home } from '../components/landing/Home'
-import { Navbar } from '../components/navbar/Navbar'
+import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
 import { useCtx } from '../../store'
 import { query } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
@@ -11,6 +11,7 @@ import { useRef } from 'react'
 import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
 import { Container } from '../styles/Styles'
 import axios from 'axios'
+import { DesktopNavs } from '../components/navbar/DesktopNavs'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
@@ -61,7 +62,8 @@ export default function Index({ blog, sanityData }) {
                         contact={contact}
                     />
                 ))}
-                <Navbar navs={site.sites.nav} startMenu={site.sites.startButton} />
+                <DesktopNavs navs={site.sites.nav} />
+                <StartMenuNavbar navs={site.sites.nav} startMenu={site.sites.startButton} />
             </div>
         </Container>
     )

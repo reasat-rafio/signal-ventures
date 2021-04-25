@@ -76,3 +76,30 @@ export const useToText = (item: IBloginfo[], feed: { image: string; link: string
     }, [])
     return { blogInfo }
 }
+
+export const useOrderNavs = (navs, theme) => {
+    const [navigations, setNavigations] = useState<any>()
+
+    useEffect(() => {
+        const _navs = navs.filter((n) => n.dark_mode == undefined)
+        const dark_and_light_navs = navs.filter((n) => n.dark_mode != undefined)
+        setNavigations(_navs)
+
+        if (theme) {
+            const _dark_nav = dark_and_light_navs.filter((d) => !d.dark_mode)
+            const newNav = [..._navs.reverse(), ..._dark_nav].sort((n) =>
+                n.dark_mode != undefined ? -1 : 1,
+            )
+            setNavigations(newNav)
+        } else {
+            const _light_nav = dark_and_light_navs.filter((d) => d.dark_mode)
+            const newNav = [..._navs.reverse(), ..._light_nav].sort((n) =>
+                n.dark_mode != undefined ? -1 : 1,
+            )
+            setNavigations(newNav)
+        }
+    }, [theme])
+    return {
+        navigations,
+    }
+}

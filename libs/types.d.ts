@@ -35,6 +35,15 @@ interface HomeProps {
     }
 }
 
+interface NavbarProps {
+    navs: Inavs[]
+    startMenu: {
+        _type: string
+        title: string
+        logo: any
+    }
+}
+
 interface Inavs {
     title: string
     key: string

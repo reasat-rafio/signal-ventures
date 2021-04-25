@@ -19,8 +19,6 @@ export const Window_: React.FC<WindowProps> = ({
     portfolioItems,
     contact,
 }) => {
-    console.log(contact)
-
     const {
         state: { focusWindow, activeWindows },
     } = useCtx()

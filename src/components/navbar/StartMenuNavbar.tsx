@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button, ListItem, Tooltip } from 'react95'
 import {
     NavBar,
@@ -9,52 +9,25 @@ import {
     ToolbarWrapper,
 } from '../../styles/Styles'
 import { SanityImg } from 'sanity-react-extra'
-import { useDate } from '../../../libs/hooks'
+import { useDate, useOrderNavs } from '../../../libs/hooks'
 import { CREATE_WINDOW_BOX, TOGGLE_DARK_MODE } from '../../../store/types'
 import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 
-interface NavbarProps {
-    navs: Inavs[]
-    startMenu: {
-        _type: string
-        title: string
-        logo: any
-    }
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
+export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
     const {
         dispatch,
         state: { openWindows, focusWindow, darkMode },
     } = useCtx()
 
-    const [navigation, setNavigation] = useState<Inavs[]>([])
+    // const [navigation, setNavigation] = useState<Inavs[]>([])
     // Menu open | close state
     const [open, setOpen] = useState<boolean>(false)
     // This will return the current time date and year
     const { date, time, year } = useDate()
 
-    // This whole useEffect will order the navs accounding to the <dark | light> mode
-    useEffect(() => {
-        const _navs = navs.filter((n) => n.dark_mode == undefined)
-        const dark_and_light_navs = navs.filter((n) => n.dark_mode != undefined)
-        setNavigation(_navs)
-
-        if (darkMode) {
-            const _dark_nav = dark_and_light_navs.filter((d) => !d.dark_mode)
-            const newNav = [..._navs.reverse(), ..._dark_nav].sort((n) =>
-                n.dark_mode != undefined ? -1 : 1,
-            )
-            setNavigation(newNav)
-        } else {
-            const _light_nav = dark_and_light_navs.filter((d) => d.dark_mode)
-            const newNav = [..._navs.reverse(), ..._light_nav].sort((n) =>
-                n.dark_mode != undefined ? -1 : 1,
-            )
-            setNavigation(newNav)
-        }
-    }, [darkMode])
+    // This will return the ordered navigation accounding to the <dark | light> mode
+    const { navigations } = useOrderNavs(navs, darkMode)
 
     const navbarAction = (
         title: string,
@@ -129,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                     {/*  DROPDOWN LIST ITEMS */}
                     {open && (
                         <NavList onClick={() => setOpen(false)}>
-                            {navigation?.map(({ title, key, logo, dark_mode, href }: Inavs) => (
+                            {navigations?.map(({ title, key, logo, dark_mode, href }: Inavs) => (
                                 <div
                                     onClick={() => navbarAction(title, logo, key, dark_mode, href)}
                                 >
