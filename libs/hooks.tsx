@@ -78,7 +78,7 @@ export const useToText = (item: IBloginfo[], feed: { image: string; link: string
 }
 
 export const useOrderNavs = (navs, theme) => {
-    const [navigations, setNavigations] = useState<any>()
+    const [navigations, setNavigations] = useState<Inavs[]>([])
 
     useEffect(() => {
         const _navs = navs.filter((n) => n.dark_mode == undefined)

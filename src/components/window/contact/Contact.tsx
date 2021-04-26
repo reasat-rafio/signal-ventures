@@ -27,7 +27,10 @@ export const Contact: React.FC<ContactProps> = ({
 }) => {
     const { ctaButton, email, message, logo } = contact[0]
 
-    const { dispatch } = useCtx()
+    const {
+        dispatch,
+        state: { darkMode },
+    } = useCtx()
     return (
         <Draggable
             handle="strong"
@@ -79,7 +82,10 @@ export const Contact: React.FC<ContactProps> = ({
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2 ">{email}</p>
                             <TextField
-                                style={{ gridColumn: 'span 10 / span 10' }}
+                                style={{
+                                    gridColumn: 'span 10 / span 10',
+                                    background: `${darkMode ? '#301b3f' : 'white'}`,
+                                }}
                                 placeholder="Type here..."
                                 fullWidth
                             />
@@ -87,7 +93,10 @@ export const Contact: React.FC<ContactProps> = ({
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2">{message}</p>
                             <TextField
-                                style={{ gridColumn: 'span 10 / span 10' }}
+                                style={{
+                                    gridColumn: 'span 10 / span 10',
+                                    background: `${darkMode ? '#301b3f' : 'white'}`,
+                                }}
                                 multiline
                                 placeholder="Type here..."
                                 fullWidth

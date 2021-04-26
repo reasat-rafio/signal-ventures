@@ -1,3 +1,4 @@
+import { SET_MODE } from './../types'
 import {
     CREATE_WINDOW_BOX,
     MINIMIZE_WINDOW_BOX,
@@ -67,6 +68,12 @@ export const reducer = (state: InitalState, action: Action) => {
             return {
                 ...state,
                 darkMode: !darkMode,
+            }
+
+        case SET_MODE:
+            return {
+                ...state,
+                darkMode: action.payload,
             }
 
         default:

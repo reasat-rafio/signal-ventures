@@ -21,6 +21,8 @@ type Action = {
         | 'CLOSE_WINDOW_BOX'
         | 'FOCUS_WINDOW_BOX'
         | 'TOGGLE_DARK_MODE'
+        | 'SET_MODE'
+
     payload?: any
 }
 

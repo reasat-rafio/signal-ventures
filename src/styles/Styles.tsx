@@ -123,9 +123,9 @@ export const ArticleImg = styled.div<{ thumbnail: string }>`
     position: relative;
 `
 
-export const ArticleContent = styled(Cutout)`
+export const ArticleContent = styled(Cutout)<{ darkMode: boolean }>`
     grid-row: span 3 / span 3;
-    background: white;
+    background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
     margin: 10px 0 0 0;
 
     > * {
@@ -160,9 +160,9 @@ export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
     height: ${(props) => props.isExpanded && '89%'};
 `
 
-export const PortfolioBody = styled(TabBody)`
+export const PortfolioBody = styled(TabBody)<{ darkMode: boolean }>`
     margin: 0.5rem 0;
-    background: white;
+    background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
     overflow: auto;
 `
 

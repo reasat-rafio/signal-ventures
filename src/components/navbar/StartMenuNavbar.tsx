@@ -13,6 +13,7 @@ import { useDate, useOrderNavs } from '../../../libs/hooks'
 import { CREATE_WINDOW_BOX, TOGGLE_DARK_MODE } from '../../../store/types'
 import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
+import { NavAction } from '../../../libs/HelperFunc'
 
 export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
     const {
@@ -20,7 +21,6 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
         state: { openWindows, focusWindow, darkMode },
     } = useCtx()
 
-    // const [navigation, setNavigation] = useState<Inavs[]>([])
     // Menu open | close state
     const [open, setOpen] = useState<boolean>(false)
     // This will return the current time date and year
@@ -28,35 +28,6 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
 
     // This will return the ordered navigation accounding to the <dark | light> mode
     const { navigations } = useOrderNavs(navs, darkMode)
-
-    const navbarAction = (
-        title: string,
-        logo: string,
-        key: string,
-        dark_mode: number | undefined,
-        href?: string,
-    ) => {
-        if (key != undefined) {
-            dispatch({
-                type: CREATE_WINDOW_BOX,
-                payload: {
-                    name: title,
-                    icon: logo,
-                    key: key,
-                },
-            })
-        } else {
-            if (dark_mode == undefined) {
-                if (typeof window !== 'undefined' && typeof href !== 'undefined') {
-                    document.location.href = href
-                }
-            } else {
-                dispatch({
-                    type: TOGGLE_DARK_MODE,
-                })
-            }
-        }
-    }
 
     return (
         <NavBar>
@@ -104,7 +75,9 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                         <NavList onClick={() => setOpen(false)}>
                             {navigations?.map(({ title, key, logo, dark_mode, href }: Inavs) => (
                                 <div
-                                    onClick={() => navbarAction(title, logo, key, dark_mode, href)}
+                                    onClick={() =>
+                                        NavAction(title, logo, key, dark_mode, dispatch, href)
+                                    }
                                 >
                                     <ListItem style={{ width: '14rem' }} key={key}>
                                         <div className="flex items-center gap-4">

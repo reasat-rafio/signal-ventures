@@ -30,7 +30,10 @@ export const Portfolio: React.FC<PortfolioProps> = ({
     yaxis,
     portfolioItems,
 }) => {
-    const { dispatch } = useCtx()
+    const {
+        dispatch,
+        state: { darkMode },
+    } = useCtx()
 
     return (
         <Draggable
@@ -64,8 +67,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                 </strong>
 
                 <PortfolioContentWrapper isExpanded={isExpanded}>
-                    <PortfolioBody>
-                        <div className="grid grid-cols-20 justify-center items-center my-9 h-full">
+                    <PortfolioBody darkMode={darkMode}>
+                        <div className="grid grid-cols-20 justify-center items-center my-9 h-full ">
                             {portfolioItems.map(({ _id, href, logo, title }) => (
                                 <a
                                     key={_id}
@@ -78,7 +81,13 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                         alt={'signal ventures logo'}
                                         width={45}
                                     />
-                                    <p className="text-base">{title}</p>
+                                    <p
+                                        className={`text-base ${
+                                            darkMode ? 'text-gray-200' : 'text-gray-600'
+                                        } `}
+                                    >
+                                        {title}
+                                    </p>
                                 </a>
                             ))}
                         </div>

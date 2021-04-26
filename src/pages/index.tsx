@@ -6,13 +6,14 @@ import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
 import { useCtx } from '../../store'
 import { query } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
 import { Container } from '../styles/Styles'
 import axios from 'axios'
 import { DesktopNavs } from '../components/navbar/DesktopNavs'
 import { ThemeProvider } from 'styled-components'
 import { dark_mode, light_mode } from '../../libs/theme'
+import { SET_MODE } from '../../store/types'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
@@ -32,12 +33,23 @@ export default function Index({ blog, sanityData }) {
     } = useSanityQuery(query, sanityData)
 
     const {
-        state: { activeWindows, darkMode, focusWindow },
+        dispatch,
+        state: { activeWindows, darkMode },
     } = useCtx()
 
-    const siteRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        const localData = localStorage.getItem('signal_ventures_active_mode')
+        if (localData) {
+            const mode = JSON.parse(localData)
+            dispatch({
+                type: SET_MODE,
+                payload: mode,
+            })
+        }
+    }, [])
 
     // This will return current page width
+    const siteRef = useRef<HTMLDivElement>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
     // This will return an array of all the blogs from clients medium
     const { blogInfo } = useToText(blog.items, blog.feed)

@@ -35,7 +35,10 @@ export const Articles: React.FC<ArticleProps> = ({
     yaxis,
     blogInfo,
 }) => {
-    const { dispatch } = useCtx()
+    const {
+        dispatch,
+        state: { darkMode },
+    } = useCtx()
 
     return (
         <Draggable
@@ -80,9 +83,13 @@ export const Articles: React.FC<ArticleProps> = ({
                                 <ArticleImg thumbnail={thumbnail}>
                                     <ArticleAvatar size={60} src={image} />
                                 </ArticleImg>
-                                <ArticleContent>
+                                <ArticleContent darkMode={darkMode}>
                                     <h3 className="md:text-2xl text-xl font-bold my-2">{title}</h3>
-                                    <p className="md:text-lg text-gray-600 text-base">
+                                    <p
+                                        className={`md:text-lg ${
+                                            darkMode ? 'text-gray-200' : 'text-gray-600'
+                                        } text-base`}
+                                    >
                                         {content}{' '}
                                         <a
                                             className="text-blue-500 md:text-lg text-base"
