@@ -19,7 +19,7 @@ export const DesktopNavs: React.FC<DesktopNavsProps> = ({ navs }) => {
     const { navigations } = useOrderNavs(navs, darkMode)
 
     return (
-        <div className="hidden fixed lg:block top-10 left-5 z-20  ">
+        <div className="hidden fixed lg:block top-10 left-5 z-20  w-16">
             <div className="flex flex-col justify-center items-center gap-6 ">
                 {navigations?.map(({ title, key, logo, dark_mode, href }: Inavs, i: number) => (
                     <div
