@@ -33,7 +33,7 @@ export const DesktopNavs: React.FC<DesktopNavsProps> = ({ navs }) => {
                             alt={title + 'logo'}
                             width={40}
                         />
-                        <p className="text-white">{title}</p>
+                        <p className={`${darkMode ? 'text-white' : 'text-gray-800'}`}>{title}</p>
                     </div>
                 ))}
             </div>
