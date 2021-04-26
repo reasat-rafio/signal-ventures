@@ -77,28 +77,34 @@ export const useToText = (item: IBloginfo[], feed: { image: string; link: string
     return { blogInfo }
 }
 
-export const useOrderNavs = (navs, theme) => {
+export const useOrderNavs = (navs: Inavs[], darkMode: boolean) => {
     const [navigations, setNavigations] = useState<Inavs[]>([])
 
     useEffect(() => {
+        // filtering out the navs that dont have "dark_mode" value (ex: Article, Portfolio, Contact, Twitter)
         const _navs = navs.filter((n) => n.dark_mode == undefined)
+        // filtering out the navs that  have "dark_mode" value (ex: Switch to dark mode, Switch to light mode)
         const dark_and_light_navs = navs.filter((n) => n.dark_mode != undefined)
         setNavigations(_navs)
 
-        if (theme) {
+        if (darkMode) {
+            // If DarkMode is true then only keeping 'Switch to light mode' and removing 'Switch to darkmode'
             const _dark_nav = dark_and_light_navs.filter((d) => !d.dark_mode)
+            // Ordering the navs
             const newNav = [..._navs.reverse(), ..._dark_nav].sort((n) =>
                 n.dark_mode != undefined ? -1 : 1,
             )
             setNavigations(newNav)
         } else {
+            // If DarkMode is false then only keeping 'Switch to dark mode' and removing 'Switch to light mode'
             const _light_nav = dark_and_light_navs.filter((d) => d.dark_mode)
+            // Ordering the navs
             const newNav = [..._navs.reverse(), ..._light_nav].sort((n) =>
                 n.dark_mode != undefined ? -1 : 1,
             )
             setNavigations(newNav)
         }
-    }, [theme])
+    }, [darkMode])
     return {
         navigations,
     }

@@ -16,26 +16,25 @@ import { font_size_for_nav, commonWindowStylings } from '../../libs/_variables'
 export const Container = styled.div<{ darkMode: boolean }>`
     min-height: 100vh;
     background: ${(props: { darkMode: boolean }) =>
-        props.darkMode === true
-            ? 'url(/img/static/darkbg.png) no-repeat center center / cover'
-            : '#0E1C3D'};
-
-    ${({ darkMode }) =>
-        darkMode &&
-        `
-        &:after {
-            content: '';
-            opacity: 0.8;
-            background-color: #000;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            position: absolute;
-            background-size: contain;
-            background-repeat: repeat;
-        } `}
+        props.darkMode === true ? 'black' : '#0E1C3D'};
 `
+
+// ${({ darkMode }) =>
+// darkMode &&
+// `
+// &:after {
+//     content: '';
+//     opacity: 0.8;
+//     background-color: #000;
+//     top: 0;
+//     left: 0;
+//     bottom: 0;
+//     right: 0;
+//     position: absolute;
+//     background-size: contain;
+//     background-repeat: repeat;
+// } `}
+
 export const BackgroundMask = styled.div`
     top: 0;
     left: 0;

@@ -9,6 +9,7 @@
         "postinstall": "lerna bootstrap"
     },
     "dependencies": {
+        "@react-three/fiber": "^6.0.16",
         "@react95/core": "^3.0.7",
         "autoprefixer": "^10.2.5",
         "axios": "^0.21.1",
@@ -25,11 +26,11 @@
         "react-draggable": "^4.4.3",
         "react-icons": "^4.2.0",
         "react-json-pretty": "^2.2.0",
-        "react-three-fiber": "^6.0.13",
         "react95": "^3.7.0",
         "sanity-react-extra": "^0.2.4",
         "styled-components": "^5.2.3",
-        "tailwindcss": "^2.1.1"
+        "tailwindcss": "^2.1.1",
+        "three": "^0.128.0"
     },
     "devDependencies": {
         "@sanity/cli": "^2.8.0",

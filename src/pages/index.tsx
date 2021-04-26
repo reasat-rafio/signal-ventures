@@ -14,6 +14,7 @@ import { DesktopNavs } from '../components/navbar/DesktopNavs'
 import { ThemeProvider } from 'styled-components'
 import { dark_mode, light_mode } from '../../libs/theme'
 import { SET_MODE } from '../../store/types'
+import { AppCanvas } from '../components/Canvas/AppCanvas'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
@@ -79,6 +80,7 @@ export default function Index({ blog, sanityData }) {
                     ))}
                     <DesktopNavs navs={site.sites.nav} />
                     <StartMenuNavbar navs={site.sites.nav} startMenu={site.sites.startButton} />
+                    <AppCanvas />
                 </div>
             </Container>
         </ThemeProvider>

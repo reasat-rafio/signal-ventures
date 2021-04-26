@@ -3,7 +3,6 @@ import { SanityImg } from 'sanity-react-extra'
 import { NavAction } from '../../../libs/HelperFunc'
 import { useOrderNavs } from '../../../libs/hooks'
 import { useCtx } from '../../../store'
-import { CREATE_WINDOW_BOX, TOGGLE_DARK_MODE } from '../../../store/types'
 import { imageUrlBuilder } from '../../../utils/sanity'
 
 interface DesktopNavsProps {
@@ -20,7 +19,7 @@ export const DesktopNavs: React.FC<DesktopNavsProps> = ({ navs }) => {
     const { navigations } = useOrderNavs(navs, darkMode)
 
     return (
-        <div className="hidden fixed lg:block top-10 left-5 z-20  w-40">
+        <div className="hidden fixed lg:block top-10 left-5 z-20  ">
             <div className="flex flex-col justify-center items-center gap-6 ">
                 {navigations?.map(({ title, key, logo, dark_mode, href }: Inavs, i: number) => (
                     <div
