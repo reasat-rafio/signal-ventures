@@ -80,14 +80,14 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                                     }
                                 >
                                     <ListItem style={{ width: '14rem' }} key={key}>
-                                        <div className="flex items-center gap-4">
+                                        <div className="flex items-center ">
                                             <SanityImg
                                                 builder={imageUrlBuilder}
                                                 image={logo}
                                                 alt={title + 'logo'}
                                                 width={30}
                                             />
-                                            <p>{title}</p>
+                                            <p className="ml-4">{title}</p>
                                         </div>
                                     </ListItem>
                                 </div>

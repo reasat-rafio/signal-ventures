@@ -91,15 +91,13 @@ export const useOrderNavs = (navs: Inavs[], darkMode: boolean) => {
             // If DarkMode is true then only keeping 'Switch to light mode' and removing 'Switch to darkmode'
             const _dark_nav = dark_and_light_navs.filter((d) => !d.dark_mode)
             // Ordering the navs
-            const newNav = [..._navs.reverse(), ..._dark_nav].sort((n) =>
-                n.dark_mode != undefined ? -1 : 1,
-            )
+            const newNav = [..._navs, ..._dark_nav].sort((n) => (n.dark_mode != undefined ? -1 : 1))
             setNavigations(newNav)
         } else {
             // If DarkMode is false then only keeping 'Switch to dark mode' and removing 'Switch to light mode'
             const _light_nav = dark_and_light_navs.filter((d) => d.dark_mode)
             // Ordering the navs
-            const newNav = [..._navs.reverse(), ..._light_nav].sort((n) =>
+            const newNav = [..._navs, ..._light_nav].sort((n) =>
                 n.dark_mode != undefined ? -1 : 1,
             )
             setNavigations(newNav)
