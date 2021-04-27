@@ -11,6 +11,7 @@ import {
 } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
+import clsx from 'clsx'
 
 interface PortfolioProps extends IWindowsProps {
     portfolioItems: IPorfolioItems[]
@@ -82,9 +83,10 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                         width={45}
                                     />
                                     <p
-                                        className={`text-base ${
-                                            darkMode ? 'text-gray-200' : 'text-gray-600'
-                                        } `}
+                                        className={clsx(
+                                            'text-base',
+                                            darkMode ? 'text-gray-200' : 'text-gray-600',
+                                        )}
                                     >
                                         {title}
                                     </p>

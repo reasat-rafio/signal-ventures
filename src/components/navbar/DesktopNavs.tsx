@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { NavAction } from '../../../libs/HelperFunc'
@@ -33,7 +34,14 @@ export const DesktopNavs: React.FC<DesktopNavsProps> = ({ navs }) => {
                             alt={title + 'logo'}
                             width={40}
                         />
-                        <p className={`${darkMode ? 'text-white' : 'text-gray-800'}`}>{title}</p>
+                        <p
+                            className={clsx(
+                                'transition-colors duration-300',
+                                darkMode ? 'text-white' : 'text-gray-800',
+                            )}
+                        >
+                            {title}
+                        </p>
                     </div>
                 ))}
             </div>

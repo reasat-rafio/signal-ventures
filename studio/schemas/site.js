@@ -7,11 +7,17 @@ export default {
             name: 'lightLogo',
             title: 'Light Logo',
             type: 'image',
+            options: {
+                hotspot: true,
+            },
         },
         {
             name: 'darkLogo',
             title: 'Dark Logo',
             type: 'image',
+            options: {
+                hotspot: true,
+            },
         },
         {
             name: 'favicon',

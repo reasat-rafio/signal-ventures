@@ -15,7 +15,7 @@ import { font_size_for_nav, commonWindowStylings } from '../../libs/_variables'
 
 export const Container = styled.div<{ darkMode: boolean }>`
     min-height: 100vh;
-    background: ${(props: { darkMode: boolean }) => (props.darkMode === true ? 'black' : 'white')};
+    background: ${({ darkMode }) => (darkMode === true ? 'black' : 'white')};
 `
 
 // 0E1C3D

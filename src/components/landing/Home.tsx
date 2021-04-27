@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React from 'react'
 import { Button } from 'react95'
 import { SanityImg } from 'sanity-react-extra'
@@ -10,39 +11,27 @@ export const Home: React.FC<HomeProps> = ({ description, title, lightLogo, darkL
     } = useCtx()
 
     return (
-        <section
-            className={`flex flex-col justify-center items-center transform  h-screen   gap-5   px-2 md:px-0 z-10 ${
-                darkMode ? '-translate-y-16' : ' -translate-y-5 '
-            }`}
-        >
-            {darkMode ? (
-                <SanityImg
-                    builder={imageUrlBuilder}
-                    image={darkLogo}
-                    alt={'signal ventures logo'}
-                    width={200}
-                    className="transform translate-y-16"
-                />
-            ) : (
-                <SanityImg
-                    builder={imageUrlBuilder}
-                    image={lightLogo}
-                    alt={'signal ventures logo'}
-                    width={110}
-                />
-            )}
-
+        <section className="flex flex-col justify-center items-center transform h-screen space-y-5 px-2 md:px-0 z-10">
+            <SanityImg
+                builder={imageUrlBuilder}
+                image={darkMode ? darkLogo : lightLogo}
+                alt={'signal ventures logo'}
+                width={200}
+                className="w-64 h-64 object-center"
+            />
             <h1
-                className={`md:text-6xl text-5xl font-header  ${
-                    darkMode ? 'text-white' : 'text-black'
-                } text-center`}
+                className={clsx(
+                    'md:text-6xl text-5xl font-header text-center transition-colors duration-300',
+                    darkMode ? 'text-white' : 'text-black',
+                )}
             >
                 {title}
             </h1>
             <p
-                className={` md:text-2xl text-xl  text-center max-w-5xl  ${
-                    darkMode ? 'text-gray-300' : 'text-gray-800'
-                } `}
+                className={clsx(
+                    'md:text-2xl text-xl  text-center max-w-5xl transition-colors duration-300',
+                    darkMode ? 'text-gray-300' : 'text-gray-800',
+                )}
             >
                 {description}
             </p>

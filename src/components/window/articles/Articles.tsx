@@ -16,6 +16,7 @@ import {
 import Draggable from 'react-draggable'
 import moment from 'moment'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
+import clsx from 'clsx'
 
 interface ArticleProps extends IWindowsProps {
     blogInfo: IBloginfo[]
@@ -86,9 +87,10 @@ export const Articles: React.FC<ArticleProps> = ({
                                 <ArticleContent darkMode={darkMode}>
                                     <h3 className="md:text-2xl text-xl font-bold my-2">{title}</h3>
                                     <p
-                                        className={`md:text-lg ${
-                                            darkMode ? 'text-gray-200' : 'text-gray-600'
-                                        } text-base`}
+                                        className={clsx(
+                                            'md:text-lg text-base transition-colors duration-300',
+                                            darkMode ? 'text-gray-200' : 'text-gray-600',
+                                        )}
                                     >
                                         {content}{' '}
                                         <a
