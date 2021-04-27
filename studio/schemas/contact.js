@@ -12,6 +12,17 @@ export default {
             type: 'string',
         },
         {
+            name: 'name',
+            title: 'Name',
+            type: 'string',
+        },
+        {
+            name: 'subject',
+            title: 'Subject',
+            type: 'string',
+        },
+
+        {
             name: 'message',
             title: 'Message',
             type: 'string',

@@ -25,7 +25,7 @@ export const Contact: React.FC<ContactProps> = ({
     yaxis,
     contact,
 }) => {
-    const { ctaButton, email, message, logo } = contact[0]
+    const { ctaButton, email, message, name, subject, logo } = contact[0]
 
     const {
         dispatch,
@@ -81,6 +81,28 @@ export const Contact: React.FC<ContactProps> = ({
                     <div className="md:col-span-8 col-span-12  h-full w-full flex flex-col justify-center gap-4 px-3">
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2 ">{email}</p>
+                            <TextField
+                                style={{
+                                    gridColumn: 'span 10 / span 10',
+                                    background: `${darkMode ? '#301b3f' : 'white'}`,
+                                }}
+                                placeholder="Type here..."
+                                fullWidth
+                            />
+                        </div>
+                        <div className="grid grid-cols-12  gap-4">
+                            <p className="col-span-2 ">{name}</p>
+                            <TextField
+                                style={{
+                                    gridColumn: 'span 10 / span 10',
+                                    background: `${darkMode ? '#301b3f' : 'white'}`,
+                                }}
+                                placeholder="Type here..."
+                                fullWidth
+                            />
+                        </div>
+                        <div className="grid grid-cols-12  gap-4">
+                            <p className="col-span-2 ">{subject}</p>
                             <TextField
                                 style={{
                                     gridColumn: 'span 10 / span 10',

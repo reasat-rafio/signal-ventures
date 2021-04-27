@@ -148,7 +148,9 @@ interface Icontact {
     _updatedAt: Date
     ctaButton: CtaButton
     email: string
+    name: string
     logo: Logo
+    subject: string
     message: string
 }
 
