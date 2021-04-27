@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
     let faviconImage: string | null = null
     if (pageProps.data?.site.favicon) {
         faviconImage = imageUrlBuilder
-            .image(pageProps.sanityData?.data?.site.favicon)
+            .image(pageProps.sanityData?.data?.site.sites.favicon)
             .width(256)
             .height(256)
             .url()
