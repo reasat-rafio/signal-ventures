@@ -19,7 +19,7 @@ const SIZE = 80
 const SEGMENTS = 60
 const LINEWIDTH = 5
 
-function Grid({ darkMode }) {
+function Grid({ darkMode }: { darkMode: boolean }) {
     const gridRef = useRef<LineWidthGridHelper>()
 
     useFrame(({ clock }) => {
