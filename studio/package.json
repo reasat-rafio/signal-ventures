@@ -25,6 +25,7 @@
         "prop-types": "^15.7",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
-        "react-icons": "^4.1.0"
+        "react-icons": "^4.1.0",
+        "sanity-plugin-intl-input": "^5.0.6"
     }
 }
