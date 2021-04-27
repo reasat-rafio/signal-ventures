@@ -2,11 +2,12 @@ import { AppProps } from 'next/app'
 import '../styles/globals.css'
 import { AppProvider } from '../../store'
 import { imageUrlBuilder } from '../../utils/sanity'
-import { Head } from 'next/document'
+import Head from 'next/head'
 
 export default function App({ Component, pageProps }: AppProps) {
     let faviconImage: string | null = null
-    if (pageProps.data?.site.favicon) {
+
+    if (pageProps.sanityData?.data?.site.sites.favicon) {
         faviconImage = imageUrlBuilder
             .image(pageProps.sanityData?.data?.site.sites.favicon)
             .width(256)
