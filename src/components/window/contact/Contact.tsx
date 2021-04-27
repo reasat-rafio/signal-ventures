@@ -67,7 +67,7 @@ export const Contact: React.FC<ContactProps> = ({
                     style={{ height: '90%', width: '99%' }}
                 >
                     <div
-                        className="col-span-4 flex justify-center items-center  px-8  h-full w-full  "
+                        className="hidden  col-span-4 md:flex justify-center items-center  px-8  h-full w-full  "
                         style={{ backgroundColor: '#56AAAA' }}
                     >
                         <SanityImg
@@ -78,7 +78,7 @@ export const Contact: React.FC<ContactProps> = ({
                         />
                     </div>
 
-                    <div className="col-span-8  h-full w-full flex flex-col justify-center gap-4 px-3">
+                    <div className="md:col-span-8 col-span-12  h-full w-full flex flex-col justify-center gap-4 px-3">
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2 ">{email}</p>
                             <TextField

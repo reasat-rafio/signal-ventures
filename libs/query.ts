@@ -5,6 +5,7 @@ export const siteQuery = groq`{
     "sites": *[_id == "site"][0] {
         "dark_logo": ${withDimensions('darkLogo')},
         "light_logo": ${withDimensions('lightLogo')},
+        "favicon": ${withDimensions('favicon')},
         "startButton": startButton {
         ...,
         "logo": ${withDimensions('logo')}

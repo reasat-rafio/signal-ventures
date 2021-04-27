@@ -1,7 +1,10 @@
 import { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, extend } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useCtx } from '../../../store'
+import { LineWidthGridHelper } from './LineWidthGridHelper'
+
+extend({ LineWidthGridHelper })
 
 const COLORS: { [key: string]: THREE.Color } = {
     codGray: new THREE.Color(0x000),
@@ -12,13 +15,37 @@ const COLORS: { [key: string]: THREE.Color } = {
     mandy: new THREE.Color(0xe84971),
 }
 
+const SIZE = 80
+const SEGMENTS = 60
+const LINEWIDTH = 3
+// function Grid({ darkMode }) {
+//     const gridRef: any = useRef<LineWidthGridHelper>()
+
+//     useFrame(({ clock }) => {
+//         if (gridRef.current) {
+//             gridRef.current.position.z = (clock.getElapsedTime() % 1) * (SIZE / SEGMENTS)
+//         }
+//     })
+//     return (
+//         <lineWidthGridHelper
+//             ref={gridRef}
+//             position={[0, -5, 0]}
+//             args={
+//                 darkMode
+//                     ? [LINEWIDTH, SIZE, SEGMENTS, COLORS.brightTurquoise, COLORS.brightTurquoise]
+//                     : [LINEWIDTH, SIZE, SEGMENTS, COLORS.blackWaves, COLORS.blackWaves]
+//             }
+//         />
+//     )
+// }
+
 function Grid({ darkMode }) {
-    const SIZE = 80
-    const SEGMENTS = 60
-    const gridRef: any = useRef<THREE.GridHelper>()
+    const gridRef: any = useRef<LineWidthGridHelper>()
 
     useFrame(({ clock }) => {
-        gridRef.current.position.z = (clock.getElapsedTime() % 1) * (SIZE / SEGMENTS)
+        if (gridRef.current) {
+            gridRef.current.position.z = (clock.getElapsedTime() % 1) * (SIZE / SEGMENTS)
+        }
     })
     return (
         <gridHelper

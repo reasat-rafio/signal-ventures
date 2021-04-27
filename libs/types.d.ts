@@ -156,3 +156,14 @@ interface CtaButton {
     _type: string
     title: string
 }
+
+declare type LineWidthGridHelperProps = Object3DNode<
+    LineWidthGridHelper,
+    typeof LineWidthGridHelper
+>
+
+namespace JSX {
+    interface IntrinsicElements {
+        lineWidthGridHelper: LineWidthGridHelperProps
+    }
+}

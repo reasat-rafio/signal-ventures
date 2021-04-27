@@ -14,6 +14,11 @@ export default {
             type: 'image',
         },
         {
+            name: 'favicon',
+            title: 'Favicon',
+            type: 'image',
+        },
+        {
             name: 'startButton',
             title: 'Start Button',
             type: 'startButton',
