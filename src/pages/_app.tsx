@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import '../styles/globals.css'
 import { AppProvider } from '../../store'
 import { imageUrlBuilder } from '../../utils/sanity'
+import { Head } from 'next/document'
 
 export default function App({ Component, pageProps }: AppProps) {
     let faviconImage: string | null = null
@@ -14,10 +15,15 @@ export default function App({ Component, pageProps }: AppProps) {
     }
 
     return (
-        <div>
+        <>
+            {faviconImage && (
+                <Head>
+                    <link rel="icon" type="image/png" href={faviconImage} />
+                </Head>
+            )}
             <AppProvider>
                 <Component {...pageProps} />
             </AppProvider>
-        </div>
+        </>
     )
 }
