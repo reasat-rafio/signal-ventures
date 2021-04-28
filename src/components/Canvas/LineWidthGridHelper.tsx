@@ -45,7 +45,7 @@ class LineWidthGridHelper extends LineSegments {
         geometry.setAttribute('color', new Float32BufferAttribute(colors, 3))
 
         const material = new LineBasicMaterial({
-            color: 0xffffff,
+            color: color1,
             linewidth: lineWidth,
             linecap: 'round', //ignored by WebGLRenderer
             linejoin: 'round', //ignored by WebGLRenderer
