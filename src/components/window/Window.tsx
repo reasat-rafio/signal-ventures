@@ -55,8 +55,8 @@ export const Window_: React.FC<WindowProps> = ({
         }
         // This will find the info of THIS window and set it in the states
         switch (index) {
-            case 'article':
-                findWindowDetails('article')
+            case 'articles':
+                findWindowDetails('articles')
                 break
             case 'portfolio':
                 findWindowDetails('portfolio')
@@ -106,7 +106,7 @@ export const Window_: React.FC<WindowProps> = ({
             {windowIsNotUndefined && windowKey === 'contact' && (
                 <Contact {...props} contact={contact} />
             )}
-            {windowIsNotUndefined && windowKey === 'article' && (
+            {windowIsNotUndefined && windowKey === 'articles' && (
                 <Articles {...props} blogInfo={blogInfo} />
             )}
         </>

@@ -1,15 +1,15 @@
 import { MdLink } from 'react-icons/md'
 
 export default {
-    name: 'menuItem',
-    title: 'Menu Item',
+    name: 'navItem',
+    title: 'Nav Item',
     type: 'object',
     icon: MdLink,
     i18n: true,
     fields: [
         { name: 'title', title: 'Title', type: 'string' },
         { name: 'href', title: 'Link', type: 'string' },
-        { name: 'dark_mode', title: 'Dark Mode', type: 'number' },
+        { name: 'dark_mode', title: 'Dark Mode', type: 'boolean' },
         {
             name: 'logo',
             title: 'Logo',

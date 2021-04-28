@@ -6,7 +6,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import site from './site'
 import seo from './seo'
 import landingPage from './landingPage'
-import menuItem from './menuItem'
+import navItem from './navItems'
 import ctaButton from './ctaButton'
 import startButton from './startButton'
 import portfolioItem from './portfolioItem'
@@ -22,7 +22,7 @@ export default createSchema({
         site,
         seo,
         landingPage,
-        menuItem,
+        navItem,
         ctaButton,
         startButton,
         portfolioItem,

@@ -17,7 +17,6 @@ import { SET_MODE } from '../../store/types'
 import { AppCanvas } from '../components/Canvas/AppCanvas'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
-    console.log(context)
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
     return {
@@ -56,6 +55,7 @@ export default function Index({ blog, sanityData }) {
             })
         }
     }, [])
+    console.log(landingPage)
 
     // This will return current page width
     const siteRef = useRef<HTMLDivElement>(null)
