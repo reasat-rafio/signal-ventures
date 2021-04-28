@@ -2,6 +2,7 @@ export default {
     name: 'site',
     title: 'Site',
     type: 'document',
+    i18n: true,
     fields: [
         {
             name: 'lightLogo',

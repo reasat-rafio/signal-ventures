@@ -5,6 +5,7 @@ export default {
     title: 'Contact',
     type: 'document',
     icon: AiFillContacts,
+    i18n: true,
     fields: [
         {
             name: 'email',

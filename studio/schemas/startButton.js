@@ -2,6 +2,7 @@ export default {
     name: 'startButton',
     title: 'Start Button',
     type: 'object',
+    i18n: true,
     fields: [
         {
             name: 'title',

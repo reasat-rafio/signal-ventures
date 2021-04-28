@@ -4,7 +4,7 @@ import { Window_ } from '../components/window/Window'
 import { Home } from '../components/landing/Home'
 import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
 import { useCtx } from '../../store'
-import { query } from '../../libs/query'
+import { query, toSanityLocale } from '../../libs/query'
 import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
 import { useEffect, useRef } from 'react'
 import { useSiteHeightAndWidth, useToText } from '../../libs/hooks'
@@ -18,11 +18,19 @@ import { AppCanvas } from '../components/Canvas/AppCanvas'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
+    console.log(context)
 
     return {
         props: {
             blog: data,
-            sanityData: await sanityStaticProps({ query, context }),
+
+            sanityData: await sanityStaticProps({
+                query,
+                context,
+                // params: {
+                //     locale: toSanityLocale(context.locale),
+                // },
+            }),
         },
         revalidate: 10,
     }

@@ -5,6 +5,7 @@ export default {
     name: 'ctaButton',
     title: 'CTA Button',
     type: 'object',
+    i18n: true,
     fields: [
         {
             name: 'title',

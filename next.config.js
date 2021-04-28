@@ -8,6 +8,10 @@ const STUDIO_REWRITE = {
 
 module.exports = {
     rewrites: () => [STUDIO_REWRITE],
+    i18n: {
+        locales: ['en-SG', 'zh-SG'],
+        defaultLocale: 'en-SG',
+    },
     future: {
         webpack5: true,
     },

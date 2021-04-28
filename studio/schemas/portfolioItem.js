@@ -5,6 +5,7 @@ export default {
     title: 'Portfolio',
     type: 'document',
     icon: GiBookshelf,
+    i18n: true,
     fields: [
         { name: 'title', title: 'Title', type: 'string' },
         { name: 'href', title: 'Link', type: 'string' },

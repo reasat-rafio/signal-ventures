@@ -17,9 +17,11 @@ export const siteQuery = groq`{
     }
 }`
 
+// && __i18n_lang == $locale
+
 export const query = groq`{
     "site": ${siteQuery},
-    "landingPage": *[_id == "landingPage"][0]{
+    "landingPage": *[_id == "landingPage" ][0]{
       seo,
       heading,
       description,
@@ -34,3 +36,6 @@ export const query = groq`{
         "logo": ${withDimensions('logo')}
     }
   }`
+
+export const toSanityLocale = (locale: string | undefined) =>
+    locale?.toLowerCase().replace('-', '_')

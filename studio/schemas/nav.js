@@ -2,6 +2,7 @@ export default {
     name: 'nav',
     title: 'Navigation',
     type: 'document',
+    i18n: true,
     fields: [
         {
             name: 'menu',

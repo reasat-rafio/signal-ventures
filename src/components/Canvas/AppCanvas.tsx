@@ -17,7 +17,29 @@ const COLORS: { [key: string]: THREE.Color } = {
 
 const SIZE = 80
 const SEGMENTS = 60
-const LINEWIDTH = 5
+// const LINEWIDTH = 5
+
+// function Grid({ darkMode }: { darkMode: boolean }) {
+//     const gridRef = useRef<LineWidthGridHelper>()
+
+//     useFrame(({ clock }) => {
+//         if (gridRef.current) {
+//             gridRef.current.position.z = (clock.getElapsedTime() % 1) * (SIZE / SEGMENTS)
+//         }
+//     })
+
+//     return (
+//         <lineWidthGridHelper
+//             ref={gridRef}
+//             position={[0, -5, 0]}
+//             args={
+//                 darkMode
+//                     ? [LINEWIDTH, SIZE, SEGMENTS, COLORS.brightTurquoise, COLORS.brightTurquoise]
+//                     : [LINEWIDTH, SIZE, SEGMENTS, COLORS.blackWaves, COLORS.blackWaves]
+//             }
+//         />
+//     )
+// }
 
 function Grid({ darkMode }: { darkMode: boolean }) {
     const gridRef = useRef<LineWidthGridHelper>()
@@ -29,13 +51,13 @@ function Grid({ darkMode }: { darkMode: boolean }) {
     })
 
     return (
-        <lineWidthGridHelper
+        <gridHelper
             ref={gridRef}
             position={[0, -5, 0]}
             args={
                 darkMode
-                    ? [LINEWIDTH, SIZE, SEGMENTS, COLORS.brightTurquoise, COLORS.brightTurquoise]
-                    : [LINEWIDTH, SIZE, SEGMENTS, COLORS.blackWaves, COLORS.blackWaves]
+                    ? [SIZE, SEGMENTS, COLORS.brightTurquoise, COLORS.brightTurquoise]
+                    : [SIZE, SEGMENTS, COLORS.blackWaves, COLORS.blackWaves]
             }
         />
     )
