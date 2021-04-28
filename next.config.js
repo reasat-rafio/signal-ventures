@@ -6,7 +6,7 @@ const STUDIO_REWRITE = {
             : '/studio/index.html',
 }
 
-module.exports = {
+const config = {
     rewrites: () => [STUDIO_REWRITE],
     i18n: {
         locales: ['en-SG', 'zh-SG'],
@@ -20,4 +20,4 @@ module.exports = {
 const withFonts = require('next-fonts')
 const withTM = require('next-transpile-modules')(['@react95/core'])
 
-module.exports = withTM(withFonts())
+module.exports = withTM(withFonts(config))

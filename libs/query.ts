@@ -36,6 +36,3 @@ export const query = groq`{
         "logo": ${withDimensions('logo')}
     }
   }`
-
-export const toSanityLocale = (locale: string | undefined) =>
-    locale?.toLowerCase().replace('-', '_')
