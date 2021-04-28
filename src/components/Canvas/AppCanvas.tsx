@@ -40,13 +40,14 @@ const LINEWIDTH = 3
 // }
 
 function Grid({ darkMode }) {
-    const gridRef: any = useRef<LineWidthGridHelper>()
+    const gridRef = useRef<LineWidthGridHelper>()
 
     useFrame(({ clock }) => {
         if (gridRef.current) {
             gridRef.current.position.z = (clock.getElapsedTime() % 1) * (SIZE / SEGMENTS)
         }
     })
+
     return (
         <gridHelper
             ref={gridRef}
