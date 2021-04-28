@@ -2,6 +2,7 @@ export default {
     name: 'landingPage',
     title: 'Landing Page',
     type: 'document',
+    i18n: true,
     fields: [
         {
             name: 'seo',

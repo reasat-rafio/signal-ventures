@@ -8,7 +8,7 @@ import {
 
 class LineWidthGridHelper extends LineSegments {
     constructor(
-        lineWidth: 1,
+        lineWidth: number = 1,
         size = 10,
         divisions = 10,
         color1: Color | number = 0x444444,
