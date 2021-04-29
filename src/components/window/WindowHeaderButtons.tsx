@@ -27,7 +27,13 @@ export const WindowHeaderButtons: React.FC<WindowHeaderButtonsProps> = ({
             <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
                 <FaRegWindowMaximize />
             </Button>
-            <Button size="sm" onClick={() => dispatch({ type: CLOSE_WINDOW_BOX, payload: index })}>
+            <Button
+                size="sm"
+                onClick={() => {
+                    console.log('index', index)
+                    dispatch({ type: CLOSE_WINDOW_BOX, payload: index })
+                }}
+            >
                 <IoCloseSharp />
             </Button>
         </div>

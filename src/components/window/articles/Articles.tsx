@@ -41,6 +41,12 @@ export const Articles: React.FC<ArticleProps> = ({
         state: { darkMode },
     } = useCtx()
 
+    const onClickImgAction = (link: string) => {
+        if (typeof window !== 'undefined' && typeof link !== 'undefined') {
+            window.open(link, '_blank')
+        }
+    }
+
     return (
         <Draggable
             handle="strong"
@@ -54,7 +60,6 @@ export const Articles: React.FC<ArticleProps> = ({
             }}
         >
             <ArticelWindowWrapper
-                darkMode={darkMode}
                 windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
@@ -82,9 +87,13 @@ export const Articles: React.FC<ArticleProps> = ({
                             index: number,
                         ) => (
                             <ArticleBody key={index}>
-                                <ArticleImg thumbnail={thumbnail}>
+                                <ArticleImg
+                                    thumbnail={thumbnail}
+                                    onClick={() => onClickImgAction(link)}
+                                >
                                     <ArticleAvatar size={60} src={image} />
                                 </ArticleImg>
+
                                 <ArticleContent darkMode={darkMode}>
                                     <h3 className="md:text-2xl text-xl font-bold my-2">{title}</h3>
                                     <p

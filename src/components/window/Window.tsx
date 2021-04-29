@@ -68,7 +68,9 @@ export const Window_: React.FC<WindowProps> = ({
                 setWindowName('...')
                 break
         }
-    }, [])
+    }, [activeWindows])
+
+    console.log('asd', index)
 
     useEffect(() => {
         width >= 992 ? setMdScreenBreakpoint(false) : setMdScreenBreakpoint(true)

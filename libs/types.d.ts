@@ -31,6 +31,7 @@ interface HomeProps {
     description: string
     darkLogo: string
     lightLogo: string
+    navs: Inavs[]
     button: {
         _type: string
         title: string

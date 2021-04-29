@@ -20,7 +20,7 @@ export const NavAction = (
     } else {
         if (dark_mode == undefined) {
             if (typeof window !== 'undefined' && typeof href !== 'undefined') {
-                document.location.href = href
+                window.open(href, '_blank')
             }
         } else {
             dispatch({

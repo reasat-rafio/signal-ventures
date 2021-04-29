@@ -18,23 +18,6 @@ export const Container = styled.div<{ darkMode: boolean }>`
     background: ${({ darkMode }) => (darkMode === true ? 'black' : 'white')};
 `
 
-// scrollbar-width: thin;
-// scrollbar-color: ${({ darkMode }) => darkMode && '#39f5e6 #1f0220'};
-
-// &::-webkit-scrollbar {
-//     width: 12px;
-// }
-
-// &::-webkit-scrollbar-track {
-//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-//     border-radius: 10px;
-// }
-
-// &::-webkit-scrollbar-thumb {
-//     border-radius: 10px;
-//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-// }
-
 export const BackgroundMask = styled.div`
     top: 0;
     left: 0;
@@ -122,7 +105,25 @@ export const ArticleImg = styled.div<{ thumbnail: string }>`
     grid-row: span 2 / span 2;
     background: ${(props) => `url(${props.thumbnail})  no-repeat center center / cover`};
     position: relative;
+    cursor: pointer;
 `
+
+// scrollbar-width: thin;
+// scrollbar-color: ${({ darkMode }) => darkMode && '#39f5e6 #1f0220'};
+
+// &::-webkit-scrollbar {
+//     width: 12px;
+// }
+
+// &::-webkit-scrollbar-track {
+//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+//     border-radius: 10px;
+// }
+
+// &::-webkit-scrollbar-thumb {
+//     border-radius: 10px;
+//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+// }
 
 export const ArticleContent = styled(Cutout)<{ darkMode: boolean }>`
     grid-row: span 3 / span 3;
@@ -133,6 +134,7 @@ export const ArticleContent = styled(Cutout)<{ darkMode: boolean }>`
         overflow: hidden;
     }
 `
+
 export const ArticleAvatar = styled(Avatar)`
     bottom: 0;
     left: 10px;

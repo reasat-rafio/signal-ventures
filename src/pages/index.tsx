@@ -57,7 +57,7 @@ export default function Index({ blog, sanityData }) {
             })
         }
     }, [])
-
+    console.log('activeWindows', activeWindows)
     // This will return current page width
     const siteRef = useRef<HTMLDivElement>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
@@ -80,18 +80,20 @@ export default function Index({ blog, sanityData }) {
                         darkLogo={site.sites.dark_logo}
                         lightLogo={site.sites.light_logo}
                         button={landingPage.ctaButton}
+                        navs={site.sites.nav}
                     />
 
-                    {activeWindows.map(({ key }: WindowsProps, index: number) => (
-                        <Window_
-                            key={index}
-                            index={key}
-                            width={width}
-                            blogInfo={blogInfo}
-                            portfolioItems={portfolio}
-                            contact={contact}
-                        />
-                    ))}
+                    {activeWindows.length > 0 &&
+                        activeWindows.map(({ key }: WindowsProps, index: number) => (
+                            <Window_
+                                key={index}
+                                index={key}
+                                width={width}
+                                blogInfo={blogInfo}
+                                portfolioItems={portfolio}
+                                contact={contact}
+                            />
+                        ))}
                     <DesktopNavs navs={site.sites.nav} />
                     <StartMenuNavbar navs={site.sites.nav} startMenu={site.sites.startButton} />
                     <AppCanvas />
