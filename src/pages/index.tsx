@@ -61,8 +61,6 @@ export default function Index({ blog, sanityData }) {
     // This will return current page width
     const siteRef = useRef<HTMLDivElement>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
-    // This will return an array of all the blogs from clients medium
-    const { blogInfo } = useToText(blog.items, blog.feed)
 
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
@@ -89,9 +87,10 @@ export default function Index({ blog, sanityData }) {
                                 key={index}
                                 index={key}
                                 width={width}
-                                blogInfo={blogInfo}
                                 portfolioItems={portfolio}
                                 contact={contact}
+                                blogItems={blog.items}
+                                blogFeeds={blog.feed}
                             />
                         ))}
                     <DesktopNavs navs={site.sites.nav} />

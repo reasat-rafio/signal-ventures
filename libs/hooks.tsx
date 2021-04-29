@@ -54,16 +54,42 @@ export const useSiteHeightAndWidth = (myRef: any) => {
     return { height, width }
 }
 
-export const useToText = (item: IBloginfo[], feed: { image: string; link: string }) => {
+export const useToText = (
+    item: IBloginfo[],
+    feed: { image: string; link: string },
+    width: number,
+    isExpanded: boolean,
+) => {
     const [blogInfo, setBlogInfo] = useState<IBloginfo[]>([])
     const { image, link } = feed
+    const [pageWidth, setPageWidth] = useState<number>(0)
+
+    useEffect(() => {
+        if (!isExpanded) {
+            if (width < 500) {
+                setPageWidth(300)
+            } else {
+                setPageWidth(600)
+            }
+        } else {
+            if (width >= 1785) {
+                setPageWidth(2400)
+            } else if (width < 1784 && width >= 1275) {
+                setPageWidth(1000)
+            } else if (width < 1275 && width >= 500) {
+                setPageWidth(600)
+            } else {
+                setPageWidth(300)
+            }
+        }
+    }, [width, isExpanded])
 
     useEffect(() => {
         const newArr = item.map(({ content, author, pubDate, title, thumbnail }: IBloginfo) => {
             let tag = document.createElement('div')
             tag.innerHTML = content
             return {
-                content: tag.innerText.slice(0, 600) + '...',
+                content: tag.innerText.slice(0, pageWidth) + '...',
                 pubDate,
                 title,
                 thumbnail,
@@ -73,7 +99,7 @@ export const useToText = (item: IBloginfo[], feed: { image: string; link: string
             }
         })
         setBlogInfo(newArr)
-    }, [])
+    }, [pageWidth])
     return { blogInfo }
 }
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useToText } from '../../../libs/hooks'
 import { useCtx } from '../../../store'
 import { Articles } from './articles/Articles'
 import { Contact } from './contact/Contact'
@@ -7,7 +8,8 @@ import { Portfolio } from './portfolio/Portfolio'
 interface WindowProps {
     index: string
     width: number
-    blogInfo: IBloginfo[]
+    blogItems: IBloginfo[]
+    blogFeeds: { image: string; link: string }
     portfolioItems: IPorfolioItems[]
     contact: Icontact[]
 }
@@ -15,7 +17,8 @@ interface WindowProps {
 export const Window_: React.FC<WindowProps> = ({
     index,
     width,
-    blogInfo,
+    blogItems,
+    blogFeeds,
     portfolioItems,
     contact,
 }) => {
@@ -49,6 +52,9 @@ export const Window_: React.FC<WindowProps> = ({
         setWindowKey(findWin[0].key)
     }
 
+    // This will return an array of all the blogs from clients medium
+    const { blogInfo } = useToText(blogItems, blogFeeds, width, isExpanded)
+
     useEffect(() => {
         if (window !== undefined) {
             setWindowIsNotUndefined(true)
@@ -69,8 +75,6 @@ export const Window_: React.FC<WindowProps> = ({
                 break
         }
     }, [activeWindows])
-
-    console.log('asd', index)
 
     useEffect(() => {
         width >= 992 ? setMdScreenBreakpoint(false) : setMdScreenBreakpoint(true)
