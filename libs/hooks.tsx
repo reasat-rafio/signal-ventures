@@ -64,6 +64,7 @@ export const useToText = (
     const { image, link } = feed
     const [pageWidth, setPageWidth] = useState<number>(0)
 
+    // This will set the words count for the article based on page width
     useEffect(() => {
         if (!isExpanded) {
             if (width < 500) {
