@@ -2,7 +2,7 @@ import { groq } from 'next-sanity'
 import { withDimensions } from 'sanity-react-extra'
 
 export const siteQuery = groq`{
-    "sites": *[_type == "site" &&  __i18n_lang == $locale][0] {
+    "sites": *[_type == "site" &&  __i18n_lang == $locale && !(_id in path('drafts.**'))] [0] {
         "dark_logo": ${withDimensions('darkLogo')},
         "light_logo": ${withDimensions('lightLogo')},
         "favicon": ${withDimensions('favicon')},
@@ -19,12 +19,12 @@ export const siteQuery = groq`{
 
 export const query = groq`{
     "site": ${siteQuery},
-    "landingPage": *[_type == "landingPage" &&  __i18n_lang == $locale][0],
-    "contact": *[_type == "contact" &&  __i18n_lang == $locale] {
+    "landingPage": *[_type == "landingPage" && __i18n_lang == $locale && !(_id in path('drafts.**'))][0],
+    "contact": *[_type == "contact" &&  __i18n_lang == $locale && !(_id in path('drafts.**'))] {
       ...,
       "logo": ${withDimensions('logo')}
     },
-    "portfolio": *[_type == "portfolio"] {
+    "portfolio": *[_type == "portfolio"  && __i18n_lang == $locale && !(_id in path('drafts.**'))] {
         ...,
         "logo": ${withDimensions('logo')}
     }

@@ -153,13 +153,15 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
   `}
 `
 export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
-    padding: 0 5px;
+    padding: 0 4px;
     margin: auto;
-    position: ${(props) => props.isExpanded && 'absolute'};
-    width: ${(props) => props.isExpanded && '100%'};
-    height: ${(props) => props.isExpanded && '89%'};
+    position: absolute;
+    height: 90%;
+    width: 99%;
 `
-
+//    width: ${(props) => props.isExpanded && '100%'};
+//  position: ${(props) => props.isExpanded && 'absolute'};
+// height: ${(props) => props.isExpanded && '89%'};
 export const PortfolioBody = styled(TabBody)<{ darkMode: boolean }>`
     margin: 0.5rem 0;
     background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};

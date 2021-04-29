@@ -86,7 +86,7 @@ export const Contact: React.FC<ContactProps> = ({
                                     gridColumn: 'span 10 / span 10',
                                     background: `${darkMode ? '#301b3f' : 'white'}`,
                                 }}
-                                placeholder="Type here..."
+                                // placeholder="Type here..."
                                 fullWidth
                             />
                         </div>
@@ -97,7 +97,7 @@ export const Contact: React.FC<ContactProps> = ({
                                     gridColumn: 'span 10 / span 10',
                                     background: `${darkMode ? '#301b3f' : 'white'}`,
                                 }}
-                                placeholder="Type here..."
+                                // placeholder="Type here..."
                                 fullWidth
                             />
                         </div>
@@ -108,7 +108,7 @@ export const Contact: React.FC<ContactProps> = ({
                                     gridColumn: 'span 10 / span 10',
                                     background: `${darkMode ? '#301b3f' : 'white'}`,
                                 }}
-                                placeholder="Type here..."
+                                // placeholder="Type here..."
                                 fullWidth
                             />
                         </div>
@@ -120,7 +120,7 @@ export const Contact: React.FC<ContactProps> = ({
                                     background: `${darkMode ? '#301b3f' : 'white'}`,
                                 }}
                                 multiline
-                                placeholder="Type here..."
+                                // placeholder="Type here..."
                                 fullWidth
                                 rows={4}
                             />

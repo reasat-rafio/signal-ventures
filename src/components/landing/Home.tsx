@@ -11,7 +11,7 @@ export const Home: React.FC<HomeProps> = ({ description, title, lightLogo, darkL
     } = useCtx()
 
     return (
-        <section className="flex flex-col justify-center items-center transform h-screen space-y-5 px-2 md:px-0 z-10">
+        <section className="flex flex-col justify-center items-center transform h-screen space-y-5 px-2 md:px-0 z-10 -translate-y-12">
             <SanityImg
                 builder={imageUrlBuilder}
                 image={darkMode ? darkLogo : lightLogo}

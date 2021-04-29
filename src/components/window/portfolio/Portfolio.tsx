@@ -69,7 +69,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
 
                 <PortfolioContentWrapper isExpanded={isExpanded}>
                     <PortfolioBody darkMode={darkMode}>
-                        <div className="grid grid-cols-20 justify-center items-center my-9 h-full ">
+                        <div className="grid grid-cols-20 justify-center items-center h-full ">
                             {portfolioItems.map(({ _id, href, logo, title }) => (
                                 <a
                                     key={_id}
