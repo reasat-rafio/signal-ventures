@@ -55,7 +55,6 @@ export default function Index({ blog, sanityData }) {
             })
         }
     }, [])
-    console.log(landingPage)
 
     // This will return current page width
     const siteRef = useRef<HTMLDivElement>(null)
