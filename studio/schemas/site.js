@@ -34,7 +34,7 @@ export default {
             name: 'menu',
             title: 'Menu',
             type: 'array',
-            of: [{ type: 'menuItem' }],
+            of: [{ type: 'navItems' }],
         },
     ],
     preview: {

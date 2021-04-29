@@ -1,8 +1,8 @@
 import { MdLink } from 'react-icons/md'
 
 export default {
-    name: 'navItem',
-    title: 'Nav Item',
+    name: 'navItems',
+    title: 'Nav Items',
     type: 'object',
     icon: MdLink,
     i18n: true,

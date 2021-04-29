@@ -8,7 +8,7 @@ export default {
             name: 'menu',
             title: 'Nav',
             type: 'array',
-            of: [{ type: 'menuItem' }],
+            of: [{ type: 'navItems' }],
         },
     ],
 }
