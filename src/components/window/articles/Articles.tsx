@@ -54,6 +54,7 @@ export const Articles: React.FC<ArticleProps> = ({
             }}
         >
             <ArticelWindowWrapper
+                darkMode={darkMode}
                 windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}

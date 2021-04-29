@@ -69,6 +69,7 @@ interface IWindowWrapper {
     isExpanded: boolean
     windowIsFocused: boolean
     windowKey: string
+    darkMode: boolean
 }
 
 interface IWindowsProps {

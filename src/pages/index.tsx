@@ -15,6 +15,7 @@ import { ThemeProvider } from 'styled-components'
 import { dark_mode, light_mode } from '../../libs/theme'
 import { SET_MODE } from '../../store/types'
 import { AppCanvas } from '../components/Canvas/AppCanvas'
+import clsx from 'clsx'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
@@ -67,7 +68,12 @@ export default function Index({ blog, sanityData }) {
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
             <Container ref={siteRef} darkMode={darkMode}>
                 <NextSeo title={landingPage.seo.title} description={landingPage.seo.description} />
-                <div className="container mx-auto flex flex-col items-center ">
+                <div
+                    className={clsx(
+                        'container mx-auto flex flex-col items-center',
+                        darkMode ? 'dark_scrollbar' : 'light_scrollbar',
+                    )}
+                >
                     <Home
                         title={landingPage.heading}
                         description={landingPage.description}

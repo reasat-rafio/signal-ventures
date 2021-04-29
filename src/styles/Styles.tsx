@@ -18,23 +18,22 @@ export const Container = styled.div<{ darkMode: boolean }>`
     background: ${({ darkMode }) => (darkMode === true ? 'black' : 'white')};
 `
 
-// 0E1C3D
+// scrollbar-width: thin;
+// scrollbar-color: ${({ darkMode }) => darkMode && '#39f5e6 #1f0220'};
 
-// ${({ darkMode }) =>
-// darkMode &&
-// `
-// &:after {
-//     content: '';
-//     opacity: 0.8;
-//     background-color: #000;
-//     top: 0;
-//     left: 0;
-//     bottom: 0;
-//     right: 0;
-//     position: absolute;
-//     background-size: contain;
-//     background-repeat: repeat;
-// } `}
+// &::-webkit-scrollbar {
+//     width: 12px;
+// }
+
+// &::-webkit-scrollbar-track {
+//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+//     border-radius: 10px;
+// }
+
+// &::-webkit-scrollbar-thumb {
+//     border-radius: 10px;
+//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+// }
 
 export const BackgroundMask = styled.div`
     top: 0;
@@ -89,6 +88,20 @@ export const Header = styled(WindowHeader)`
     align-items: center;
     padding-right: 0;
 `
+
+// ARTICEL WINDOW STYLINGS
+export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
+    ${commonWindowStylings}
+    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
+
+    ${respondTo.md`
+    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '700px')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
+    width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
+
+  `}
+`
 export const ArticleBodyWrapper = styled.div`
     position: absolute;
     height: 94%;
@@ -97,18 +110,6 @@ export const ArticleBodyWrapper = styled.div`
     padding: 0 5px;
 `
 
-// ARTICEL WINDOW STYLINGS
-export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
-    ${commonWindowStylings}
-
-    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
-    ${respondTo.md`
-    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '700px')};
-    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
-    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
-    width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
-  `}
-`
 export const ArticleBody = styled(TabBody)`
     display: grid;
     grid-template-rows: repeat(5, minmax(0, 1fr));
