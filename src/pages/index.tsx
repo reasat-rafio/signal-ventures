@@ -29,6 +29,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
                 params: {
                     locale: context.locale,
                 },
+                authenticated: true,
             }),
         },
         revalidate: 10,

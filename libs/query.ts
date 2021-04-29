@@ -20,7 +20,7 @@ export const siteQuery = groq`{
 export const query = groq`{
     "site": ${siteQuery},
     "landingPage": *[_type == "landingPage" &&  __i18n_lang == $locale][0],
-    "contact": *[_type == "contact" ] {
+    "contact": *[_type == "contact" &&  __i18n_lang == $locale] {
       ...,
       "logo": ${withDimensions('logo')}
     },
