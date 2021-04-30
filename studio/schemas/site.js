@@ -1,7 +1,10 @@
+import { FaSitemap } from 'react-icons/fa'
+
 export default {
     name: 'site',
     title: 'Site',
     type: 'document',
+    icon: FaSitemap,
     i18n: true,
     fields: [
         {

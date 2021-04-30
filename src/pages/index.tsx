@@ -57,7 +57,7 @@ export default function Index({ blog, sanityData }) {
             })
         }
     }, [])
-    console.log('activeWindows', activeWindows)
+
     // This will return current page width
     const siteRef = useRef<HTMLDivElement>(null)
     const { width } = useSiteHeightAndWidth(siteRef)

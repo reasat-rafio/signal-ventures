@@ -17,3 +17,7 @@ export const commonWindowStylings = `
     top: 0;
     min-height: 100vh;
 `
+// DARKMODE COLORS
+export const DARK_PINK = '#1F0220'
+export const LIGHT_PINK = '#E635EC'
+export const DARK_MODE_TEXT = '#ffffff'

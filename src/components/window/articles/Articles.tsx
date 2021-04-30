@@ -17,6 +17,7 @@ import Draggable from 'react-draggable'
 import moment from 'moment'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 import clsx from 'clsx'
+import { WindowContent } from 'react95'
 
 interface ArticleProps extends IWindowsProps {
     blogInfo: IBloginfo[]

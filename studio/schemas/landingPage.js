@@ -1,7 +1,10 @@
+import { VscPreview } from 'react-icons/vsc'
+
 export default {
     name: 'landingPage',
     title: 'Landing Page',
     type: 'document',
+    icon: VscPreview,
     i18n: true,
     fields: [
         {

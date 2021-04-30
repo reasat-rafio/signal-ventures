@@ -75,16 +75,36 @@ export const Header = styled(WindowHeader)`
 // ARTICEL WINDOW STYLINGS
 export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     ${commonWindowStylings}
-    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
 
+    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
     ${respondTo.md`
     min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '700px')};
     left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
     top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
-
   `}
 `
+// > * {
+//     scrollbar-width: thin;
+//     scrollbar-color: #39f5e6 #1f0220;
+
+//     &::-webkit-scrollbar-track {
+//         -webkit-box-shadow: ${({ darkMode }) =>
+//             darkMode ? 'inset 0 0 6px #39f5e6' : 'inset 0 0 6px rgba(0, 0, 0, 0.3)'};
+//         border-radius: 10px;
+//     }
+//     &::-webkit-scrollbar {
+//         width: 12px;
+//     }
+
+//     &::-webkit-scrollbar-thumb {
+//         border-radius: 10px;
+
+//         -webkit-box-shadow: ${({ darkMode }) =>
+//             darkMode ? 'inset 0 0 6px #39f5e6' : 'inset 0 0 6px rgba(0, 0, 0, 0.5)'};
+//     }
+// }
+
 export const ArticleBodyWrapper = styled.div`
     position: absolute;
     height: 94%;
@@ -110,20 +130,6 @@ export const ArticleImg = styled.div<{ thumbnail: string }>`
 
 // scrollbar-width: thin;
 // scrollbar-color: ${({ darkMode }) => darkMode && '#39f5e6 #1f0220'};
-
-// &::-webkit-scrollbar {
-//     width: 12px;
-// }
-
-// &::-webkit-scrollbar-track {
-//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-//     border-radius: 10px;
-// }
-
-// &::-webkit-scrollbar-thumb {
-//     border-radius: 10px;
-//     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-// }
 
 export const ArticleContent = styled(Cutout)<{ darkMode: boolean }>`
     grid-row: span 3 / span 3;
