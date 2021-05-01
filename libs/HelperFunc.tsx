@@ -2,10 +2,10 @@ import { CREATE_WINDOW_BOX, TOGGLE_DARK_MODE } from '../store/types'
 
 export const NavAction = (
     title: string,
-    logo: string,
+    logo: Logo,
     key: string,
     dark_mode: number | undefined,
-    dispatch: (action: Action) => {},
+    dispatch: (action: Action) => void,
     href?: string,
 ) => {
     if (key != undefined) {
