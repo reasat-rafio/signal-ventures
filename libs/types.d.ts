@@ -80,7 +80,7 @@ interface IWindowsProps {
     index: string
     windowName: string
     windowIcon: string
-    setIsExpanded: (isExpanded: (prev: boolean) => void) => void
+    setIsExpanded: Dispatch<SetStateAction<boolean>>
     draggable: (e, data: DraggableData) => void
     mdScreenBreakpoint: boolean
     xaxis: number

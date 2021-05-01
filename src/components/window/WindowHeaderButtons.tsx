@@ -4,7 +4,6 @@ import { useCtx } from '../../../store'
 import { CLOSE_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../store/types'
 import { IoCloseSharp } from 'react-icons/io5'
 import { FaRegWindowMinimize, FaRegWindowMaximize } from 'react-icons/fa'
-import { useEffect, useState } from 'react'
 
 interface WindowHeaderButtonsProps {
     index: string
