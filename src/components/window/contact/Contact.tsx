@@ -52,6 +52,7 @@ export const Contact: React.FC<ContactProps> = ({
             }}
         >
             <ContactWindowsWrapper
+                ref={contactRef}
                 windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
