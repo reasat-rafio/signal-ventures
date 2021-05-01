@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { FOCUS_WINDOW_BOX } from '../../../../store/types'
@@ -17,7 +17,6 @@ import Draggable from 'react-draggable'
 import moment from 'moment'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 import clsx from 'clsx'
-import { WindowContent } from 'react95'
 
 interface ArticleProps extends IWindowsProps {
     blogInfo: IBloginfo[]
@@ -36,12 +35,19 @@ export const Articles: React.FC<ArticleProps> = ({
     xaxis,
     yaxis,
     blogInfo,
+    positionX,
+    positionY,
+    setPositionX,
+    setPositionY,
 }) => {
     const {
         dispatch,
         state: { darkMode },
     } = useCtx()
 
+    const articlesRef = useRef<HTMLDivElement | null>(null)
+
+    // opening the medium article when clicking on then article image
     const onClickImgAction = (link: string) => {
         if (typeof window !== 'undefined' && typeof link !== 'undefined') {
             window.open(link, '_blank')
@@ -50,20 +56,20 @@ export const Articles: React.FC<ArticleProps> = ({
 
     return (
         <Draggable
-            handle="strong"
+            handle={isExpanded ? 'legend' : 'strong'} // couldnt find any solution to disable the dragging so using legend for handle when the window is expanded. (legend doesn't exist here)
             onDrag={draggable}
             onStart={draggable}
             onStop={draggable}
             bounds="body"
             position={{
-                x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
-                y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
+                x: mdScreenBreakpoint ? 0 : isExpanded ? positionX : xaxis,
+                y: mdScreenBreakpoint ? 0 : isExpanded ? positionY : yaxis,
             }}
         >
             <ArticelWindowWrapper
-                windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
+                ref={articlesRef}
                 onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
             >
                 <strong className="cursor-move">
@@ -77,7 +83,18 @@ export const Articles: React.FC<ArticleProps> = ({
                             />
                             <p>{windowName}</p>
                         </div>
-                        <WindowHeaderButtons index={index} setIsExpanded={setIsExpanded} />
+                        <WindowHeaderButtons
+                            index={index}
+                            setIsExpanded={setIsExpanded}
+                            windowRef={articlesRef}
+                            xaxis={xaxis}
+                            yaxis={yaxis}
+                            isExpanded={isExpanded}
+                            positionX={positionX}
+                            positionY={positionY}
+                            setPositionX={setPositionX}
+                            setPositionY={setPositionY}
+                        />
                     </Header>
                 </strong>
 

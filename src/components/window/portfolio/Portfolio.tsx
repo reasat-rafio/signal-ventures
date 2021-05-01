@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { FOCUS_WINDOW_BOX } from '../../../../store/types'
@@ -30,25 +30,32 @@ export const Portfolio: React.FC<PortfolioProps> = ({
     xaxis,
     yaxis,
     portfolioItems,
+    positionX,
+    positionY,
+    setPositionX,
+    setPositionY,
 }) => {
     const {
         dispatch,
         state: { darkMode },
     } = useCtx()
 
+    const portfolioRef = useRef<HTMLDivElement | null>(null)
+
     return (
         <Draggable
-            handle="strong"
+            handle={isExpanded ? 'legend' : 'strong'} // couldnt find any solution to disable the dragging so using legend for handle when the window is expanded. (legend doesn't exist here)
             onDrag={draggable}
             onStart={draggable}
             onStop={draggable}
             bounds="body"
             position={{
-                x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
-                y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
+                x: mdScreenBreakpoint ? 0 : isExpanded ? positionX : xaxis,
+                y: mdScreenBreakpoint ? 0 : isExpanded ? positionY : yaxis,
             }}
         >
             <PorfolioWindowWrapper
+                ref={portfolioRef}
                 windowKey={windowKey}
                 windowIsFocused={windowIsFocused}
                 isExpanded={isExpanded}
@@ -63,7 +70,19 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                             alt={windowName + 'logo'}
                         />
                         <p>{windowName}</p>
-                        <WindowHeaderButtons index={index} setIsExpanded={setIsExpanded} />
+
+                        <WindowHeaderButtons
+                            index={index}
+                            setIsExpanded={setIsExpanded}
+                            windowRef={portfolioRef}
+                            xaxis={xaxis}
+                            yaxis={yaxis}
+                            isExpanded={isExpanded}
+                            positionX={positionX}
+                            positionY={positionY}
+                            setPositionX={setPositionX}
+                            setPositionY={setPositionY}
+                        />
                     </Header>
                 </strong>
 

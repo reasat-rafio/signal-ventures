@@ -79,11 +79,14 @@ export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
     ${respondTo.md`
     min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '700px')};
-    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
-    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '11%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '6%')};
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
+
+// transform: ${({ x, y }) => `translate(${x} ${y})`}
+
 // > * {
 //     scrollbar-width: thin;
 //     scrollbar-color: #39f5e6 #1f0220;
@@ -156,8 +159,8 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
     overflow: hidden;
     ${respondTo.md`
     min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '500px')};
-    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
-    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '15%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '7%')};
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
@@ -181,8 +184,8 @@ export const ContactWindowsWrapper = styled(Window)<IWindowWrapper>`
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
     ${respondTo.md`
     min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '500px')};
-    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '10%')};
-    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '5%')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '9%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '7%')};
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `

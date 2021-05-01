@@ -59,7 +59,7 @@ export default function Index({ blog, sanityData }) {
     }, [])
 
     // This will return current page width
-    const siteRef = useRef<HTMLDivElement>(null)
+    const siteRef = useRef<HTMLDivElement | null>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
 
     return (

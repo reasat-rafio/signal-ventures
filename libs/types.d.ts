@@ -44,14 +44,14 @@ interface NavbarProps {
     startMenu: {
         _type: string
         title: string
-        logo: any
+        logo: Logo
     }
 }
 
 interface Inavs {
     title: string
     key: string
-    logo: any
+    logo: Logo
     dark_mode?: number
     href?: string
 }
@@ -80,11 +80,15 @@ interface IWindowsProps {
     index: string
     windowName: string
     windowIcon: string
-    setIsExpanded: any
+    setIsExpanded: (isExpanded: (prev: boolean) => void) => void
     draggable: (e, data: DraggableData) => void
     mdScreenBreakpoint: boolean
     xaxis: number
     yaxis: number
+    positionX: number
+    positionY: number
+    setPositionX: (positionX: number) => void
+    setPositionY: (positionY: number) => void
 }
 
 interface IBloginfo {

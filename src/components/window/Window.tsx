@@ -33,6 +33,10 @@ export const Window_: React.FC<WindowProps> = ({
     const [xaxis, setXaxis] = useState<number>(0)
     const [yaxis, setYaxis] = useState<number>(0)
 
+    // This two state will keep the x and y value of the window position right before it expended
+    const [positionX, setPositionX] = useState<number>(0)
+    const [positionY, setPositionY] = useState<number>(0)
+
     //Window that is focused right now | clicked (for stylings and setting the window header active)
     const [windowIsFocused, setWindowIsFocused] = useState<boolean>(false)
 
@@ -102,6 +106,10 @@ export const Window_: React.FC<WindowProps> = ({
         mdScreenBreakpoint,
         xaxis,
         yaxis,
+        positionX,
+        positionY,
+        setPositionX,
+        setPositionY,
     }
 
     return (

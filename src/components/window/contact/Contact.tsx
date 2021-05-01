@@ -6,6 +6,7 @@ import { imageUrlBuilder } from '../../../../utils/sanity'
 import { Header, ContactWindowsWrapper } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
+import { useRef } from 'react'
 
 interface ContactProps extends IWindowsProps {
     contact: Icontact[]
@@ -24,6 +25,10 @@ export const Contact: React.FC<ContactProps> = ({
     xaxis,
     yaxis,
     contact,
+    positionX,
+    positionY,
+    setPositionX,
+    setPositionY,
 }) => {
     const { ctaButton, email, message, name, subject, logo } = contact[0]
 
@@ -31,16 +36,19 @@ export const Contact: React.FC<ContactProps> = ({
         dispatch,
         state: { darkMode },
     } = useCtx()
+
+    const contactRef = useRef<HTMLDivElement | null>(null)
+
     return (
         <Draggable
-            handle="strong"
+            handle={isExpanded ? 'legend' : 'strong'} // couldnt find any solution to disable the dragging so using legend for handle when the window is expanded. (legend doesn't exist here)
             onDrag={draggable}
             onStart={draggable}
             onStop={draggable}
             bounds="body"
             position={{
-                x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
-                y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
+                x: mdScreenBreakpoint ? 0 : isExpanded ? positionX : xaxis,
+                y: mdScreenBreakpoint ? 0 : isExpanded ? positionY : yaxis,
             }}
         >
             <ContactWindowsWrapper
@@ -59,7 +67,18 @@ export const Contact: React.FC<ContactProps> = ({
                         />
                         <p>{windowName}</p>
 
-                        <WindowHeaderButtons index={index} setIsExpanded={setIsExpanded} />
+                        <WindowHeaderButtons
+                            index={index}
+                            setIsExpanded={setIsExpanded}
+                            windowRef={contactRef}
+                            xaxis={xaxis}
+                            yaxis={yaxis}
+                            isExpanded={isExpanded}
+                            positionX={positionX}
+                            positionY={positionY}
+                            setPositionX={setPositionX}
+                            setPositionY={setPositionY}
+                        />
                     </Header>
                 </strong>
                 <form

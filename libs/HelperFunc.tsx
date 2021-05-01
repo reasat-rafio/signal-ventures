@@ -5,7 +5,7 @@ export const NavAction = (
     logo: string,
     key: string,
     dark_mode: number | undefined,
-    dispatch: any,
+    dispatch: (action: Action) => {},
     href?: string,
 ) => {
     if (key != undefined) {
