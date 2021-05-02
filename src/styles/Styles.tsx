@@ -95,6 +95,7 @@ export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
 
 // > * {
 //     scrollbar-width: thin;
+
 //     scrollbar-color: #39f5e6 #1f0220;
 
 //     &::-webkit-scrollbar-track {
