@@ -135,9 +135,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                             {languageSwitcher?.map(
                                 ({ logo, title, _id, locales }: IlanguageSwitcher) => (
                                     <Link href="/" locale={locales} key={_id}>
-                                        <LanguageSwitcherListItem
-                                            onClick={() => setOpenLanguageSwitcher(false)}
-                                        >
+                                        <ListItem onClick={() => setOpenLanguageSwitcher(false)}>
                                             <div className="flex items-center ">
                                                 <SanityImg
                                                     builder={imageUrlBuilder}
@@ -147,7 +145,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                                                 />
                                                 <p className="ml-4">{title}</p>
                                             </div>
-                                        </LanguageSwitcherListItem>
+                                        </ListItem>
                                     </Link>
                                 ),
                             )}
