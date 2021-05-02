@@ -129,7 +129,7 @@ export const useOrderNavs = (navs: Inavs[], darkMode: boolean) => {
             )
             setNavigations(newNav)
         }
-    }, [darkMode])
+    }, [darkMode, navs])
     return {
         navigations,
     }

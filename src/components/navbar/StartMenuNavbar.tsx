@@ -43,6 +43,8 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
     // This will return the ordered navigation accounding to the <dark | light> mode
     const { navigations } = useOrderNavs(navs, darkMode)
 
+    console.log(navigations)
+
     useEffect(() => {
         const activeLanguage = languageSwitcher.filter(({ locales }) => locales == locale)
         setActiveLocaleLogo(activeLanguage[0].logo)
@@ -94,11 +96,12 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                         <NavList onClick={() => setOpen(false)}>
                             {navigations?.map(({ title, key, logo, dark_mode, href }: Inavs) => (
                                 <div
+                                    key={key}
                                     onClick={() =>
                                         NavAction(title, logo, key, dark_mode, dispatch, href)
                                     }
                                 >
-                                    <ListItem style={{ width: '14rem' }} key={key}>
+                                    <ListItem style={{ width: '14rem' }}>
                                         <div className="flex items-center ">
                                             <SanityImg
                                                 builder={imageUrlBuilder}

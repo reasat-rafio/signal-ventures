@@ -41,6 +41,7 @@ export default function Index({ blog, sanityData, locale }) {
     const {
         data: { site, landingPage, portfolio, contact },
     } = useSanityQuery(query, sanityData)
+    console.log(site)
 
     const {
         dispatch,

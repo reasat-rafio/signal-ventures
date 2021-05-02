@@ -21,7 +21,7 @@ export const Home: React.FC<HomeProps> = ({
 
     const portfolio = navs.filter(({ key }) => key === 'portfolio')
     const { logo, key, dark_mode, href } = portfolio[0]
-    console.log(logo)
+
     return (
         <section className="flex flex-col justify-center items-center transform h-screen space-y-5 px-2 md:px-0 z-10 -translate-y-12">
             <SanityImg
