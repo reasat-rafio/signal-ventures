@@ -8,11 +8,11 @@ import {
     TabBody,
     Cutout,
     Avatar,
-    ListItem,
+    TextField,
 } from 'react95'
 import styled from 'styled-components'
 import { respondTo } from '../../libs/mixin'
-import { font_size_for_nav, commonWindowStylings } from '../../libs/_variables'
+import { font_size_for_nav, commonWindowStylings, LIGHT_PINK } from '../../libs/_variables'
 
 export const Container = styled.div<{ darkMode: boolean }>`
     min-height: 100vh;
@@ -209,4 +209,10 @@ export const ContactContentWrapper = styled.div<{ isExpanded: boolean }>`
     position: ${(props) => props.isExpanded && 'absolute'};
     width: ${(props) => props.isExpanded && '100%'};
     height: ${(props) => props.isExpanded && '89%'};
+`
+export const ContactTextField = styled(TextField)<{ darkMode: boolean; error: boolean }>`
+    grid-column: span 10 / span 10;
+    background: ${({ darkMode }) => (darkMode ? '#301b3f' : 'white')};
+    border: ${({ error, darkMode }) =>
+        error ? '1px solid red' : `1px solid ${darkMode ? LIGHT_PINK : '#e5e7eb'}`};
 `

@@ -131,7 +131,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                     </Button>
                     {/* Language selector dropdown  */}
                     {openLanguageSwitcher && (
-                        <ListItem>
+                        <LanguageList>
                             {languageSwitcher?.map(
                                 ({ logo, title, _id, locales }: IlanguageSwitcher) => (
                                     <Link href="/" locale={locales} key={_id}>
@@ -149,7 +149,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                                     </Link>
                                 ),
                             )}
-                        </ListItem>
+                        </LanguageList>
                     )}
 
                     {/* TIME VIEW */}
