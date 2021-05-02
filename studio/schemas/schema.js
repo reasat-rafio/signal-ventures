@@ -9,6 +9,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import logos from './site/logos'
 import navs from './site/nav'
 import startButton from './site/startButton'
+import languageSwitcher from './site/languageSwitcher'
 
 //landing page
 import landingPage from './landingPage'
@@ -40,5 +41,6 @@ export default createSchema({
         ctaButton,
         portfolioItem,
         contact,
+        languageSwitcher,
     ]),
 })

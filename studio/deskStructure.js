@@ -61,6 +61,9 @@ export default () =>
                             ...groupItems({
                                 schemaType: 'site.startButton',
                             }),
+                            ...groupItems({
+                                schemaType: 'site.languageSwitcher',
+                            }),
                         ]),
                 ),
 
@@ -73,9 +76,13 @@ export default () =>
             ...Structure.getFilteredDocumentTypeListItems()
                 .filter(
                     (item) =>
-                        !['site.nav', 'site.startButton', 'site.logos', 'landingPage'].includes(
-                            item.getId(),
-                        ) && !item.getId().includes('site' || 'Page'),
+                        ![
+                            'site.nav',
+                            'site.startButton',
+                            'site.logos',
+                            'site.languageSwitcher',
+                            'landingPage',
+                        ].includes(item.getId()) && !item.getId().includes('site' || 'Page'),
                 )
                 .reverse(),
         ])

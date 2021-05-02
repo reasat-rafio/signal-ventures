@@ -8,6 +8,7 @@ import {
     TabBody,
     Cutout,
     Avatar,
+    ListItem,
 } from 'react95'
 import styled from 'styled-components'
 import { respondTo } from '../../libs/mixin'
@@ -63,6 +64,11 @@ export const NavTabs = styled(Button)<{ index: number }>`
 export const NavList = styled(List)`
     position: absolute;
     left: -5px;
+    bottom: 43px;
+`
+export const LanguageList = styled(List)`
+    position: absolute;
+    right: 1px;
     bottom: 43px;
 `
 

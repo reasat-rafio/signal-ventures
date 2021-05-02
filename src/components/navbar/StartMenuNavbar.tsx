@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Button, ListItem, Tooltip } from 'react95'
 import {
+    LanguageList,
     NavBar,
     NavList,
     NavTabs,
@@ -15,19 +17,36 @@ import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 import { NavAction } from '../../../libs/HelperFunc'
 
-export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
+export const StartMenuNavbar: React.FC<NavbarProps> = ({
+    navs,
+    startMenu,
+    languageSwitcher,
+    locale,
+}) => {
     const {
         dispatch,
         state: { openWindows, focusWindow, darkMode },
     } = useCtx()
 
-    // Menu open | close state
+    // Menu open | close state for start button
     const [open, setOpen] = useState<boolean>(false)
+
+    // Language dropdown open | close state
+    const [openLanguageSwitcher, setOpenLanguageSwitcher] = useState<boolean>(false)
+
+    //
+    const [acticeLocaleLogo, setActiveLocaleLogo] = useState<any>()
+
     // This will return the current time date and year
     const { date, time, year } = useDate()
 
     // This will return the ordered navigation accounding to the <dark | light> mode
     const { navigations } = useOrderNavs(navs, darkMode)
+
+    useEffect(() => {
+        const activeLanguage = languageSwitcher.filter(({ locales }) => locales == locale)
+        setActiveLocaleLogo(activeLanguage[0].logo)
+    }, [locale])
 
     return (
         <NavBar>
@@ -95,22 +114,62 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({ navs, startMenu }) => {
                         </NavList>
                     )}
                 </StartBar>
-
-                {/* TIME VIEW */}
-                <Tooltip
-                    text={date + year}
-                    enterDelay={100}
-                    leaveDelay={200}
-                    style={{
-                        position: 'absolute',
-                        left: '0',
-                        bottom: '100%',
-                    }}
-                >
-                    <Button variant="flat" disabled>
-                        {time}
+                <div className="flex gap-2  items-center">
+                    <Button
+                        active={openLanguageSwitcher}
+                        onClick={() => setOpenLanguageSwitcher((prev) => !prev)}
+                        size="sm"
+                    >
+                        {acticeLocaleLogo && (
+                            <SanityImg
+                                builder={imageUrlBuilder}
+                                image={acticeLocaleLogo}
+                                alt="Start menu logo"
+                                width={20}
+                            />
+                        )}
                     </Button>
-                </Tooltip>
+                    {/* Language selector dropdown  */}
+                    {openLanguageSwitcher && (
+                        <ListItem>
+                            {languageSwitcher?.map(
+                                ({ logo, title, _id, locales }: IlanguageSwitcher) => (
+                                    <Link href="/" locale={locales} key={_id}>
+                                        <LanguageSwitcherListItem
+                                            onClick={() => setOpenLanguageSwitcher(false)}
+                                        >
+                                            <div className="flex items-center ">
+                                                <SanityImg
+                                                    builder={imageUrlBuilder}
+                                                    image={logo}
+                                                    alt={title + 'logo'}
+                                                    width={25}
+                                                />
+                                                <p className="ml-4">{title}</p>
+                                            </div>
+                                        </LanguageSwitcherListItem>
+                                    </Link>
+                                ),
+                            )}
+                        </ListItem>
+                    )}
+
+                    {/* TIME VIEW */}
+                    <Tooltip
+                        text={date + year}
+                        enterDelay={100}
+                        leaveDelay={200}
+                        style={{
+                            position: 'absolute',
+                            left: '0',
+                            bottom: '100%',
+                        }}
+                    >
+                        <Button variant="flat" disabled>
+                            {time}
+                        </Button>
+                    </Tooltip>
+                </div>
             </ToolbarWrapper>
         </NavBar>
     )

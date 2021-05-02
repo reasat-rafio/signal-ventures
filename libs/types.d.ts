@@ -46,6 +46,8 @@ interface NavbarProps {
         title: string
         logo: Logo
     }
+    languageSwitcher: IlanguageSwitcher[]
+    locale: string
 }
 
 interface Inavs {
@@ -175,3 +177,28 @@ interface CtaButton {
 //         lineWidthGridHelper: LineWidthGridHelperProps
 //     }
 // }
+
+interface IlanguageSwitcher {
+    __i18n_lang: string
+    __i18n_refs: I18NRef[]
+    _createdAt: Date
+    _id: string
+    _rev: string
+    _type: string
+    _updatedAt: Date
+    locales: string
+    logo: Logo
+    title: string
+}
+
+interface I18NRef {
+    _key: string
+    lang: string
+    ref: Ref
+}
+
+interface Ref {
+    _ref: string
+    _type: string
+    _weak: boolean
+}

@@ -17,6 +17,10 @@ export const siteQuery = groq`{
         ...,
         "logo": ${withDimensions('logo')}
     },
+    "languageSwitcher" :  *[_type == "site.languageSwitcher" && __i18n_lang == $locale && !(_id in path('drafts.**'))] {
+        ...,
+        "logo": ${withDimensions('logo')}
+    },
 }
 `
 

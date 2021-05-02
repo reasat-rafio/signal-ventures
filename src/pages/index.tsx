@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     return {
         props: {
             blog: data,
-
+            locale: context.locale,
             sanityData: await sanityStaticProps({
                 query,
                 context,
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     }
 }
 
-export default function Index({ blog, sanityData }) {
+export default function Index({ blog, sanityData, locale }) {
     const {
         data: { site, landingPage, portfolio, contact },
     } = useSanityQuery(query, sanityData)
@@ -61,7 +61,6 @@ export default function Index({ blog, sanityData }) {
     // This will return current page width
     const siteRef = useRef<HTMLDivElement | null>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
-    console.log(site)
 
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
@@ -95,7 +94,12 @@ export default function Index({ blog, sanityData }) {
                             />
                         ))}
                     <DesktopNavs navs={site.nav.menu} />
-                    <StartMenuNavbar navs={site.nav.menu} startMenu={site.startButton} />
+                    <StartMenuNavbar
+                        navs={site.nav.menu}
+                        startMenu={site.startButton}
+                        languageSwitcher={site.languageSwitcher}
+                        locale={locale}
+                    />
                     <AppCanvas />
                 </div>
             </Container>
