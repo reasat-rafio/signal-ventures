@@ -61,6 +61,7 @@ export default function Index({ blog, sanityData }) {
     // This will return current page width
     const siteRef = useRef<HTMLDivElement | null>(null)
     const { width } = useSiteHeightAndWidth(siteRef)
+    console.log(site)
 
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
@@ -75,10 +76,10 @@ export default function Index({ blog, sanityData }) {
                     <Home
                         title={landingPage.heading}
                         description={landingPage.description}
-                        darkLogo={site.sites.dark_logo}
-                        lightLogo={site.sites.light_logo}
+                        darkLogo={site.logos.dark_logo}
+                        lightLogo={site.logos.light_logo}
                         button={landingPage.ctaButton}
-                        navs={site.sites.nav}
+                        navs={site.nav.menu}
                     />
 
                     {activeWindows.length > 0 &&
@@ -93,8 +94,8 @@ export default function Index({ blog, sanityData }) {
                                 blogFeeds={blog.feed}
                             />
                         ))}
-                    <DesktopNavs navs={site.sites.nav} />
-                    <StartMenuNavbar navs={site.sites.nav} startMenu={site.sites.startButton} />
+                    <DesktopNavs navs={site.nav.menu} />
+                    <StartMenuNavbar navs={site.nav.menu} startMenu={site.startButton} />
                     <AppCanvas />
                 </div>
             </Container>

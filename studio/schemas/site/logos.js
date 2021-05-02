@@ -1,11 +1,10 @@
-import { FaSitemap } from 'react-icons/fa'
+import { FaRegStar } from 'react-icons/fa'
 
 export default {
-    name: 'site',
-    title: 'Site',
+    name: 'site.logos',
+    title: 'Logos',
     type: 'document',
-    icon: FaSitemap,
-    i18n: true,
+    icon: FaRegStar,
     fields: [
         {
             name: 'lightLogo',
@@ -28,22 +27,10 @@ export default {
             title: 'Favicon',
             type: 'image',
         },
-        {
-            name: 'startButton',
-            title: 'Start Button',
-            type: 'startButton',
-        },
-        {
-            name: 'menu',
-            title: 'Menu',
-            type: 'array',
-            of: [{ type: 'navItems' }],
-        },
     ],
     preview: {
         select: {
             media: 'lightLogo',
-            media: 'darkLogo',
         },
     },
 }

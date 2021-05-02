@@ -2,6 +2,7 @@ import S from '@sanity/desk-tool/structure-builder'
 import * as Structure from 'sanity-plugin-intl-input/lib/structure'
 import { GrEdit, GrView } from 'react-icons/gr'
 import * as React from 'react'
+import { FaSitemap } from 'react-icons/fa'
 
 function SitePreview({ document, options }) {
     if (!process.env.SANITY_STUDIO_PREVIEW_URL) {
@@ -31,43 +32,50 @@ export const getDefaultDocumentNode = (props) => {
     ])
 }
 
-// export default () =>
-//     S.list().title('Content').id('__root__').items(Structure.getFilteredDocumentTypeListItems())
+const groupItems = ({ schemaType }) => {
+    return [
+        ...Structure.getFilteredDocumentTypeListItems().filter((i) =>
+            i.getId().includes(schemaType),
+        ),
+    ]
+}
+
 export default () =>
     S.list()
         .title('Content')
         .id('__root__')
         .items([
-            // S.listItem().title('Site').icon(FaSitemap).child(S.editor(),
-            // S.listItem()
-            //     .title('Landing Page')
-            //     .icon(FaHome)
-            //     .child(
-            //         S.editor()
-            //             .schemaType('landingPage')
-            //             .views([
-            //                 S.view.form().icon(GrEdit),
-            //                 S.view
-            //                     .component(SitePreview)
-            //                     .icon(GrView)
-            //                     .options({ slug: '' })
-            //                     .title('Preview'),
-            //             ]),
-            //     ),
-            ...Structure.getFilteredDocumentTypeListItems().filter((i) =>
-                i.getId().includes('site'),
-            ),
+            S.listItem()
+                .title('Site')
+                .icon(FaSitemap)
+                .child(
+                    S.list()
+                        .title('Site')
+                        .items([
+                            ...groupItems({
+                                schemaType: 'site.logos',
+                            }),
+                            ...groupItems({
+                                schemaType: 'site.nav',
+                            }),
+                            ...groupItems({
+                                schemaType: 'site.startButton',
+                            }),
+                        ]),
+                ),
 
             S.divider(),
-            ...Structure.getFilteredDocumentTypeListItems().filter((i) =>
-                i.getId().includes('Page'),
-            ),
+            ...groupItems({
+                schemaType: 'Page',
+            }),
+
             S.divider(),
             ...Structure.getFilteredDocumentTypeListItems()
                 .filter(
                     (item) =>
-                        !['site', 'landingPage'].includes(item.getId()) &&
-                        !item.getId().includes('site' || 'Page'),
+                        !['site.nav', 'site.startButton', 'site.logos', 'landingPage'].includes(
+                            item.getId(),
+                        ) && !item.getId().includes('site' || 'Page'),
                 )
                 .reverse(),
         ])

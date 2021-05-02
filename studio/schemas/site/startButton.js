@@ -1,8 +1,10 @@
+import { AiOutlineMenu } from 'react-icons/ai'
 export default {
-    name: 'startButton',
+    name: 'site.startButton',
     title: 'Start Button',
-    type: 'object',
+    type: 'document',
     i18n: true,
+    icon: AiOutlineMenu,
     fields: [
         {
             name: 'title',
