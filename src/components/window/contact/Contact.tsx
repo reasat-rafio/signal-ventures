@@ -75,17 +75,16 @@ export const Contact: React.FC<ContactProps> = ({
                 type: SHOW_MODAL,
                 payload: {
                     success: true,
-                    description: 'Form submitted',
                 },
             })
 
             reset({})
         } catch (error) {
+            console.log(error.message)
             dispatch({
                 type: SHOW_MODAL,
                 payload: {
-                    success: true,
-                    description: `${error.message}`,
+                    success: false,
                 },
             })
         }
@@ -168,6 +167,7 @@ export const Contact: React.FC<ContactProps> = ({
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2 ">{email}</p>
                             <ContactTextField
+                                disabled={submitting}
                                 error={errors.email}
                                 darkMode={darkMode}
                                 {...register('email')}
@@ -177,6 +177,7 @@ export const Contact: React.FC<ContactProps> = ({
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2 ">{name}</p>
                             <ContactTextField
+                                disabled={submitting}
                                 error={errors.name}
                                 {...register('name')}
                                 darkMode={darkMode}
@@ -186,6 +187,7 @@ export const Contact: React.FC<ContactProps> = ({
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2 ">{subject}</p>
                             <ContactTextField
+                                disabled={submitting}
                                 error={errors.subject}
                                 darkMode={darkMode}
                                 {...register('subject')}
@@ -195,6 +197,7 @@ export const Contact: React.FC<ContactProps> = ({
                         <div className="grid grid-cols-12  gap-4">
                             <p className="col-span-2">{message}</p>
                             <ContactTextField
+                                disabled={submitting}
                                 error={errors.message}
                                 darkMode={darkMode}
                                 {...register('message')}
@@ -212,6 +215,7 @@ export const Contact: React.FC<ContactProps> = ({
                             <div className="col-span-2" />
 
                             <Button
+                                disabled={submitting}
                                 type="submit"
                                 style={{ gridColumn: 'span 10 / span 10', width: '90px' }}
                             >

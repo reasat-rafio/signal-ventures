@@ -25,6 +25,9 @@ import contact from './contact'
 import ctaButton from './ctaButton'
 import navItems from './navItems'
 
+//
+import modal from './modal'
+
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
     // We name our schema
@@ -42,5 +45,6 @@ export default createSchema({
         portfolioItem,
         contact,
         languageSwitcher,
+        modal,
     ]),
 })

@@ -34,5 +34,10 @@ export const query = groq`{
     "portfolio": *[_type == "portfolio"  && __i18n_lang == $locale && !(_id in path('drafts.**'))] {
         ...,
         "logo": ${withDimensions('logo')}
+    },
+    "modal": *[_type == "modal"  && __i18n_lang == $locale && !(_id in path('drafts.**'))] {
+        ...,
+        "successImg": ${withDimensions('successImg')},
+        "errorImg": ${withDimensions('errorImg')},
     }
   }`

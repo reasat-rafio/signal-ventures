@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
 export default function Index({ blog, sanityData, locale }) {
     const {
-        data: { site, landingPage, portfolio, contact },
+        data: { site, landingPage, portfolio, contact, modal },
     } = useSanityQuery(query, sanityData)
 
     const {
@@ -105,7 +105,7 @@ export default function Index({ blog, sanityData, locale }) {
                     />
                     <AppCanvas />
                     <Loading />
-                    <Modal />
+                    <Modal modal={modal} />
                 </div>
             </Container>
         </ThemeProvider>

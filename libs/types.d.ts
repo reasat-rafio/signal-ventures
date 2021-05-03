@@ -8,7 +8,6 @@ interface WindowsProps {
 
 interface ImodalDAta {
     success: boolean
-    description: string
 }
 
 interface InitalState {
@@ -229,4 +228,19 @@ interface IForm {
     name: string
     subject: string
     message: string
+}
+
+interface ModalData {
+    __i18n_lang: string
+    __i18n_refs: I18NRef[]
+    _createdAt: Date
+    _id: string
+    _rev: string
+    _type: string
+    _updatedAt: Date
+    errorImg: Img
+    errorMessage: string
+    successImg: Img
+    successMessage: string
+    closeButton: string
 }

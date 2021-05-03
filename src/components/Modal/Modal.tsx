@@ -6,15 +6,23 @@ import { ModalButton, ModalHeader, ModalWrapper } from '../../styles/Styles'
 import { useEffect, useState } from 'react'
 import { HIDE_MODAL } from '../../../store/types'
 import Image from 'next/image'
-interface ModalProps {}
+import { SanityImg } from 'sanity-react-extra'
+import { imageUrlBuilder } from '../../../utils/sanity'
 
-export const Modal: React.FC<ModalProps> = ({}) => {
+interface ModalProps {
+    modal: ModalData[]
+}
+
+export const Modal: React.FC<ModalProps> = ({ modal }) => {
+    const { errorImg, errorMessage, successImg, successMessage, closeButton } = modal[0]
+    console.log(closeButton)
+
     const {
         dispatch,
         state: {
             darkMode,
             showModal,
-            modalData: { success, description },
+            modalData: { success },
         },
     } = useCtx()
 
@@ -42,22 +50,20 @@ export const Modal: React.FC<ModalProps> = ({}) => {
                     <WindowContent>
                         <div className="grid grid-cols-12">
                             <div className="col-span-4">
-                                <Image
-                                    layout="intrinsic"
-                                    src={
-                                        success
-                                            ? '/img/static/check.png'
-                                            : '/img/static/Warning.png'
-                                    }
-                                    width="50"
-                                    height="50"
+                                <SanityImg
+                                    builder={imageUrlBuilder}
+                                    image={success ? successImg : errorImg}
+                                    alt={success ? 'success logo' : 'error logo'}
+                                    width={100}
                                 />
                             </div>
-                            <div className="col-span-8">{description}</div>
+                            <div className="col-span-8 m-auto">
+                                {success ? successMessage : errorMessage}
+                            </div>
                         </div>
                         <div className="flex justify-center items-center">
                             <ModalButton size="sm" onClick={hideModalAction}>
-                                OK
+                                {closeButton}
                             </ModalButton>
                         </div>
                     </WindowContent>

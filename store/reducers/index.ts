@@ -16,7 +16,6 @@ export const initialState: InitalState = {
     showModal: false,
     modalData: {
         success: false,
-        description: '',
     },
 }
 
