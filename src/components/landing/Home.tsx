@@ -23,17 +23,17 @@ export const Home: React.FC<HomeProps> = ({
     const { logo, key, dark_mode, href } = portfolio[0]
 
     return (
-        <section className="flex flex-col justify-center items-center transform h-screen space-y-5 px-2 md:px-0 z-10 -translate-y-12">
+        <section className="flex flex-col justify-center items-center transform h-screen  px-2 md:px-0 z-10 -translate-y-9 lg:-translate-y-28">
             <SanityImg
                 builder={imageUrlBuilder}
                 image={darkMode ? darkLogo : lightLogo}
                 alt={'signal ventures logo'}
                 width={200}
-                className="w-64 h-64 object-center"
+                className="w-44 h-44 md:w-56 md:h-56 object-center"
             />
             <h1
                 className={clsx(
-                    'md:text-6xl text-5xl font-header text-center transition-colors duration-300',
+                    'md:text-big text-3xl font-header text-center transition-colors duration-300 mb-7',
                     darkMode ? 'text-white' : 'text-black',
                 )}
             >
@@ -41,7 +41,7 @@ export const Home: React.FC<HomeProps> = ({
             </h1>
             <p
                 className={clsx(
-                    'md:text-2xl text-xl  text-center max-w-5xl transition-colors duration-300',
+                    'md:text-2xl text-xl  text-center max-w-5xl transition-colors duration-300 mb-7',
                     darkMode ? 'text-gray-300' : 'text-gray-800',
                 )}
             >

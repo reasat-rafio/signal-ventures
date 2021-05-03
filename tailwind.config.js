@@ -12,6 +12,9 @@ module.exports = {
             fontFamily: {
                 header: ['Audiowide', 'cursive'],
             },
+            fontSize: {
+                big: '3.5rem',
+            },
         },
     },
     variants: {

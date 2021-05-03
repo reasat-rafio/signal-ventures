@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-export const useDate = () => {
-    const locale = 'en'
+export const useDate = (_locale: string) => {
+    const locale = _locale.slice(0, 2)
     const [today, setDate] = useState(new Date())
 
     useEffect(() => {
@@ -11,7 +11,7 @@ export const useDate = () => {
         return () => {
             clearInterval(timer)
         }
-    }, [])
+    }, [_locale])
 
     const day = today.toLocaleDateString(locale, { weekday: 'long' })
     const date = `${day}, ${today.getDate()} ${today.toLocaleDateString(locale, {

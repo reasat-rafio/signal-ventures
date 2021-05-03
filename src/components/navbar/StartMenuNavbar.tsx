@@ -37,11 +37,11 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
     // Language dropdown open | close state
     const [openLanguageSwitcher, setOpenLanguageSwitcher] = useState<boolean>(false)
 
-    //
+    // State for active locale logo
     const [activeLocaleLogo, setActiveLocaleLogo] = useState<any>()
 
     // This will return the current time date and year
-    const { date, time, year } = useDate()
+    const { date, time, year } = useDate(locale)
 
     // This will return the ordered navigation accounding to the <dark | light> mode
     const { navigations } = useOrderNavs(navs, darkMode)
