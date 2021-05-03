@@ -6,12 +6,21 @@ interface WindowsProps {
     key: string
 }
 
+interface ImodalDAta {
+    success: boolean
+    description: string
+}
+
 interface InitalState {
     openWindows: WindowsProps[]
     activeWindows: WindowsProps[]
     focusWindow: null | string
     darkMode: boolean
+    loading: boolean
+    showModal: boolean
+    modalData: ImodalDAta
 }
+
 type Action = {
     type:
         | 'CREATE_WINDOW_BOX'
@@ -20,6 +29,10 @@ type Action = {
         | 'FOCUS_WINDOW_BOX'
         | 'TOGGLE_DARK_MODE'
         | 'SET_MODE'
+        | 'LOADING_START'
+        | 'LOADING_END'
+        | 'SHOW_MODAL'
+        | 'HIDE_MODAL'
 
     payload?: any
 }
@@ -209,4 +222,11 @@ interface Ref {
     _ref: string
     _type: string
     _weak: boolean
+}
+
+interface IForm {
+    email: string
+    name: string
+    subject: string
+    message: string
 }

@@ -16,6 +16,8 @@ import { dark_mode, light_mode } from '../../libs/theme'
 import { SET_MODE } from '../../store/types'
 import { AppCanvas } from '../components/Canvas/AppCanvas'
 import clsx from 'clsx'
+import { Loading } from '../components/Loading/Loading'
+import { Modal } from '../components/Modal/Modal'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
@@ -102,6 +104,8 @@ export default function Index({ blog, sanityData, locale }) {
                         locale={locale}
                     />
                     <AppCanvas />
+                    <Loading />
+                    <Modal />
                 </div>
             </Container>
         </ThemeProvider>

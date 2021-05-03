@@ -9,6 +9,7 @@ import {
     Cutout,
     Avatar,
     TextField,
+    WindowContent,
 } from 'react95'
 import styled from 'styled-components'
 import { respondTo } from '../../libs/mixin'
@@ -90,30 +91,6 @@ export const ArticelWindowWrapper = styled(Window)<IWindowWrapper>`
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
-
-// transform: ${({ x, y }) => `translate(${x} ${y})`}
-
-// > * {
-//     scrollbar-width: thin;
-
-//     scrollbar-color: #39f5e6 #1f0220;
-
-//     &::-webkit-scrollbar-track {
-//         -webkit-box-shadow: ${({ darkMode }) =>
-//             darkMode ? 'inset 0 0 6px #39f5e6' : 'inset 0 0 6px rgba(0, 0, 0, 0.3)'};
-//         border-radius: 10px;
-//     }
-//     &::-webkit-scrollbar {
-//         width: 12px;
-//     }
-
-//     &::-webkit-scrollbar-thumb {
-//         border-radius: 10px;
-
-//         -webkit-box-shadow: ${({ darkMode }) =>
-//             darkMode ? 'inset 0 0 6px #39f5e6' : 'inset 0 0 6px rgba(0, 0, 0, 0.5)'};
-//     }
-// }
 
 export const ArticleBodyWrapper = styled.div`
     position: absolute;
@@ -215,4 +192,19 @@ export const ContactTextField = styled(TextField)<{ darkMode: boolean; error: bo
     background: ${({ darkMode }) => (darkMode ? '#301b3f' : 'white')};
     border: ${({ error, darkMode }) =>
         error ? '1px solid red' : `1px solid ${darkMode ? LIGHT_PINK : '#e5e7eb'}`};
+`
+
+// MODAL
+export const ModalWrapper = styled(Window)`
+    max-width: 500px;
+    min-width: 360px;
+    min-height: 120px;
+`
+export const ModalHeader = styled(WindowHeader)<{ darkMode: boolean }>`
+    display: flex;
+`
+export const ModalContent = styled(WindowContent)``
+
+export const ModalButton = styled(Button)`
+    padding: 5px 20px;
 `

@@ -1,12 +1,12 @@
-import { Button, TextField } from 'react95'
+import { Button, Hourglass } from 'react95'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
-import { FOCUS_WINDOW_BOX } from '../../../../store/types'
+import { FOCUS_WINDOW_BOX, LOADING_END, LOADING_START, SHOW_MODAL } from '../../../../store/types'
 import { imageUrlBuilder } from '../../../../utils/sanity'
 import { Header, ContactWindowsWrapper, ContactTextField } from '../../../styles/Styles'
 import Draggable from 'react-draggable'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useFormspark } from '@formspark/use-formspark'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -44,6 +44,7 @@ export const Contact: React.FC<ContactProps> = ({
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         mode: 'onBlur',
@@ -58,12 +59,50 @@ export const Contact: React.FC<ContactProps> = ({
         formId: formID,
     })
 
-    const onSubmit = async (data) => {
-        const { email, name, subject, message } = data
-        await submit({ email, name, subject, message })
-        alert('Form submitted')
+    const onSubmit = async (data: IForm) => {
+        try {
+            dispatch({
+                type: LOADING_START,
+            })
+            const { email, name, subject, message } = data
+            await submit({ email, name, subject, message })
+
+            dispatch({
+                type: LOADING_END,
+            })
+
+            dispatch({
+                type: SHOW_MODAL,
+                payload: {
+                    success: true,
+                    description: 'Form submitted',
+                },
+            })
+
+            reset({})
+        } catch (error) {
+            dispatch({
+                type: SHOW_MODAL,
+                payload: {
+                    success: true,
+                    description: `${error.message}`,
+                },
+            })
+        }
     }
-    console.log('submitting', submitting)
+
+    // this will set the loading to true || false when the form is submitting
+    // useEffect(() => {
+    //     if (submitting) {
+    // dispatch({
+    //     type: LOADING_START,
+    // })
+    //     } else {
+    // dispatch({
+    //     type: LOADING_END,
+    // })
+    //     }
+    // }, [submitting])
 
     return (
         <Draggable
@@ -171,6 +210,7 @@ export const Contact: React.FC<ContactProps> = ({
                         </div>
                         <div className="grid grid-cols-12  gap-4">
                             <div className="col-span-2" />
+
                             <Button
                                 type="submit"
                                 style={{ gridColumn: 'span 10 / span 10', width: '90px' }}

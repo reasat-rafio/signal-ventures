@@ -1,4 +1,4 @@
-import { SET_MODE } from './../types'
+import { HIDE_MODAL, LOADING_END, LOADING_START, SET_MODE, SHOW_MODAL } from './../types'
 import {
     CREATE_WINDOW_BOX,
     MINIMIZE_WINDOW_BOX,
@@ -12,6 +12,12 @@ export const initialState: InitalState = {
     activeWindows: [],
     focusWindow: null,
     darkMode: false,
+    loading: false,
+    showModal: false,
+    modalData: {
+        success: false,
+        description: '',
+    },
 }
 
 export const reducer = (state: InitalState, action: Action) => {
@@ -74,6 +80,32 @@ export const reducer = (state: InitalState, action: Action) => {
             return {
                 ...state,
                 darkMode: action.payload,
+            }
+
+        case LOADING_START:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case LOADING_END:
+            return {
+                ...state,
+                loading: false,
+            }
+
+        case SHOW_MODAL:
+            return {
+                ...state,
+                showModal: true,
+                modalData: action.payload,
+            }
+
+        case HIDE_MODAL:
+            return {
+                ...state,
+                showModal: false,
+                modalData: {},
             }
 
         default:

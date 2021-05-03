@@ -57,7 +57,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
         const keysName = openWindows.map((i) => i.key)
         const res = navs.filter(({ key }) => keysName.includes(key))
         setOpenWindows(res)
-    }, [navs, openWindows])
+    }, [navs, openWindows.length])
 
     return (
         <NavBar>
