@@ -54,10 +54,10 @@ export const Modal: React.FC<ModalProps> = ({ modal }) => {
                                     builder={imageUrlBuilder}
                                     image={success ? successImg : errorImg}
                                     alt={success ? 'success logo' : 'error logo'}
-                                    width={100}
+                                    width={60}
                                 />
                             </div>
-                            <div className="col-span-8 m-auto">
+                            <div className="col-span-8 flex justify-start items-center">
                                 {success ? successMessage : errorMessage}
                             </div>
                         </div>
