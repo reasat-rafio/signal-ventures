@@ -37,7 +37,7 @@ export const Window_: React.FC<WindowProps> = ({
 
     // THIS windows name icon and key
     const [windowName, setWindowName] = useState<string>('')
-    const [windowIcon, setWindowIcon] = useState<Logo>()
+    const [windowIcon, setWindowIcon] = useState<Logo | undefined>()
     const [windowKey, setWindowKey] = useState<string>('')
 
     const findWindowDetails = (key: string) => {
