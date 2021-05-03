@@ -41,7 +41,6 @@ export default function Index({ blog, sanityData, locale }) {
     const {
         data: { site, landingPage, portfolio, contact },
     } = useSanityQuery(query, sanityData)
-    console.log(site)
 
     const {
         dispatch,
@@ -92,6 +91,7 @@ export default function Index({ blog, sanityData, locale }) {
                                 contact={contact}
                                 blogItems={blog.items}
                                 blogFeeds={blog.feed}
+                                navs={site.nav.menu}
                             />
                         ))}
                     <DesktopNavs navs={site.nav.menu} />

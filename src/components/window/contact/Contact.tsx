@@ -35,7 +35,6 @@ export const Contact: React.FC<ContactProps> = ({
     setPositionY,
 }) => {
     const { ctaButton, email, message, name, subject, logo } = contact[0]
-    console.log(process.env.FORM_ID)
 
     const {
         dispatch,

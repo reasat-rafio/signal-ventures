@@ -3,8 +3,6 @@ interface PropIsChildren {
 }
 
 interface WindowsProps {
-    name: string
-    icon: string
     key: string
 }
 
@@ -37,6 +35,16 @@ interface HomeProps {
         title: string
         href?: string
     }
+}
+
+interface WindowProps {
+    index: string
+    width: number
+    blogItems: IBloginfo[]
+    blogFeeds: { image: string; link: string }
+    portfolioItems: IPorfolioItems[]
+    contact: Icontact[]
+    navs: Inavs[]
 }
 
 interface NavbarProps {

@@ -23,7 +23,6 @@ interface ArticleProps extends IWindowsProps {
 }
 
 export const Articles: React.FC<ArticleProps> = ({
-    windowKey,
     windowIsFocused,
     isExpanded,
     index,

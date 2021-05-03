@@ -12,8 +12,6 @@ export const NavAction = (
         dispatch({
             type: CREATE_WINDOW_BOX,
             payload: {
-                name: title,
-                icon: logo,
                 key: key,
             },
         })
@@ -29,17 +27,3 @@ export const NavAction = (
         }
     }
 }
-
-// export const borderWarning = ({
-//     condition,
-//     errorColor,
-//     darkMode,
-//     noErrorBorderColorDRK,
-//     noErrorBorderColorLHT,
-//  } : any) => {
-//     return `border: ${
-//         condition
-//             ? `1px solid ${errorColor}`
-//             : `1px solid ${darkMode ? noErrorBorderColorDRK : noErrorBorderColorLHT}`
-//     }`
-// }

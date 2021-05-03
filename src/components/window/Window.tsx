@@ -5,15 +5,6 @@ import { Articles } from './articles/Articles'
 import { Contact } from './contact/Contact'
 import { Portfolio } from './portfolio/Portfolio'
 
-interface WindowProps {
-    index: string
-    width: number
-    blogItems: IBloginfo[]
-    blogFeeds: { image: string; link: string }
-    portfolioItems: IPorfolioItems[]
-    contact: Icontact[]
-}
-
 export const Window_: React.FC<WindowProps> = ({
     index,
     width,
@@ -21,6 +12,7 @@ export const Window_: React.FC<WindowProps> = ({
     blogFeeds,
     portfolioItems,
     contact,
+    navs,
 }) => {
     const {
         state: { focusWindow, activeWindows },
@@ -45,14 +37,15 @@ export const Window_: React.FC<WindowProps> = ({
 
     // THIS windows name icon and key
     const [windowName, setWindowName] = useState<string>('')
-    const [windowIcon, setWindowIcon] = useState<string>('')
+    const [windowIcon, setWindowIcon] = useState<Logo>()
     const [windowKey, setWindowKey] = useState<string>('')
 
     const findWindowDetails = (key: string) => {
         // Finding THIS windows info from global store by key and setting them to state
-        const findWin: WindowsProps[] = activeWindows.filter((i) => i.key == key)
-        setWindowName(findWin[0].name)
-        setWindowIcon(findWin[0].icon)
+        const findWinFromStore: WindowsProps[] = activeWindows.filter((i) => i.key == key)
+        const findWin = navs.filter(({ key }) => key == findWinFromStore[0].key)
+        setWindowName(findWin[0].title)
+        setWindowIcon(findWin[0].logo)
         setWindowKey(findWin[0].key)
     }
 
@@ -78,7 +71,7 @@ export const Window_: React.FC<WindowProps> = ({
                 setWindowName('...')
                 break
         }
-    }, [activeWindows])
+    }, [activeWindows, navs])
 
     useEffect(() => {
         width >= 992 ? setMdScreenBreakpoint(false) : setMdScreenBreakpoint(true)

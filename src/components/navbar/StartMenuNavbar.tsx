@@ -28,6 +28,9 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
         state: { openWindows, focusWindow, darkMode },
     } = useCtx()
 
+    // State for the windows that is open
+    const [_openWindows, setOpenWindows] = useState<Inavs[]>([])
+
     // Menu open | close state for start button
     const [open, setOpen] = useState<boolean>(false)
 
@@ -35,7 +38,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
     const [openLanguageSwitcher, setOpenLanguageSwitcher] = useState<boolean>(false)
 
     //
-    const [acticeLocaleLogo, setActiveLocaleLogo] = useState<any>()
+    const [activeLocaleLogo, setActiveLocaleLogo] = useState<any>()
 
     // This will return the current time date and year
     const { date, time, year } = useDate()
@@ -43,12 +46,18 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
     // This will return the ordered navigation accounding to the <dark | light> mode
     const { navigations } = useOrderNavs(navs, darkMode)
 
-    console.log(navigations)
-
+    // This will set the active locale logo activeLocaleLogo state
     useEffect(() => {
         const activeLanguage = languageSwitcher.filter(({ locales }) => locales == locale)
         setActiveLocaleLogo(activeLanguage[0].logo)
     }, [locale])
+
+    // This will get the open windows keys from the state and find the same one from the navs
+    useEffect(() => {
+        const keysName = openWindows.map((i) => i.key)
+        const res = navs.filter(({ key }) => keysName.includes(key))
+        setOpenWindows(res)
+    }, [navs, openWindows])
 
     return (
         <NavBar>
@@ -69,7 +78,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                     </StartButton>
 
                     {/* THIS WILL SHOW ALL THE TABS THAT ARE OPEN IN THE NAVBAR  */}
-                    {openWindows.map(({ icon, name, key }) => (
+                    {_openWindows.map(({ key, logo, title }) => (
                         <NavTabs
                             primary
                             active={key == focusWindow ? true : false}
@@ -77,17 +86,17 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                             onClick={() =>
                                 dispatch({
                                     type: CREATE_WINDOW_BOX,
-                                    payload: { icon, name, key },
+                                    payload: { key },
                                 })
                             }
                         >
                             <SanityImg
                                 builder={imageUrlBuilder}
-                                image={icon}
-                                alt={name + 'logo'}
+                                image={logo}
+                                alt={title + 'logo'}
                                 width={20}
                             />
-                            <p className="ml-1 md:block hidden">{name}</p>
+                            <p className="ml-1 md:block hidden">{title}</p>
                         </NavTabs>
                     ))}
 
@@ -123,10 +132,10 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                         onClick={() => setOpenLanguageSwitcher((prev) => !prev)}
                         size="sm"
                     >
-                        {acticeLocaleLogo && (
+                        {activeLocaleLogo && (
                             <SanityImg
                                 builder={imageUrlBuilder}
-                                image={acticeLocaleLogo}
+                                image={activeLocaleLogo}
                                 alt="Start menu logo"
                                 width={20}
                             />
