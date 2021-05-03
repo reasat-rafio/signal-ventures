@@ -52,15 +52,18 @@ export const Contact: React.FC<ContactProps> = ({
 
     const contactRef = useRef<HTMLDivElement | null>(null)
 
+    const formID: any = process.env.NEXT_PUBLIC_FORMID
+
     const [submit, submitting] = useFormspark({
-        formId: 'process.env.FORM_ID',
+        formId: formID,
     })
 
     const onSubmit = async (data) => {
-        console.log(data)
-        // await submit({ message })
-        // alert('Form submitted')
+        const { email, name, subject, message } = data
+        await submit({ email, name, subject, message })
+        alert('Form submitted')
     }
+    console.log('submitting', submitting)
 
     return (
         <Draggable
