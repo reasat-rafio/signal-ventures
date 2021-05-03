@@ -103,7 +103,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                     />
                                     <p
                                         className={clsx(
-                                            'text-base',
+                                            'text-base text-center',
                                             darkMode ? 'text-gray-200' : 'text-gray-600',
                                         )}
                                     >
