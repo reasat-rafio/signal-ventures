@@ -198,6 +198,7 @@ export const ContactTextField = styled(TextField)<{ darkMode: boolean; error: bo
 export const ModalWrapper = styled(Window)`
     max-width: 500px;
     min-width: 360px;
+
     min-height: 120px;
 `
 export const ModalHeader = styled(WindowHeader)<{ darkMode: boolean }>`
