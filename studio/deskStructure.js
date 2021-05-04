@@ -64,6 +64,9 @@ export default () =>
                             ...groupItems({
                                 schemaType: 'site.languageSwitcher',
                             }),
+                            ...groupItems({
+                                schemaType: 'seo',
+                            }),
                         ]),
                 ),
 
@@ -96,6 +99,7 @@ export default () =>
                             'articles',
                             'contact',
                             'portfolio',
+                            'seo',
                         ].includes(item.getId()) &&
                         !item
                             .getId()

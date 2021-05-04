@@ -1,7 +1,11 @@
+import { GiChart } from 'react-icons/gi'
+
 export default {
     name: 'seo',
     title: 'Seo',
-    type: 'object',
+    type: 'document',
+    icon: GiChart,
+    i18n: true,
     fields: [
         {
             name: 'title',
@@ -14,4 +18,10 @@ export default {
             type: 'string',
         },
     ],
+    preview: {
+        select: {
+            title: 'title',
+            subtitle: 'description',
+        },
+    },
 }

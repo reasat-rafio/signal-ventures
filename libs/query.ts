@@ -45,5 +45,6 @@ export const query = groq`{
         ...,
         "successImg": ${withDimensions('successImg')},
         "errorImg": ${withDimensions('errorImg')},
-    }
+    },
+    "seo": *[_type == "seo" &&  __i18n_lang == $locale && !(_id in path('drafts.**'))] [0]
   }`

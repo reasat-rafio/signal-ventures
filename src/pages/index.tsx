@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
 export default function Index({ blog, sanityData, locale }) {
     const {
-        data: { site, landingPage, portfolio, contact, modal, articles },
+        data: { site, landingPage, portfolio, contact, modal, articles, seo },
     } = useSanityQuery(query, sanityData)
 
     const {
@@ -67,7 +67,7 @@ export default function Index({ blog, sanityData, locale }) {
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
             <Container ref={siteRef} darkMode={darkMode}>
-                <NextSeo title={landingPage.seo.title} description={landingPage.seo.description} />
+                <NextSeo title={seo.title} description={seo.description} />
                 <div
                     className={clsx(
                         'container mx-auto flex flex-col items-center',
