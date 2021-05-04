@@ -1,40 +1,42 @@
 {
-  "root": true,
-  "project": {
-    "name": "Next.js TS, Sanity, Vercel, Extras Starter",
-    "basePath": "/studio"
-  },
-  "api": {
-    "projectId": "PULLED_FROM_ENV",
-    "dataset": "PULLED_FROM_ENV"
-  },
-  "plugins": [
-    "@sanity/base",
-    "@sanity/components",
-    "@sanity/default-layout",
-    "@sanity/default-login",
-    "@sanity/desk-tool",
-    "intl-input"
-  ],
-  "env": {
-    "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
-    }
-  },
-  "parts": [
-    {
-      "name": "part:@sanity/base/schema",
-      "path": "./schemas/schema"
+    "root": true,
+    "project": {
+        "name": "Next.js TS, Sanity, Vercel, Extras Starter",
+        "basePath": "/studio"
     },
-    {
-      "name": "part:@sanity/desk-tool/structure",
-      "path": "./deskStructure.js"
+    "api": {
+        "projectId": "PULLED_FROM_ENV",
+        "dataset": "PULLED_FROM_ENV"
     },
-    {
-      "implements": "part:@sanity/base/theme/variables/override-style",
-      "path": "./styles/variables.css"
-    }
-  ]
+    "plugins": [
+        "@sanity/base",
+        "@sanity/components",
+        "@sanity/default-layout",
+        "@sanity/default-login",
+        "@sanity/desk-tool",
+        "intl-input"
+    ],
+    "env": {
+        "development": {
+            "plugins": ["@sanity/vision"]
+        }
+    },
+    "parts": [
+        {
+            "name": "part:@sanity/base/schema",
+            "path": "./schemas/schema"
+        },
+        {
+            "name": "part:@sanity/desk-tool/structure",
+            "path": "./deskStructure.js"
+        },
+        {
+            "implements": "part:@sanity/base/theme/variables/override-style",
+            "path": "./styles/variables.css"
+        },
+        {
+            "implements": "part:@sanity/base/document-actions/resolver",
+            "path": "resolveDocumentActions.js"
+        }
+    ]
 }

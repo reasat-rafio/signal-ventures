@@ -16,7 +16,6 @@ export default {
     ],
     preview: {
         select: {
-            title: `asda`,
             media: 'IoNavigate',
         },
         prepare(selection) {
