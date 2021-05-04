@@ -35,6 +35,12 @@ export const query = groq`{
         ...,
         "logo": ${withDimensions('logo')}
     },
+    "articles": *[_type == "articles"  && __i18n_lang == $locale && !(_id in path('drafts.**'))][0] {
+        placeholderMessage,
+        "placeholderImage": ${withDimensions('placeholderImage')},
+        "authorIcon": ${withDimensions('authorIcon')},
+        "publisedAtIcon": ${withDimensions('publisedAtIcon')},
+    },
     "modal": *[_type == "modal"  && __i18n_lang == $locale && !(_id in path('drafts.**'))] {
         ...,
         "successImg": ${withDimensions('successImg')},

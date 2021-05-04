@@ -73,6 +73,17 @@ export default () =>
             }),
 
             S.divider(),
+            ...groupItems({
+                schemaType: 'articles',
+            }),
+            ...groupItems({
+                schemaType: 'contact',
+            }),
+            ...groupItems({
+                schemaType: 'portfolio',
+            }),
+
+            S.divider(),
             ...Structure.getFilteredDocumentTypeListItems()
                 .filter(
                     (item) =>
@@ -82,7 +93,13 @@ export default () =>
                             'site.logos',
                             'site.languageSwitcher',
                             'landingPage',
-                        ].includes(item.getId()) && !item.getId().includes('site' || 'Page'),
+                            'articles',
+                            'contact',
+                            'portfolio',
+                        ].includes(item.getId()) &&
+                        !item
+                            .getId()
+                            .includes('site' || 'Page' || 'articles' || 'contact' || 'portfolio'),
                 )
                 .reverse(),
         ])

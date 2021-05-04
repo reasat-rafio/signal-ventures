@@ -13,6 +13,7 @@ export const Window_: React.FC<WindowProps> = ({
     portfolioItems,
     contact,
     navs,
+    articlesPlaceholder,
 }) => {
     const {
         state: { focusWindow, activeWindows },
@@ -114,7 +115,11 @@ export const Window_: React.FC<WindowProps> = ({
                 <Contact {...props} contact={contact} />
             )}
             {windowIsNotUndefined && windowKey === 'articles' && (
-                <Articles {...props} blogInfo={blogInfo} />
+                <Articles
+                    {...props}
+                    blogInfo={blogInfo}
+                    articlesPlaceholder={articlesPlaceholder}
+                />
             )}
         </>
     )

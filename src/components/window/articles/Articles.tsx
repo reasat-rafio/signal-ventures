@@ -20,6 +20,7 @@ import clsx from 'clsx'
 
 interface ArticleProps extends IWindowsProps {
     blogInfo: IBloginfo[]
+    articlesPlaceholder: IArticlePlacerholder
 }
 
 export const Articles: React.FC<ArticleProps> = ({
@@ -38,6 +39,7 @@ export const Articles: React.FC<ArticleProps> = ({
     positionY,
     setPositionX,
     setPositionY,
+    articlesPlaceholder,
 }) => {
     const {
         dispatch,
@@ -52,6 +54,8 @@ export const Articles: React.FC<ArticleProps> = ({
             window.open(link, '_blank')
         }
     }
+
+    const { authorIcon, placeholderMessage, publisedAtIcon, placeholderImage } = articlesPlaceholder
 
     return (
         <Draggable
@@ -98,61 +102,76 @@ export const Articles: React.FC<ArticleProps> = ({
                 </strong>
 
                 <ArticleBodyWrapper>
-                    {blogInfo.map(
-                        (
-                            { thumbnail, title, link, pubDate, image, author, content },
-                            index: number,
-                        ) => (
-                            <ArticleBody key={index}>
-                                <ArticleImg
-                                    thumbnail={thumbnail}
-                                    onClick={() => onClickImgAction(link)}
-                                >
-                                    <ArticleAvatar size={60} src={image} />
-                                </ArticleImg>
-
-                                <ArticleContent darkMode={darkMode}>
-                                    <h3 className="md:text-2xl text-xl font-bold my-2">{title}</h3>
-                                    <p
-                                        className={clsx(
-                                            'md:text-lg text-base transition-colors duration-300',
-                                            darkMode ? 'text-gray-200' : 'text-gray-600',
-                                        )}
+                    {blogInfo?.length > 0 ? (
+                        blogInfo.map(
+                            (
+                                { thumbnail, title, link, pubDate, image, author, content },
+                                index: number,
+                            ) => (
+                                <ArticleBody key={index}>
+                                    <ArticleImg
+                                        thumbnail={thumbnail}
+                                        onClick={() => onClickImgAction(link)}
                                     >
-                                        {content}{' '}
-                                        <a
-                                            className="text-blue-500 md:text-lg text-base"
-                                            href={link}
-                                            target="_blank"
+                                        <ArticleAvatar size={60} src={image} />
+                                    </ArticleImg>
+
+                                    <ArticleContent darkMode={darkMode}>
+                                        <h3 className="md:text-2xl text-xl font-bold my-2">
+                                            {title}
+                                        </h3>
+                                        <p
+                                            className={clsx(
+                                                'md:text-lg text-base transition-colors duration-300',
+                                                darkMode ? 'text-gray-200' : 'text-gray-600',
+                                            )}
                                         >
-                                            [Read more...]
-                                        </a>
-                                    </p>
-                                    <div className="flex gap-2 mt-3">
-                                        <Image
-                                            src="/img/static/person.png"
-                                            layout="intrinsic"
-                                            height="20"
-                                            width="20"
-                                            alt="date icon"
-                                        />
-                                        <p className="text-sm md:text-base">{author}</p>
-                                    </div>
-                                    <div className="flex gap-2 mb-3">
-                                        <Image
-                                            src="/img/static/date.png"
-                                            layout="intrinsic"
-                                            height="20"
-                                            width="20"
-                                            alt="date icon"
-                                        />
-                                        <p className="text-sm md:text-base">
-                                            {moment(pubDate).format('ll')}
+                                            {content}{' '}
+                                            <a
+                                                className="text-blue-500 md:text-lg text-base"
+                                                href={link}
+                                                target="_blank"
+                                            >
+                                                [Read more...]
+                                            </a>
                                         </p>
-                                    </div>
-                                </ArticleContent>
-                            </ArticleBody>
-                        ),
+                                        <div className="flex gap-2 mt-3">
+                                            <SanityImg
+                                                builder={imageUrlBuilder}
+                                                image={authorIcon}
+                                                alt="Author Icon"
+                                                width={20}
+                                            />
+                                            <p className="text-sm md:text-base">{author}</p>
+                                        </div>
+                                        <div className="flex gap-2 mb-3">
+                                            <SanityImg
+                                                builder={imageUrlBuilder}
+                                                image={publisedAtIcon}
+                                                alt="Published at Icon"
+                                                width={20}
+                                            />
+                                            <p className="text-sm md:text-base">
+                                                {moment(pubDate).format('ll')}
+                                            </p>
+                                        </div>
+                                    </ArticleContent>
+                                </ArticleBody>
+                            ),
+                        )
+                    ) : (
+                        // WHEN THERE IS NO ARTICLES IN CLIENTS MEDIUM
+                        <div className="h-full flex flex-col justify-center items-center gap-5 transform -translate-y-7 w-full">
+                            <SanityImg
+                                builder={imageUrlBuilder}
+                                image={placeholderImage}
+                                alt="Ghost image"
+                                width={isExpanded ? 380 : 200}
+                            />
+                            <p className={clsx(' text-center', isExpanded ? 'text-xl' : 'text-lg')}>
+                                {placeholderMessage}
+                            </p>
+                        </div>
                     )}
                 </ArticleBodyWrapper>
             </ArticelWindowWrapper>

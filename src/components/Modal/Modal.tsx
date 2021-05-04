@@ -15,7 +15,6 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({ modal }) => {
     const { errorImg, errorMessage, successImg, successMessage, closeButton } = modal[0]
-    console.log(closeButton)
 
     const {
         dispatch,

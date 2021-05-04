@@ -48,7 +48,7 @@ interface HomeProps {
         href?: string
     }
 }
-
+//
 interface WindowProps {
     index: string
     width: number
@@ -57,6 +57,7 @@ interface WindowProps {
     portfolioItems: IPorfolioItems[]
     contact: Icontact[]
     navs: Inavs[]
+    articlesPlaceholder: IArticlePlacerholder
 }
 
 interface NavbarProps {
@@ -132,6 +133,13 @@ interface IPorfolioItems {
     href: string
     logo: Logo
     title: string
+}
+
+interface IArticlePlacerholder {
+    authorIcon: Icon
+    placeholderMessage: string
+    publisedAtIcon: Icon
+    placeholderImage: Icon
 }
 
 interface Logo {

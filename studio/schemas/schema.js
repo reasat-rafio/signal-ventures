@@ -18,8 +18,11 @@ import seo from './seo'
 //portfolio
 import portfolioItem from './portfolioItem'
 
-//contact
+//contact window
 import contact from './contact'
+
+// articles window
+import articles from './articles'
 
 //types = object
 import ctaButton from './ctaButton'
@@ -46,5 +49,6 @@ export default createSchema({
         contact,
         languageSwitcher,
         modal,
+        articles,
     ]),
 })
