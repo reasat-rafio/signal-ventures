@@ -11,6 +11,10 @@ export default {
             name: 'menu',
             title: 'Nav',
             type: 'array',
+            options: {
+                limit: 6,
+                typeLimits: 1,
+            },
             of: [{ type: 'navItems' }],
         },
     ],

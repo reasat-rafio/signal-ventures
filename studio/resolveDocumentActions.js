@@ -1,4 +1,7 @@
-import defaultResolve, { PublishAction, UnpublishAction } from 'part:@sanity/base/document-actions'
+import defaultResolve, {
+    PublishAction,
+    DiscardChangesAction,
+} from 'part:@sanity/base/document-actions'
 
 export default function resolveDocumentActions(props) {
     // if (['site.nav'].includes(props.type)) {
@@ -6,5 +9,5 @@ export default function resolveDocumentActions(props) {
     // } else {
     //     return defaultResolve(props)
     // }
-    return [UnpublishAction, PublishAction]
+    return [PublishAction, DiscardChangesAction]
 }
