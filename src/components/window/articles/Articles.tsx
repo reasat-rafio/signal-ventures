@@ -79,6 +79,7 @@ export const Articles: React.FC<ArticleProps> = ({
                     <Header active={windowIsFocused ? true : false}>
                         <div className="flex gap-2">
                             <SanityImg
+                                width={20}
                                 className="py-1"
                                 builder={imageUrlBuilder}
                                 image={windowIcon}

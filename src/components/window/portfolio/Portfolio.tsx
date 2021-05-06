@@ -64,6 +64,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                 <strong className="cursor-move">
                     <Header active={windowIsFocused ? true : false}>
                         <SanityImg
+                            width={20}
                             className="py-1"
                             builder={imageUrlBuilder}
                             image={windowIcon}
@@ -94,6 +95,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                     key={_id}
                                     className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center  gap-1"
                                     href={href}
+                                    target="_blank"
                                 >
                                     <SanityImg
                                         builder={imageUrlBuilder}

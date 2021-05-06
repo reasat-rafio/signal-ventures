@@ -90,19 +90,6 @@ export const Contact: React.FC<ContactProps> = ({
         }
     }
 
-    // this will set the loading to true || false when the form is submitting
-    // useEffect(() => {
-    //     if (submitting) {
-    // dispatch({
-    //     type: LOADING_START,
-    // })
-    //     } else {
-    // dispatch({
-    //     type: LOADING_END,
-    // })
-    //     }
-    // }, [submitting])
-
     return (
         <Draggable
             handle={isExpanded ? 'legend' : 'strong'} // couldnt find any solution to disable the dragging so using legend for handle when the window is expanded. (legend doesn't exist here)
@@ -128,6 +115,7 @@ export const Contact: React.FC<ContactProps> = ({
                             className="py-1"
                             builder={imageUrlBuilder}
                             image={windowIcon}
+                            width={20}
                             alt={windowName + 'logo'}
                         />
                         <p>{windowName}</p>

@@ -14,6 +14,12 @@ export default {
             title: 'Logo',
             type: 'image',
         },
+        {
+            name: 'order',
+            title: 'Order',
+            type: 'number',
+            hidden: true,
+        },
     ],
     preview: {
         select: {
