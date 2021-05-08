@@ -33,6 +33,7 @@ export const WindowHeaderButtons: React.FC<WindowHeaderButtonsProps> = ({
     const { dispatch } = useCtx()
 
     const minmaxAction = () => {
+        console.log('asd')
         if (isExpanded) {
             setPositionX(0)
             setPositionY(0)
@@ -52,18 +53,23 @@ export const WindowHeaderButtons: React.FC<WindowHeaderButtonsProps> = ({
             <Button
                 size="sm"
                 onClick={() => {
+                    console.log('asd')
                     dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
                 }}
             >
                 <FaRegWindowMinimize />
             </Button>
+            <div className="hidden lg:block">
+                <Button size="sm" onClick={minmaxAction}>
+                    <FaRegWindowMaximize />
+                </Button>
+            </div>
 
-            <Button size="sm" onClick={minmaxAction}>
-                <FaRegWindowMaximize />
-            </Button>
             <Button
                 size="sm"
                 onClick={() => {
+                    console.log('asd')
+
                     dispatch({ type: CLOSE_WINDOW_BOX, payload: index })
                 }}
             >

@@ -111,4 +111,3 @@ export const reducer = (state: InitalState, action: Action) => {
             return state
     }
 }
-// 1/2/3/6/7/8/9
