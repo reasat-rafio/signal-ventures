@@ -48,7 +48,7 @@ export const WindowHeaderButtons: React.FC<WindowHeaderButtonsProps> = ({
     }
 
     return (
-        <div className="flex justify-end flex-1">
+        <div className="flex justify-end flex-1 z-20">
             <Button
                 size="sm"
                 onClick={() => {
