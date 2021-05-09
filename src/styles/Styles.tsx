@@ -137,6 +137,7 @@ export const ArticleAvatar = styled(Avatar)`
 `
 
 // PORTFOLIO WINDOW STYLINGS
+
 export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
     ${commonWindowStylings}
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
@@ -148,6 +149,7 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
+
 export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
     padding: 0 4px;
     margin: auto;

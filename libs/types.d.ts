@@ -92,20 +92,16 @@ type DraggableData = {
 interface IWindowWrapper {
     isExpanded: boolean
     windowIsFocused: boolean
-    windowKey: string
     darkMode: boolean
 }
 
 interface IWindowsProps {
-    windowKey: string
     windowIsFocused: boolean
     isExpanded: boolean
     index: string
     windowName: string
     windowIcon: Logo | undefined
     setIsExpanded: Dispatch<SetStateAction<boolean>>
-    draggable: (e, data: DraggableData) => void
-    mdScreenBreakpoint: boolean
     xaxis: number
     yaxis: number
     positionX: number

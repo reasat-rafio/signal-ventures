@@ -1,9 +1,17 @@
+import clsx from 'clsx'
 import React, { useEffect, useRef, useState } from 'react'
+import Draggable from 'react-draggable'
 import { useToText } from '../../../libs/hooks'
 import { useCtx } from '../../../store'
 import { Articles } from './articles/Articles'
 import { Contact } from './contact/Contact'
 import { Portfolio } from './portfolio/Portfolio'
+import {
+    ArticelWindowWrapper,
+    ContactWindowsWrapper,
+    PorfolioWindowWrapper,
+} from '../../styles/Styles'
+import { FOCUS_WINDOW_BOX } from '../../../store/types'
 
 export const Window_: React.FC<WindowProps> = ({
     index,
@@ -16,6 +24,7 @@ export const Window_: React.FC<WindowProps> = ({
     articlesPlaceholder,
 }) => {
     const {
+        dispatch,
         state: { focusWindow, activeWindows },
     } = useCtx()
     // State to find out this window is expanded or not
@@ -89,15 +98,12 @@ export const Window_: React.FC<WindowProps> = ({
     }
 
     const props = {
-        windowKey,
         windowIsFocused,
         isExpanded,
         index,
         windowName,
         windowIcon,
         setIsExpanded,
-        draggable,
-        mdScreenBreakpoint,
         xaxis,
         yaxis,
         positionX,
@@ -106,20 +112,73 @@ export const Window_: React.FC<WindowProps> = ({
         setPositionY,
     }
 
+    const draggableProps = {
+        handle: 'strong',
+        onDrag: draggable,
+        onStart: draggable,
+        onStop: draggable,
+        bounds: 'body',
+        position: {
+            x: mdScreenBreakpoint ? 0 : isExpanded ? positionX : xaxis,
+            y: mdScreenBreakpoint ? 0 : isExpanded ? positionY : yaxis,
+        },
+    }
+
+    const portfolioRef = useRef<HTMLDivElement | null>(null)
+    const contactRef = useRef<HTMLDivElement | null>(null)
+    const articlesRef = useRef<HTMLDivElement | null>(null)
+
     return (
         <>
             {windowIsNotUndefined && windowKey === 'portfolio' && (
-                <Portfolio {...props} portfolioItems={portfolioItems} />
+                <Draggable {...draggableProps} disabled={mdScreenBreakpoint ? true : false}>
+                    <PorfolioWindowWrapper
+                        ref={portfolioRef}
+                        windowKey={windowKey}
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        onClick={(e) => {
+                            dispatch({ type: FOCUS_WINDOW_BOX, payload: index })
+                        }}
+                    >
+                        <Portfolio
+                            {...props}
+                            portfolioItems={portfolioItems}
+                            portfolioRef={portfolioRef}
+                        />
+                    </PorfolioWindowWrapper>
+                </Draggable>
             )}
+
             {windowIsNotUndefined && windowKey === 'contact' && (
-                <Contact {...props} contact={contact} />
+                <Draggable {...draggableProps} disabled={mdScreenBreakpoint ? true : false}>
+                    <ContactWindowsWrapper
+                        ref={contactRef}
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
+                    >
+                        <Contact {...props} contact={contact} contactRef={contactRef} />
+                    </ContactWindowsWrapper>
+                </Draggable>
             )}
+            {/*  */}
             {windowIsNotUndefined && windowKey === 'articles' && (
-                <Articles
-                    {...props}
-                    blogInfo={blogInfo}
-                    articlesPlaceholder={articlesPlaceholder}
-                />
+                <Draggable {...draggableProps} disabled={mdScreenBreakpoint ? true : false}>
+                    <ArticelWindowWrapper
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        ref={articlesRef}
+                        onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
+                    >
+                        <Articles
+                            {...props}
+                            blogInfo={blogInfo}
+                            articlesPlaceholder={articlesPlaceholder}
+                            articlesRef={articlesRef}
+                        />
+                    </ArticelWindowWrapper>
+                </Draggable>
             )}
         </>
     )
