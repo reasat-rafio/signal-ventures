@@ -65,11 +65,11 @@ export const Portfolio: React.FC<PortfolioProps> = ({
 
             <PortfolioContentWrapper isExpanded={isExpanded}>
                 <PortfolioBody darkMode={darkMode}>
-                    <div className="grid grid-cols-20 justify-center items-center h-full  gap-6  ">
+                    <div className="grid grid-cols-20 justify-evenly items-center  gap-6 py-7">
                         {portfolioItems.map(({ _id, href, logo, title }) => (
                             <a
                                 key={_id}
-                                className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center  gap-1  m-auto"
+                                className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center  gap-1  m-auto "
                                 href={href}
                                 target="_blank"
                             >
