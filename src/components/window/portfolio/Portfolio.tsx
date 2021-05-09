@@ -62,40 +62,38 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                 </Header>
             </strong>
 
-            <PortfolioContentWrapper isExpanded={isExpanded}>
-                <PortfolioBody darkMode={darkMode}>
-                    <div
-                        className={clsx(
-                            'grid grid-cols-20 justify-center items-center  gap-6 pt-4  overflow-hidden w-screen',
-                            isExpanded ? 'pb-6 h-full' : 'pb-11',
-                        )}
-                    >
-                        {portfolioItems.map(({ _id, href, logo, title }) => (
-                            <a
-                                key={_id}
-                                className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center  gap-1  m-auto mx-2"
-                                href={href}
-                                target="_blank"
+            <PortfolioBody darkMode={darkMode} isExpanded={isExpanded}>
+                <div
+                    className={clsx(
+                        ' grid grid-cols-20 justify-evenly items-center w-full  lg: pt-4 mx-auto ',
+                        isExpanded ? 'pb-6 h-full ' : 'pb-11 gap-5',
+                    )}
+                >
+                    {portfolioItems.map(({ _id, href, logo, title }) => (
+                        <a
+                            key={_id}
+                            className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
+                            href={href}
+                            target="_blank"
+                        >
+                            <SanityImg
+                                builder={imageUrlBuilder}
+                                image={logo}
+                                alt={'signal ventures logo'}
+                                width={45}
+                            />
+                            <p
+                                className={clsx(
+                                    'text-base text-center',
+                                    darkMode ? 'text-gray-200' : 'text-gray-600',
+                                )}
                             >
-                                <SanityImg
-                                    builder={imageUrlBuilder}
-                                    image={logo}
-                                    alt={'signal ventures logo'}
-                                    width={45}
-                                />
-                                <p
-                                    className={clsx(
-                                        'text-base text-center',
-                                        darkMode ? 'text-gray-200' : 'text-gray-600',
-                                    )}
-                                >
-                                    {title}
-                                </p>
-                            </a>
-                        ))}
-                    </div>
-                </PortfolioBody>
-            </PortfolioContentWrapper>
+                                {title}
+                            </p>
+                        </a>
+                    ))}
+                </div>
+            </PortfolioBody>
         </>
     )
 }

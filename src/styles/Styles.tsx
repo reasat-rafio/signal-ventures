@@ -152,16 +152,18 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
 
 export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
     padding: 0 4px;
-    margin: auto;
-    position: absolute;
-    height: 90%;
-    width: 99%;
+    position: relative;
 `
 
-export const PortfolioBody = styled(TabBody)<{ darkMode: boolean }>`
-    margin: 0.5rem 0;
+export const PortfolioBody = styled(TabBody)<{ darkMode: boolean; isExpanded: boolean }>`
+    position: absulate;
+    margin: 0.5rem;
     background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
-    overflow: auto;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: ${({ isExpanded }) => (isExpanded ? '100vh' : '100%')};
 `
 
 // CONTACT WINDOW STYLINGS
@@ -200,7 +202,6 @@ export const ContactTextField = styled(TextField)<{ darkMode: boolean; error: bo
 export const ModalWrapper = styled(Window)`
     max-width: 500px;
     min-width: 360px;
-
     min-height: 120px;
 `
 export const ModalHeader = styled(WindowHeader)<{ darkMode: boolean }>`

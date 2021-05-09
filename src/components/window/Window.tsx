@@ -131,7 +131,10 @@ export const Window_: React.FC<WindowProps> = ({
     return (
         <>
             {windowIsNotUndefined && windowKey === 'portfolio' && (
-                <Draggable {...draggableProps} disabled={mdScreenBreakpoint ? true : false}>
+                <Draggable
+                    {...draggableProps}
+                    disabled={mdScreenBreakpoint || isExpanded ? true : false}
+                >
                     <PorfolioWindowWrapper
                         ref={portfolioRef}
                         windowKey={windowKey}
