@@ -3,7 +3,6 @@ import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { imageUrlBuilder } from '../../../../utils/sanity'
 import { Header, PortfolioBody, PortfolioContentWrapper } from '../../../styles/Styles'
-
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 import clsx from 'clsx'
 
@@ -65,7 +64,12 @@ export const Portfolio: React.FC<PortfolioProps> = ({
 
             <PortfolioContentWrapper isExpanded={isExpanded}>
                 <PortfolioBody darkMode={darkMode}>
-                    <div className="grid grid-cols-20 justify-evenly items-center  gap-6 py-7">
+                    <div
+                        className={clsx(
+                            'grid grid-cols-20 justify-center items-center  gap-6 pt-4 pb-9',
+                            isExpanded && 'h-full',
+                        )}
+                    >
                         {portfolioItems.map(({ _id, href, logo, title }) => (
                             <a
                                 key={_id}

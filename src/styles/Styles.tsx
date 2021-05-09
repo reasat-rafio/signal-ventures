@@ -159,7 +159,6 @@ export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
 `
 
 export const PortfolioBody = styled(TabBody)<{ darkMode: boolean }>`
-    height: 100%;
     margin: 0.5rem 0;
     background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
     overflow: auto;
