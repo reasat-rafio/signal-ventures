@@ -9,6 +9,7 @@ import clsx from 'clsx'
 interface PortfolioProps extends IWindowsProps {
     portfolioItems: IPorfolioItems[]
     portfolioRef: RefObject<Element>
+    mdScreenBreakpoint: boolean
 }
 
 export const Portfolio: React.FC<PortfolioProps> = ({
@@ -26,6 +27,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
     setPositionX,
     setPositionY,
     portfolioRef,
+    mdScreenBreakpoint,
 }) => {
     const {
         state: { darkMode },
@@ -61,39 +63,36 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                     />
                 </Header>
             </strong>
-            <PortfolioContentWrapper isExpanded={isExpanded}>
-                <PortfolioBody darkMode={darkMode} isExpanded={isExpanded}>
-                    <div
-                        className={clsx(
-                            ' grid grid-cols-20 justify-evenly items-center w-full mx-auto gap-5 h-full',
-                            isExpanded ? 'pb-16' : 'pb-6',
-                        )}
-                    >
-                        {portfolioItems.map(({ _id, href, logo, title }) => (
-                            <a
-                                key={_id}
-                                className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
-                                href={href}
-                                target="_blank"
+            <PortfolioContentWrapper
+                isExpanded={isExpanded}
+                mdScreenBreakpoint={mdScreenBreakpoint}
+                darkMode={darkMode}
+            >
+                <div className="grid grid-cols-20 justify-center items-center h-full  gap-6  ">
+                    {portfolioItems.map(({ _id, href, logo, title }) => (
+                        <a
+                            key={_id}
+                            className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
+                            href={href}
+                            target="_blank"
+                        >
+                            <SanityImg
+                                builder={imageUrlBuilder}
+                                image={logo}
+                                alt={'signal ventures logo'}
+                                width={45}
+                            />
+                            <p
+                                className={clsx(
+                                    'text-base text-center',
+                                    darkMode ? 'text-gray-200' : 'text-gray-600',
+                                )}
                             >
-                                <SanityImg
-                                    builder={imageUrlBuilder}
-                                    image={logo}
-                                    alt={'signal ventures logo'}
-                                    width={45}
-                                />
-                                <p
-                                    className={clsx(
-                                        'text-base text-center',
-                                        darkMode ? 'text-gray-200' : 'text-gray-600',
-                                    )}
-                                >
-                                    {title}
-                                </p>
-                            </a>
-                        ))}
-                    </div>
-                </PortfolioBody>
+                                {title}
+                            </p>
+                        </a>
+                    ))}
+                </div>
             </PortfolioContentWrapper>
         </>
     )

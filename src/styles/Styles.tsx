@@ -139,33 +139,29 @@ export const ArticleAvatar = styled(Avatar)`
 // PORTFOLIO WINDOW STYLINGS
 
 export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
-    position: absolute;
-    width: 100vw;
-    min-height: 100vh;
+    ${commonWindowStylings}
     z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
-    overflow: hidden;
     ${respondTo.md`
-    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '500px')};
+    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '510px')};
     left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '15%')};
     top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '7%')};
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
- 
   `}
 `
-
-export const PortfolioContentWrapper = styled.div<{ isExpanded: boolean }>`
-    height: ${({ isExpanded }) => (isExpanded ? '100vh' : '500px')};
-    overflow: hidden;
-`
-
-export const PortfolioBody = styled(TabBody)<{ darkMode: boolean; isExpanded: boolean }>`
+export const PortfolioContentWrapper = styled(TabBody)<{
+    isExpanded: boolean
+    mdScreenBreakpoint: boolean
+    darkMode: boolean
+}>`
+    margin: auto;
+    position: absolute;
+    height: ${({ mdScreenBreakpoint }) => (mdScreenBreakpoint ? '88%' : '90%')};
+    width: 99%;
+    overflow: auto;
     background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absulate;
 `
+
+export const PortfolioBody = styled.div<{ darkMode: boolean }>``
 
 // CONTACT WINDOW STYLINGS
 export const ContactWindowsWrapper = styled(Window)<IWindowWrapper>`

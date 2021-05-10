@@ -119,8 +119,8 @@ export const Window_: React.FC<WindowProps> = ({
         onStop: draggable,
         bounds: 'body',
         position: {
-            x: mdScreenBreakpoint ? 0 : isExpanded ? positionX : xaxis,
-            y: mdScreenBreakpoint ? 0 : isExpanded ? positionY : yaxis,
+            x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
+            y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
         },
     }
 
@@ -148,6 +148,7 @@ export const Window_: React.FC<WindowProps> = ({
                             {...props}
                             portfolioItems={portfolioItems}
                             portfolioRef={portfolioRef}
+                            mdScreenBreakpoint={mdScreenBreakpoint}
                         />
                     </PorfolioWindowWrapper>
                 </Draggable>
