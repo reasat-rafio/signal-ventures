@@ -5,7 +5,7 @@ import defaultResolve, {
 
 export default function resolveDocumentActions(props) {
     if (['site.nav'].includes(props.type)) {
-        return [UnpublishAction, PublishAction]
+        return [PublishAction, DiscardChangesAction]
     } else {
         return defaultResolve(props)
     }
