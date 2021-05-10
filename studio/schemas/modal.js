@@ -2,7 +2,7 @@ import { BiWindowOpen } from 'react-icons/bi'
 
 export default {
     name: 'modal',
-    title: 'Modal',
+    title: 'Contact Submission Modal',
     type: 'document',
     icon: BiWindowOpen,
     i18n: true,

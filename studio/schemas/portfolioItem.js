@@ -5,10 +5,6 @@ export default {
     title: 'Portfolio',
     type: 'document',
     icon: GiBookshelf,
-    i18n: {
-        base: 'en-SG',
-        languages: ['en-SG', 'zh-SG'],
-    },
 
     fields: [
         { name: 'title', title: 'Title', type: 'string' },
