@@ -26,9 +26,9 @@
         "@sanity/form-builder": "^2.10.2",
         "@sanity/vision": "^2.10.0",
         "prop-types": "^15.7",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-icons": "^4.2.0",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-icons": "^4.1.0",
         "sanity-plugin-intl-input": "^5.1.0",
         "sanity-plugin-order-documents": "0.0.17"
     }
