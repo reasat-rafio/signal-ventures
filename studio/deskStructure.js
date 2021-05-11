@@ -82,7 +82,9 @@ export default () =>
             ...groupItems({
                 schemaType: 'contact',
             }),
-            S.documentTypeListItem('portfolio').title('portfolio'),
+            ...groupItems({
+                schemaType: 'portfolio',
+            }),
 
             S.divider(),
             ...Structure.getFilteredDocumentTypeListItems()
