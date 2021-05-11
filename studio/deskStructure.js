@@ -26,10 +26,14 @@ function SitePreview({ document, options }) {
 
 // // or manual implementation to use with your own custom desk structure
 export const getDefaultDocumentNode = (props) => {
-    return S.document().views([
-        ...Structure.getDocumentNodeViewsForSchemaType(props.schemaType),
-        S.view.component(SitePreview).icon(GrView).options({ slug: '' }).title('Preview'),
-    ])
+    if (props.schemaType === 'portfolio') {
+        return S.document().views(S.view.form())
+    } else {
+        return S.document().views([
+            ...Structure.getDocumentNodeViewsForSchemaType(props.schemaType),
+            S.view.component(SitePreview).icon(GrView).options({ slug: '' }).title('Preview'),
+        ])
+    }
 }
 
 const groupItems = ({ schemaType }) => {
