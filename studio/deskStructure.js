@@ -25,6 +25,7 @@ function SitePreview({ document, options }) {
 // export default Structure.default
 
 // // or manual implementation to use with your own custom desk structure
+
 export const getDefaultDocumentNode = (props) => {
     if (props.schemaType === 'portfolio') {
         return S.document().views(S.view.form())

@@ -31,7 +31,7 @@ export const query = groq`{
       ...,
       "logo": ${withDimensions('logo')}
     },
-    "portfolio": *[_type == "portfolio" && __i18n_lang != 'zh-SG'  && !(_id in path('drafts.**'))]  | order(order asc) {
+    "portfolio": *[_type == "portfolio"  && !(_id in path('drafts.**'))]  | order(order asc) {
         ...,
         "logo": ${withDimensions('logo')}
     },
