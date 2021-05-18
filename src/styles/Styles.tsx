@@ -209,3 +209,15 @@ export const ModalContent = styled(WindowContent)``
 export const ModalButton = styled(Button)`
     padding: 5px 20px;
 `
+
+//
+export const SubPorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
+    ${commonWindowStylings}
+    z-index: ${({ windowIsFocused }: IWindowWrapper) => (windowIsFocused ? '40' : '30')};
+    ${respondTo.md`
+    min-height: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vh' : '470px')};
+    left: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '15%')};
+    top: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '0px' : '9%')};
+    width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '500px')};
+  `}
+`

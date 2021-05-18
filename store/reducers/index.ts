@@ -1,4 +1,11 @@
-import { HIDE_MODAL, LOADING_END, LOADING_START, SET_MODE, SHOW_MODAL } from './../types'
+import {
+    HIDE_MODAL,
+    LOADING_END,
+    LOADING_START,
+    SET_MODE,
+    SHOW_MODAL,
+    SUB_PORTFOLIO_DATA,
+} from './../types'
 import {
     CREATE_WINDOW_BOX,
     MINIMIZE_WINDOW_BOX,
@@ -10,6 +17,7 @@ import {
 export const initialState: InitalState = {
     openWindows: [],
     activeWindows: [],
+    subPortfolio: {},
     focusWindow: null,
     darkMode: true,
     loading: false,
@@ -55,10 +63,19 @@ export const reducer = (state: InitalState, action: Action) => {
             openWindows = openWindows.filter(
                 (window: WindowsProps) => window.key !== action.payload,
             )
-            return {
-                ...state,
-                openWindows,
-                activeWindows,
+            if (action.payload == 'sub') {
+                return {
+                    ...state,
+                    openWindows,
+                    activeWindows,
+                    subPortfolio: {},
+                }
+            } else {
+                return {
+                    ...state,
+                    openWindows,
+                    activeWindows,
+                }
             }
         }
 
@@ -105,6 +122,12 @@ export const reducer = (state: InitalState, action: Action) => {
                 ...state,
                 showModal: false,
                 modalData: {},
+            }
+
+        case SUB_PORTFOLIO_DATA:
+            return {
+                ...state,
+                subPortfolio: action.payload,
             }
 
         default:

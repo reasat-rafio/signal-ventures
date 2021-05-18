@@ -14,6 +14,13 @@ export default {
             title: 'Logo',
             type: 'image',
         },
+        { name: 'projectTitle', title: 'Project Title', type: 'string' },
+        {
+            name: 'projectDescription',
+            title: 'Project Description',
+            type: 'array',
+            of: [{ type: 'block' }],
+        },
         {
             name: 'order',
             title: 'Order',

@@ -10,8 +10,10 @@ import {
     ArticelWindowWrapper,
     ContactWindowsWrapper,
     PorfolioWindowWrapper,
+    SubPorfolioWindowWrapper,
 } from '../../styles/Styles'
 import { FOCUS_WINDOW_BOX } from '../../../store/types'
+import { SubPortfolio } from './sub_portfolio/SubPortfolio'
 
 export const Window_: React.FC<WindowProps> = ({
     index,
@@ -47,13 +49,17 @@ export const Window_: React.FC<WindowProps> = ({
 
     // THIS windows name icon and key
     const [windowName, setWindowName] = useState<string>('')
-    const [windowIcon, setWindowIcon] = useState<Logo | undefined>()
+    const [windowIcon, setWindowIcon] = useState<Logo | undefined | any>()
     const [windowKey, setWindowKey] = useState<string>('')
 
     const findWindowDetails = (key: string) => {
         // Finding THIS windows info from global store by key and setting them to state
-        const findWinFromStore: WindowsProps[] = activeWindows.filter((i) => i.key == key)
-        const findWin = navs.filter(({ key }) => key == findWinFromStore[0].key)
+        const findWinFromStore: WindowsProps[] = [...activeWindows].filter((i) => i.key == key)
+        console.log(activeWindows, 'activeWindows')
+
+        const findWin = [...navs, { title: 'sub', logo: '', key: 'sub' }].filter(
+            ({ key }) => key == findWinFromStore[0].key,
+        )
         setWindowName(findWin[0].title)
         setWindowIcon(findWin[0].logo)
         setWindowKey(findWin[0].key)
@@ -76,6 +82,9 @@ export const Window_: React.FC<WindowProps> = ({
                 break
             case 'contact':
                 findWindowDetails('contact')
+                break
+            case 'sub':
+                findWindowDetails('sub')
                 break
             default:
                 setWindowName('...')
@@ -127,7 +136,7 @@ export const Window_: React.FC<WindowProps> = ({
     const portfolioRef = useRef<HTMLDivElement | null>(null)
     const contactRef = useRef<HTMLDivElement | null>(null)
     const articlesRef = useRef<HTMLDivElement | null>(null)
-
+    const subPortfolioRef = useRef<HTMLDivElement | null>(null)
     return (
         <>
             {windowIsNotUndefined && windowKey === 'portfolio' && (
@@ -182,6 +191,29 @@ export const Window_: React.FC<WindowProps> = ({
                             articlesRef={articlesRef}
                         />
                     </ArticelWindowWrapper>
+                </Draggable>
+            )}
+            {/*  */}
+            {windowIsNotUndefined && windowKey === 'sub' && (
+                <Draggable
+                    {...draggableProps}
+                    disabled={mdScreenBreakpoint || isExpanded ? true : false}
+                >
+                    <SubPorfolioWindowWrapper
+                        ref={portfolioRef}
+                        windowKey={windowKey}
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        onClick={(e) => {
+                            dispatch({ type: FOCUS_WINDOW_BOX, payload: index })
+                        }}
+                    >
+                        <SubPortfolio
+                            {...props}
+                            subPortfolioRef={subPortfolioRef}
+                            mdScreenBreakpoint={mdScreenBreakpoint}
+                        />
+                    </SubPorfolioWindowWrapper>
                 </Draggable>
             )}
         </>

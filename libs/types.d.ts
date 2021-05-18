@@ -13,6 +13,7 @@ interface ImodalDAta {
 interface InitalState {
     openWindows: WindowsProps[]
     activeWindows: WindowsProps[]
+    subPortfolio: any
     focusWindow: null | string
     darkMode: boolean
     loading: boolean
@@ -32,6 +33,7 @@ type Action = {
         | 'LOADING_END'
         | 'SHOW_MODAL'
         | 'HIDE_MODAL'
+        | 'SUB_PORTFOLIO_DATA'
 
     payload?: any
 }
@@ -119,6 +121,13 @@ interface IBloginfo {
     thumbnail: string
     title: string
 }
+interface ProjectDescription {
+    _key: string
+    _type: string
+    children: Child[]
+    markDefs: any[]
+    style: string
+}
 
 interface IPorfolioItems {
     _createdAt: Date
@@ -129,6 +138,9 @@ interface IPorfolioItems {
     href: string
     logo: Logo
     title: string
+    order: number
+    projectDescription: ProjectDescription[]
+    projectTitle: string
 }
 
 interface IArticlePlacerholder {

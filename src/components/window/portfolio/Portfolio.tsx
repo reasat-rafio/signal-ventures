@@ -5,6 +5,8 @@ import { imageUrlBuilder } from '../../../../utils/sanity'
 import { Header, PortfolioBody, PortfolioContentWrapper } from '../../../styles/Styles'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 import clsx from 'clsx'
+import { CREATE_WINDOW_BOX, SUB_PORTFOLIO_DATA, TOGGLE_DARK_MODE } from '../../../../store/types'
+// import { NavAction } from '../../../../libs/HelperFunc'
 
 interface PortfolioProps extends IWindowsProps {
     portfolioItems: IPorfolioItems[]
@@ -30,9 +32,36 @@ export const Portfolio: React.FC<PortfolioProps> = ({
     mdScreenBreakpoint,
 }) => {
     const {
-        state: { darkMode },
+        state: { darkMode, subPortfolio },
+        dispatch,
     } = useCtx()
 
+    const navAction = (
+        key: string,
+        logo: Logo,
+        title: string,
+        href: string,
+        projectDescription: ProjectDescription[],
+        projectTitle: string,
+    ) => {
+        dispatch({
+            type: CREATE_WINDOW_BOX,
+            payload: {
+                key: key,
+            },
+        }),
+            dispatch({
+                type: SUB_PORTFOLIO_DATA,
+                payload: {
+                    logo,
+                    title,
+                    key: 'sub',
+                    href,
+                    projectDescription,
+                    projectTitle,
+                },
+            })
+    }
     return (
         <>
             <strong className="cursor-move z-20">
@@ -69,29 +98,39 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                 darkMode={darkMode}
             >
                 <div className="grid grid-cols-20 justify-center items-center h-full  gap-6  ">
-                    {portfolioItems.map(({ _id, href, logo, title }) => (
-                        <a
-                            key={_id}
-                            className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
-                            href={href}
-                            target="_blank"
-                        >
-                            <SanityImg
-                                builder={imageUrlBuilder}
-                                image={logo}
-                                alt={'signal ventures logo'}
-                                width={45}
-                            />
-                            <p
-                                className={clsx(
-                                    'text-base text-center',
-                                    darkMode ? 'text-gray-200' : 'text-gray-600',
-                                )}
+                    {portfolioItems.map(
+                        ({ _id, href, logo, title, projectDescription, projectTitle }) => (
+                            <div
+                                key={_id}
+                                className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
+                                onClick={() =>
+                                    navAction(
+                                        'sub',
+                                        logo,
+                                        title,
+                                        href,
+                                        projectDescription,
+                                        projectTitle,
+                                    )
+                                }
                             >
-                                {title}
-                            </p>
-                        </a>
-                    ))}
+                                <SanityImg
+                                    builder={imageUrlBuilder}
+                                    image={logo}
+                                    alt={'signal ventures logo'}
+                                    width={45}
+                                />
+                                <p
+                                    className={clsx(
+                                        'text-base text-center',
+                                        darkMode ? 'text-gray-200' : 'text-gray-600',
+                                    )}
+                                >
+                                    {title}
+                                </p>
+                            </div>
+                        ),
+                    )}
                 </div>
             </PortfolioContentWrapper>
         </>

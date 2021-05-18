@@ -12,7 +12,7 @@ import {
 } from '../../styles/Styles'
 import { SanityImg } from 'sanity-react-extra'
 import { useDate, useOrderNavs } from '../../../libs/hooks'
-import { CREATE_WINDOW_BOX, TOGGLE_DARK_MODE } from '../../../store/types'
+import { CREATE_WINDOW_BOX } from '../../../store/types'
 import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 import { NavAction } from '../../../libs/HelperFunc'
@@ -25,8 +25,10 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
 }) => {
     const {
         dispatch,
-        state: { openWindows, focusWindow, darkMode },
+        state: { openWindows, focusWindow, darkMode, subPortfolio },
     } = useCtx()
+    console.log('focusWindow', focusWindow)
+    console.log('subPortfolio.key', subPortfolio.key)
 
     // State for the windows that is open
     const [_openWindows, setOpenWindows] = useState<Inavs[]>([])
@@ -99,6 +101,27 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                             <p className="ml-1 md:block hidden">{title}</p>
                         </NavTabs>
                     ))}
+                    {subPortfolio.logo && (
+                        <NavTabs
+                            primary
+                            active={subPortfolio.key == focusWindow ? true : false}
+                            key={subPortfolio.key}
+                            onClick={() =>
+                                dispatch({
+                                    type: CREATE_WINDOW_BOX,
+                                    payload: { key: 'sub' },
+                                })
+                            }
+                        >
+                            <SanityImg
+                                builder={imageUrlBuilder}
+                                image={subPortfolio.logo}
+                                alt={subPortfolio.title + 'logo'}
+                                width={20}
+                            />
+                            <p className="ml-1 md:block hidden">{subPortfolio.title}</p>
+                        </NavTabs>
+                    )}
 
                     {/*  DROPDOWN LIST ITEMS */}
                     {open && (

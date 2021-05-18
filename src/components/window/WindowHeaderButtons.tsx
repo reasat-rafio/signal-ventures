@@ -30,7 +30,11 @@ export const WindowHeaderButtons: React.FC<WindowHeaderButtonsProps> = ({
     setPositionX,
     setPositionY,
 }) => {
-    const { dispatch } = useCtx()
+    const {
+        dispatch,
+        state: { activeWindows },
+    } = useCtx()
+    console.log('index', index)
 
     const minmaxAction = () => {
         if (isExpanded) {

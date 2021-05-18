@@ -4,10 +4,12 @@ export const NavAction = (
     title: string,
     logo: Logo,
     key: string,
-    dark_mode: number | undefined,
+    dark_mode: number | undefined | null,
     dispatch: (action: Action) => void,
     href?: string,
 ) => {
+    console.log(key)
+
     if (key != undefined) {
         dispatch({
             type: CREATE_WINDOW_BOX,
