@@ -27,6 +27,11 @@ export default {
             type: 'number',
             hidden: true,
         },
+        {
+            name: 'ctaButton',
+            title: 'CTA Button',
+            type: 'ctaButton',
+        },
     ],
     preview: {
         select: {

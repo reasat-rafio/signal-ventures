@@ -55,7 +55,6 @@ export const Window_: React.FC<WindowProps> = ({
     const findWindowDetails = (key: string) => {
         // Finding THIS windows info from global store by key and setting them to state
         const findWinFromStore: WindowsProps[] = [...activeWindows].filter((i) => i.key == key)
-        console.log(activeWindows, 'activeWindows')
 
         const findWin = [...navs, { title: 'sub', logo: '', key: 'sub' }].filter(
             ({ key }) => key == findWinFromStore[0].key,

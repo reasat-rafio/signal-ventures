@@ -6,7 +6,6 @@ import { Header, PortfolioContentWrapper } from '../../../styles/Styles'
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 import { Button } from 'react95'
 import clsx from 'clsx'
-import { marksSerializer, typesSerializer } from '../../../libs/blockContent'
 
 interface SubPortfolioProps extends IWindowsProps {
     subPortfolioRef: RefObject<Element>
@@ -37,7 +36,7 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
         setWindowIsFocused(true)
     }, [subPortfolio])
 
-    const { logo, title, href, projectDescription, projectTitle } = subPortfolio
+    const { logo, title, href, projectDescription, projectTitle, ctaButton } = subPortfolio
 
     return (
         <>
@@ -74,8 +73,8 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                 mdScreenBreakpoint={mdScreenBreakpoint}
                 darkMode={darkMode}
             >
-                <div className="">
-                    <div>
+                <div className="flex flex-col  h-full">
+                    <div className="flex-1">
                         <h5 className="text-center font-semibold text-xl">{projectTitle}</h5>
                         <div className="break-normal ">
                             <PortableText
@@ -88,15 +87,19 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                         </div>
                     </div>
 
-                    <div className="flex justify-center items-center gap-2">
+                    <div className="flex justify-center items-center gap-5">
                         <a href={href} target="_blank">
                             <Button size="sm" style={{ fontSize: '15px' }}>
                                 GO TO SITE
                             </Button>
                         </a>
-                        <Button size="sm" style={{ fontSize: '15px' }}>
-                            READ MORE
-                        </Button>
+                        {ctaButton && (
+                            <a href={ctaButton.href} target="_blank">
+                                <Button size="sm" style={{ fontSize: '15px' }}>
+                                    {ctaButton.title}
+                                </Button>
+                            </a>
+                        )}
                     </div>
                 </div>
             </PortfolioContentWrapper>

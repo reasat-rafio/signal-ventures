@@ -1,4 +1,4 @@
-import React, { useRef, RefObject } from 'react'
+import React, { useRef, RefObject, Dispatch, SetStateAction } from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { imageUrlBuilder } from '../../../../utils/sanity'
@@ -12,7 +12,7 @@ interface PortfolioProps extends IWindowsProps {
     portfolioItems: IPorfolioItems[]
     portfolioRef: RefObject<Element>
     mdScreenBreakpoint: boolean
-    setWindowIsFocused: any
+    setWindowIsFocused: Dispatch<SetStateAction<boolean>>
 }
 
 export const Portfolio: React.FC<PortfolioProps> = ({
@@ -45,6 +45,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
         href: string,
         projectDescription: ProjectDescription[],
         projectTitle: string,
+        ctaButton: CtaButton,
     ) => {
         dispatch({
             type: CREATE_WINDOW_BOX,
@@ -61,6 +62,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                     href,
                     projectDescription,
                     projectTitle,
+                    ctaButton,
                 },
             })
     }
@@ -101,7 +103,15 @@ export const Portfolio: React.FC<PortfolioProps> = ({
             >
                 <div className="grid grid-cols-20 justify-center items-center h-full  gap-6  ">
                     {portfolioItems.map(
-                        ({ _id, href, logo, title, projectDescription, projectTitle }) => (
+                        ({
+                            _id,
+                            href,
+                            logo,
+                            title,
+                            projectDescription,
+                            projectTitle,
+                            ctaButton,
+                        }) => (
                             <div
                                 key={_id}
                                 className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
@@ -114,6 +124,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                         href,
                                         projectDescription,
                                         projectTitle,
+                                        ctaButton,
                                     )
                                 }}
                             >

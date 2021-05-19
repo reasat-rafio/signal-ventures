@@ -129,6 +129,12 @@ interface ProjectDescription {
     style: string
 }
 
+interface CtaButton {
+    _type: string
+    title: string
+    href?: string
+}
+
 interface IPorfolioItems {
     _createdAt: Date
     _id: string
@@ -141,6 +147,7 @@ interface IPorfolioItems {
     order: number
     projectDescription: ProjectDescription[]
     projectTitle: string
+    ctaButton: CtaButton
 }
 
 interface IArticlePlacerholder {
