@@ -60,6 +60,7 @@ interface WindowProps {
     contact: Icontact[]
     navs: Inavs[]
     articlesPlaceholder: IArticlePlacerholder
+    portfolioActionButton: string
 }
 
 interface NavbarProps {

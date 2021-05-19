@@ -72,6 +72,9 @@ export default () =>
                             ...groupItems({
                                 schemaType: 'seo',
                             }),
+                            ...groupItems({
+                                schemaType: 'more',
+                            }),
                         ]),
                 ),
 
@@ -105,6 +108,7 @@ export default () =>
                             'contact',
                             'portfolio',
                             'seo',
+                            'more',
                         ].includes(item.getId()) &&
                         !item
                             .getId()

@@ -10,6 +10,7 @@ import logos from './site/logos'
 import navs from './site/nav'
 import startButton from './site/startButton'
 import languageSwitcher from './site/languageSwitcher'
+import more from './site/more'
 
 //landing page
 import landingPage from './landingPage'
@@ -50,5 +51,6 @@ export default createSchema({
         languageSwitcher,
         modal,
         articles,
+        more,
     ]),
 })

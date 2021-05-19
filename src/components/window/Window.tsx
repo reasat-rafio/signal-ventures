@@ -24,6 +24,7 @@ export const Window_: React.FC<WindowProps> = ({
     contact,
     navs,
     articlesPlaceholder,
+    portfolioActionButton,
 }) => {
     const {
         dispatch,
@@ -213,6 +214,7 @@ export const Window_: React.FC<WindowProps> = ({
                             subPortfolioRef={subPortfolioRef}
                             mdScreenBreakpoint={mdScreenBreakpoint}
                             setWindowIsFocused={setWindowIsFocused}
+                            portfolioActionButton={portfolioActionButton}
                         />
                     </SubPorfolioWindowWrapper>
                 </Draggable>

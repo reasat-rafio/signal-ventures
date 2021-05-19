@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 
 export default function Index({ blog, sanityData, locale }) {
     const {
-        data: { site, landingPage, portfolio, contact, modal, articles, seo },
+        data: { site, landingPage, portfolio, contact, modal, articles, seo, more },
     } = useSanityQuery(query, sanityData)
 
     const {
@@ -59,6 +59,7 @@ export default function Index({ blog, sanityData, locale }) {
             })
         }
     }, [])
+    console.log(more, 'more')
 
     // This will return current page width
     const siteRef = useRef<HTMLDivElement | null>(null)
@@ -95,6 +96,7 @@ export default function Index({ blog, sanityData, locale }) {
                                 blogFeeds={blog.feed}
                                 navs={site.nav.menu}
                                 articlesPlaceholder={articles}
+                                portfolioActionButton={more.portfolioActionButton}
                             />
                         ))}
                     <DesktopNavs navs={site.nav.menu} />

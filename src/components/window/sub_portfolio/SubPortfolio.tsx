@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect } from 'react'
+import React, { Dispatch, RefObject, SetStateAction, useEffect } from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { imageUrlBuilder, PortableText } from '../../../../utils/sanity'
@@ -10,7 +10,8 @@ import clsx from 'clsx'
 interface SubPortfolioProps extends IWindowsProps {
     subPortfolioRef: RefObject<Element>
     mdScreenBreakpoint: boolean
-    setWindowIsFocused: any
+    setWindowIsFocused: Dispatch<SetStateAction<boolean>>
+    portfolioActionButton: string
 }
 
 export const SubPortfolio: React.FC<SubPortfolioProps> = ({
@@ -27,6 +28,7 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
     subPortfolioRef,
     mdScreenBreakpoint,
     setWindowIsFocused,
+    portfolioActionButton,
 }) => {
     const {
         state: { subPortfolio, darkMode },
@@ -87,12 +89,15 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                         </div>
                     </div>
 
-                    <div className="flex justify-center items-center gap-5">
-                        <a href={href} target="_blank">
-                            <Button size="sm" style={{ fontSize: '15px' }}>
-                                GO TO SITE
-                            </Button>
-                        </a>
+                    <div className="flex justify-center items-center gap-5 mb-14">
+                        {portfolioActionButton && (
+                            <a href={href} target="_blank">
+                                <Button size="sm" style={{ fontSize: '15px' }}>
+                                    {portfolioActionButton}
+                                </Button>
+                            </a>
+                        )}
+
                         {ctaButton && (
                             <a href={ctaButton.href} target="_blank">
                                 <Button size="sm" style={{ fontSize: '15px' }}>

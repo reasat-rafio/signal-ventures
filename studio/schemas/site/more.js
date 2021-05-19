@@ -6,12 +6,13 @@ export default {
     type: 'document',
     icon: MdMoreHoriz,
     i18n: true,
+
     fields: [
-        // {
-        //     name: 'singlePortfolioWindowButton',
-        //     title: '',
-        //     type: 'string',
-        // },
+        {
+            name: 'portfolioActionButton',
+            title: 'Portfolio Action Button',
+            type: 'string',
+        },
     ],
     preview: {
         select: {
