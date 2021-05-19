@@ -155,8 +155,8 @@ export const PortfolioContentWrapper = styled(TabBody)<{
 }>`
     margin: auto;
     position: absolute;
-    height: ${({ mdScreenBreakpoint }) => (mdScreenBreakpoint ? '88%' : '90%')};
-    width: 99%;
+    height: ${({ mdScreenBreakpoint }) => `calc(100% - ${mdScreenBreakpoint ? '78px' : '40px'})`};
+    width: calc(100% - 4px);
     overflow: auto;
     background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
 `
