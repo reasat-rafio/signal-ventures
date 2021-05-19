@@ -148,15 +148,16 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
-export const PortfolioContentWrapper = styled(TabBody)<{
+export const PortfolioContentWrapper = styled(Cutout)<{
     isExpanded: boolean
     mdScreenBreakpoint: boolean
     darkMode: boolean
 }>`
     margin: auto;
     position: absolute;
-    height: ${({ mdScreenBreakpoint }) => (mdScreenBreakpoint ? '88%' : '90%')};
-    width: 99%;
+    /* height: ${({ mdScreenBreakpoint }) => (mdScreenBreakpoint ? '88%' : '90%')}; */
+    height: ${(mdScreenBreakpoint) => `calc(100% - ${mdScreenBreakpoint ? '78px' : '40px'})`};
+    width: calc(100% - 4px);
     overflow: auto;
     background: ${(props) => (props.darkMode ? '#301b3f' : 'white')};
 `
