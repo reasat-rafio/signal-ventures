@@ -75,7 +75,7 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                 mdScreenBreakpoint={mdScreenBreakpoint}
                 darkMode={darkMode}
             >
-                <div className="flex flex-col  h-full">
+                <div className="flex flex-col h-full">
                     <div className="flex-1">
                         <h5 className="text-center font-semibold text-xl">{projectTitle}</h5>
                         <div className="break-normal ">
@@ -89,7 +89,10 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                         </div>
                     </div>
 
-                    <div className="flex justify-center items-center gap-5 mb-14">
+                    <div
+                        className="flex justify-center items-center gap-5 mb-14"
+                        style={{ margin: '0 0 3.5rem 0' }}
+                    >
                         {portfolioActionButton && (
                             <a href={href} target="_blank">
                                 <Button size="sm" style={{ fontSize: '15px' }}>
@@ -99,7 +102,7 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                         )}
 
                         {ctaButton && (
-                            <a href={ctaButton.href} target="_blank">
+                            <a className="" href={ctaButton.href} target="_blank">
                                 <Button size="sm" style={{ fontSize: '15px' }}>
                                     {ctaButton.title}
                                 </Button>
