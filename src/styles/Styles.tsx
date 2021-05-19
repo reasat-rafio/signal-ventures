@@ -148,7 +148,7 @@ export const PorfolioWindowWrapper = styled(Window)<IWindowWrapper>`
     width: ${({ isExpanded }: IWindowWrapper) => (isExpanded ? '100vw' : '700px')};
   `}
 `
-export const PortfolioContentWrapper = styled(TabBody)<{
+export const PortfolioContentWrapper = styled(Cutout)<{
     isExpanded: boolean
     mdScreenBreakpoint: boolean
     darkMode: boolean
