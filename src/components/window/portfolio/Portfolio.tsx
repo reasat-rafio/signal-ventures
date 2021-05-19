@@ -12,6 +12,7 @@ interface PortfolioProps extends IWindowsProps {
     portfolioItems: IPorfolioItems[]
     portfolioRef: RefObject<Element>
     mdScreenBreakpoint: boolean
+    setWindowIsFocused: any
 }
 
 export const Portfolio: React.FC<PortfolioProps> = ({
@@ -30,6 +31,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
     setPositionY,
     portfolioRef,
     mdScreenBreakpoint,
+    setWindowIsFocused,
 }) => {
     const {
         state: { darkMode, subPortfolio },
@@ -103,7 +105,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                             <div
                                 key={_id}
                                 className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
-                                onClick={() =>
+                                onClick={() => {
+                                    setWindowIsFocused(false)
                                     navAction(
                                         'sub',
                                         logo,
@@ -112,7 +115,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                         projectDescription,
                                         projectTitle,
                                     )
-                                }
+                                }}
                             >
                                 <SanityImg
                                     builder={imageUrlBuilder}

@@ -158,6 +158,7 @@ export const Window_: React.FC<WindowProps> = ({
                             portfolioItems={portfolioItems}
                             portfolioRef={portfolioRef}
                             mdScreenBreakpoint={mdScreenBreakpoint}
+                            setWindowIsFocused={setWindowIsFocused}
                         />
                     </PorfolioWindowWrapper>
                 </Draggable>
@@ -212,6 +213,7 @@ export const Window_: React.FC<WindowProps> = ({
                             {...props}
                             subPortfolioRef={subPortfolioRef}
                             mdScreenBreakpoint={mdScreenBreakpoint}
+                            setWindowIsFocused={setWindowIsFocused}
                         />
                     </SubPorfolioWindowWrapper>
                 </Draggable>

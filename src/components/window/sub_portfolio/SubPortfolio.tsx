@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react'
+import React, { RefObject, useEffect } from 'react'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
 import { imageUrlBuilder, PortableText } from '../../../../utils/sanity'
@@ -11,6 +11,7 @@ import { marksSerializer, typesSerializer } from '../../../libs/blockContent'
 interface SubPortfolioProps extends IWindowsProps {
     subPortfolioRef: RefObject<Element>
     mdScreenBreakpoint: boolean
+    setWindowIsFocused: any
 }
 
 export const SubPortfolio: React.FC<SubPortfolioProps> = ({
@@ -26,13 +27,18 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
     setPositionY,
     subPortfolioRef,
     mdScreenBreakpoint,
+    setWindowIsFocused,
 }) => {
     const {
-        state: {
-            subPortfolio: { logo, title, href, projectDescription, projectTitle },
-            darkMode,
-        },
+        state: { subPortfolio, darkMode },
     } = useCtx()
+
+    useEffect(() => {
+        setWindowIsFocused(true)
+    }, [subPortfolio])
+
+    const { logo, title, href, projectDescription, projectTitle } = subPortfolio
+
     return (
         <>
             <strong className="cursor-move z-20">
@@ -68,7 +74,7 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                 mdScreenBreakpoint={mdScreenBreakpoint}
                 darkMode={darkMode}
             >
-                <div className="bg-red-600h-full">
+                <div className="">
                     <div>
                         <h5 className="text-center font-semibold text-xl">{projectTitle}</h5>
                         <div className="break-normal ">
