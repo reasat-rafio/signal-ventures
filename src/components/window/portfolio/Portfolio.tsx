@@ -6,7 +6,6 @@ import { Header, PortfolioBody, PortfolioContentWrapper } from '../../../styles/
 import { WindowHeaderButtons } from '../WindowHeaderButtons'
 import clsx from 'clsx'
 import { CREATE_WINDOW_BOX, SUB_PORTFOLIO_DATA, TOGGLE_DARK_MODE } from '../../../../store/types'
-// import { NavAction } from '../../../../libs/HelperFunc'
 
 interface PortfolioProps extends IWindowsProps {
     portfolioItems: IPorfolioItems[]
@@ -116,16 +115,22 @@ export const Portfolio: React.FC<PortfolioProps> = ({
                                 key={_id}
                                 className="col-span-10 md:col-span-5 lg:col-span-4 flex flex-col justify-center items-center gap-1 m-auto mx-2 "
                                 onClick={() => {
-                                    setWindowIsFocused(false)
-                                    navAction(
-                                        'sub',
-                                        logo,
-                                        title,
-                                        href,
-                                        projectDescription,
-                                        projectTitle,
-                                        ctaButton,
-                                    )
+                                    if (projectDescription && projectTitle) {
+                                        setWindowIsFocused(false)
+                                        navAction(
+                                            'sub',
+                                            logo,
+                                            title,
+                                            href,
+                                            projectDescription,
+                                            projectTitle,
+                                            ctaButton,
+                                        )
+                                    } else {
+                                        if (window) {
+                                            window.open(href, '_blank')
+                                        }
+                                    }
                                 }}
                             >
                                 <SanityImg

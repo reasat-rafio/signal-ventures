@@ -102,7 +102,7 @@ export const SubPortfolio: React.FC<SubPortfolioProps> = ({
                         )}
 
                         {ctaButton && (
-                            <a className="" href={ctaButton.href} target="_blank">
+                            <a href={ctaButton.href} target="_blank">
                                 <Button size="sm" style={{ fontSize: '15px' }}>
                                     {ctaButton.title}
                                 </Button>
