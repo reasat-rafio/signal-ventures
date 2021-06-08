@@ -155,6 +155,7 @@ export const PortfolioContentWrapper = styled(Cutout)<{
 }>`
     margin: auto;
     position: absolute;
+
     height: ${({ mdScreenBreakpoint }) => `calc(100% - ${mdScreenBreakpoint ? '78px' : '40px'})`};
     width: calc(100% - 4px);
     overflow: auto;
