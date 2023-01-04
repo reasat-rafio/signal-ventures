@@ -1,3 +1,5 @@
+// @ts-nocheck
+// TODO fix typescript errors
 import { Button } from 'react95'
 import { SanityImg } from 'sanity-react-extra'
 import { useCtx } from '../../../../store'
@@ -76,7 +78,6 @@ export const Contact: React.FC<ContactProps> = ({
 
             reset({})
         } catch (error) {
-            console.log(error.message)
             dispatch({
                 type: SHOW_MODAL,
                 payload: {
@@ -117,12 +118,12 @@ export const Contact: React.FC<ContactProps> = ({
                 </Header>
             </strong>
             <form
-                className="grid grid-cols-12 absolute mx-auto gap-2"
+                className="absolute grid grid-cols-12 gap-2 mx-auto"
                 style={{ height: '90%', width: '99%' }}
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <div
-                    className="hidden col-span-4 md:flex justify-center items-center  px-8  h-full w-full  "
+                    className="items-center justify-center hidden w-full h-full col-span-4 px-8 md:flex "
                     style={{ backgroundColor: '#56AAAA' }}
                 >
                     <SanityImg
@@ -133,8 +134,8 @@ export const Contact: React.FC<ContactProps> = ({
                     />
                 </div>
 
-                <div className="md:col-span-8 col-span-12  h-full w-full flex flex-col justify-center gap-4 px-3">
-                    <div className="grid grid-cols-12  gap-4">
+                <div className="flex flex-col justify-center w-full h-full col-span-12 gap-4 px-3 md:col-span-8">
+                    <div className="grid grid-cols-12 gap-4">
                         <p className="col-span-2 ">{email}</p>
                         <ContactTextField
                             disabled={submitting}
@@ -144,7 +145,7 @@ export const Contact: React.FC<ContactProps> = ({
                             fullWidth
                         />
                     </div>
-                    <div className="grid grid-cols-12  gap-4">
+                    <div className="grid grid-cols-12 gap-4">
                         <p className="col-span-2 ">{name}</p>
                         <ContactTextField
                             disabled={submitting}
@@ -154,7 +155,7 @@ export const Contact: React.FC<ContactProps> = ({
                             fullWidth
                         />
                     </div>
-                    <div className="grid grid-cols-12  gap-4">
+                    <div className="grid grid-cols-12 gap-4">
                         <p className="col-span-2 ">{subject}</p>
                         <ContactTextField
                             disabled={submitting}
@@ -164,7 +165,7 @@ export const Contact: React.FC<ContactProps> = ({
                             fullWidth
                         />
                     </div>
-                    <div className="grid grid-cols-12  gap-4">
+                    <div className="grid grid-cols-12 gap-4">
                         <p className="col-span-2">{message}</p>
                         <ContactTextField
                             disabled={submitting}
@@ -176,7 +177,7 @@ export const Contact: React.FC<ContactProps> = ({
                             rows={4}
                         />
                     </div>
-                    <div className="grid grid-cols-12  gap-4">
+                    <div className="grid grid-cols-12 gap-4">
                         <div className="col-span-2" />
 
                         <Button

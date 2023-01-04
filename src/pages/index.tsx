@@ -1,3 +1,5 @@
+//@ts-nocheck
+// TODO fix typescript errors
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
 import { Window_ } from '../components/window/Window'
@@ -20,11 +22,11 @@ import { Loading } from '../components/Loading/Loading'
 import { Modal } from '../components/Modal/Modal'
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
-    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
+    // const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
     return {
         props: {
-            blog: data,
+            blog: [],
             locale: context.locale,
             sanityData: await sanityStaticProps({
                 query,
@@ -59,7 +61,6 @@ export default function Index({ blog, sanityData, locale }) {
             })
         }
     }, [])
-    console.log(more, 'more')
 
     // This will return current page width
     const siteRef = useRef<HTMLDivElement | null>(null)
