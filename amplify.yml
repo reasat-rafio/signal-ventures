@@ -3,8 +3,8 @@ frontend:
     phases:
         build:
             commands:
-                - pnpm install --force
-                - pnpm run build
+                - yarn --force
+                - yarn build
     artifacts:
         baseDirectory: out
         files:
