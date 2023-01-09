@@ -9,7 +9,7 @@ const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET || ''
 export default defineConfig({
     name: 'default',
     title: 'Signal Ventures',
-
+    basePath: '/studio',
     projectId: PROJECT_ID,
     dataset: DATASET,
 

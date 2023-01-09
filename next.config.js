@@ -4,7 +4,6 @@ const config = {
         locales: ['en-SG', 'zh-SG'],
         defaultLocale: 'en-SG',
     },
-    output: 'standalone',
     // future: {
     //     webpack5: true,
     // },
