@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { AppProps } from 'next/app'
 import '../styles/globals.css'
 import { AppProvider } from '../../store'

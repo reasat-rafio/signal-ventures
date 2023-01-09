@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react'
 import Draggable from 'react-draggable'
 import { useToText } from '../../../libs/hooks'

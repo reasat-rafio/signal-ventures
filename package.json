@@ -5,8 +5,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "start": "next start",
-        "postinstall": "lerna bootstrap"
+        "start": "next start"
     },
     "dependencies": {
         "@formspark/use-formspark": "^0.1.39",
