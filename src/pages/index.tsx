@@ -45,7 +45,6 @@ export default function Index({ blog, sanityData, locale }) {
     const {
         data: { site, landingPage, portfolio, contact, modal, articles, seo, more },
     } = useSanityQuery(query, sanityData)
-
     const {
         dispatch,
         state: { activeWindows, darkMode },

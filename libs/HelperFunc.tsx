@@ -8,8 +8,6 @@ export const NavAction = (
     dispatch: (action: Action) => void,
     href?: string,
 ) => {
-    console.log(key)
-
     if (key != undefined) {
         dispatch({
             type: CREATE_WINDOW_BOX,

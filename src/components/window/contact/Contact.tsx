@@ -89,7 +89,7 @@ export const Contact: React.FC<ContactProps> = ({
 
     return (
         <>
-            <strong className="cursor-move" onClick={() => console.log('asd')}>
+            <strong className="cursor-move">
                 <Header active={windowIsFocused ? true : false}>
                     {windowIcon && (
                         <SanityImg

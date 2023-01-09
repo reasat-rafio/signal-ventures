@@ -27,8 +27,6 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
         dispatch,
         state: { openWindows, focusWindow, darkMode, subPortfolio },
     } = useCtx()
-    console.log('focusWindow', focusWindow)
-    console.log('subPortfolio.key', subPortfolio.key)
 
     // State for the windows that is open
     const [_openWindows, setOpenWindows] = useState<Inavs[]>([])
@@ -98,7 +96,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                                 alt={title + 'logo'}
                                 width={20}
                             />
-                            <p className="ml-1 md:block hidden">{title}</p>
+                            <p className="hidden ml-1 md:block">{title}</p>
                         </NavTabs>
                     ))}
                     {subPortfolio.logo && (
@@ -119,7 +117,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                                 alt={subPortfolio.title + 'logo'}
                                 width={20}
                             />
-                            <p className="ml-1 md:block hidden">{subPortfolio.title}</p>
+                            <p className="hidden ml-1 md:block">{subPortfolio.title}</p>
                         </NavTabs>
                     )}
 
@@ -149,7 +147,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                         </NavList>
                     )}
                 </StartBar>
-                <div className="flex gap-2  items-center">
+                <div className="flex items-center gap-2">
                     <Button
                         active={openLanguageSwitcher}
                         onClick={() => setOpenLanguageSwitcher((prev) => !prev)}

@@ -66,8 +66,8 @@ export const Window_: React.FC<WindowProps> = ({
     }
 
     // This will return an array of all the blogs from clients medium
-    const { blogInfo } = useToText(blogItems, blogFeeds, width, isExpanded)
 
+    const { blogInfo } = useToText(blogItems, blogFeeds, width, isExpanded)
     useEffect(() => {
         if (window !== undefined) {
             setWindowIsNotUndefined(true)
