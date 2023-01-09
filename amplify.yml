@@ -1,0 +1,14 @@
+version: 1
+frontend:
+    phases:
+        build:
+            commands:
+                - pnpm install --force
+                - pnpm run build
+    artifacts:
+        baseDirectory: out
+        files:
+            - '**/*'
+    cache:
+        paths:
+            - node_modules/**/*
