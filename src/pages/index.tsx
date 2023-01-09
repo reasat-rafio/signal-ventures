@@ -3,7 +3,9 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
 import { Window_ } from '../components/window/Window'
-import { Home } from '../components/landing/Home'
+// import { Home } from '../components/landing/Home'
+import dynamic from 'next/dynamic'
+
 import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
 import { useCtx } from '../../store'
 import { query } from '../../libs/query'
@@ -21,6 +23,9 @@ import clsx from 'clsx'
 import { Loading } from '../components/Loading/Loading'
 import { Modal } from '../components/Modal/Modal'
 
+const Home = dynamic(() => import('../components/landing/Home'), {
+    ssr: false,
+})
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
@@ -67,7 +72,8 @@ export default function Index({ blog, sanityData, locale }) {
 
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
-            <Container ref={siteRef} darkMode={darkMode}>
+            <></>
+            {/* <Container ref={siteRef} darkMode={darkMode}>
                 <NextSeo title={seo.title} description={seo.description} />
                 <div
                     className={clsx(
@@ -75,14 +81,14 @@ export default function Index({ blog, sanityData, locale }) {
                         darkMode ? 'dark_scrollbar' : 'light_scrollbar',
                     )}
                 >
-                    {/* <Home
+                    <Home
                         title={landingPage.heading}
                         description={landingPage.description}
                         darkLogo={site.logos.dark_logo}
                         lightLogo={site.logos.light_logo}
                         button={landingPage.ctaButton}
                         navs={site.nav.menu}
-                    /> */}
+                    />
 
                     {activeWindows.length > 0 &&
                         activeWindows.map(({ key }: WindowsProps, index: number) => (
@@ -110,7 +116,7 @@ export default function Index({ blog, sanityData, locale }) {
                     <Loading />
                     <Modal modal={modal} />
                 </div>
-            </Container>
+            </Container> */}
         </ThemeProvider>
     )
 }
