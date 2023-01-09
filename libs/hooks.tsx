@@ -61,7 +61,7 @@ export const useToText = (
     isExpanded: boolean,
 ) => {
     const [blogInfo, setBlogInfo] = useState<IBloginfo[]>([])
-    // const { image, link } = feed
+    const { image, link } = feed
     const [pageWidth, setPageWidth] = useState<number>(0)
 
     // This will set the words count for the article based on page width
@@ -95,8 +95,8 @@ export const useToText = (
                 title,
                 thumbnail,
                 author,
-                image: feed?.image,
-                link: feed?.link,
+                image: image,
+                link: link,
             }
         })
         setBlogInfo(newArr)

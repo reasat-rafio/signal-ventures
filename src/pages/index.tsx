@@ -75,14 +75,14 @@ export default function Index({ blog, sanityData, locale }) {
                         darkMode ? 'dark_scrollbar' : 'light_scrollbar',
                     )}
                 >
-                    <Home
+                    {/* <Home
                         title={landingPage.heading}
                         description={landingPage.description}
                         darkLogo={site.logos.dark_logo}
                         lightLogo={site.logos.light_logo}
                         button={landingPage.ctaButton}
                         navs={site.nav.menu}
-                    />
+                    /> */}
 
                     {activeWindows.length > 0 &&
                         activeWindows.map(({ key }: WindowsProps, index: number) => (
