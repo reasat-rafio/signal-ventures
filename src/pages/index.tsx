@@ -3,7 +3,7 @@
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
 import { Window_ } from '../components/window/Window'
-// import { Home } from '../components/landing/Home'
+import { Home } from '../components/landing/Home'
 import dynamic from 'next/dynamic'
 
 import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
@@ -23,9 +23,6 @@ import clsx from 'clsx'
 import { Loading } from '../components/Loading/Loading'
 import { Modal } from '../components/Modal/Modal'
 
-const Home = dynamic(() => import('../components/landing/Home'), {
-    ssr: false,
-})
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
