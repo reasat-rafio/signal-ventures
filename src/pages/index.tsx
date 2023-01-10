@@ -73,7 +73,7 @@ export default function Index({ blog, sanityData, locale }) {
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
             <></>
-            {/* <Container ref={siteRef} darkMode={darkMode}>
+            <Container ref={siteRef} darkMode={darkMode}>
                 <NextSeo title={seo.title} description={seo.description} />
                 <div
                     className={clsx(
@@ -116,7 +116,7 @@ export default function Index({ blog, sanityData, locale }) {
                     <Loading />
                     <Modal modal={modal} />
                 </div>
-            </Container> */}
+            </Container>
         </ThemeProvider>
     )
 }
