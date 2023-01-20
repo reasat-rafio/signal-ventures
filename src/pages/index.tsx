@@ -2,27 +2,56 @@
 // TODO fix typescript errors
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
-import { Window_ } from '../components/window/Window'
-import { Home } from '../components/landing/Home'
+// import { Window_ } from '../components/window/Window'
+// import { Home } from '../components/landing/Home'
 import dynamic from 'next/dynamic'
 
-import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
-import { useCtx } from '../../store'
-import { query } from '../../libs/query'
-import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
+import axios from 'axios'
 import { useEffect, useRef } from 'react'
 import { useSiteHeightAndWidth } from '../../libs/hooks'
+import { query } from '../../libs/query'
+import { useCtx } from '../../store'
+import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
+// import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
 import { Container } from '../styles/Styles'
-import axios from 'axios'
-import { DesktopNavs } from '../components/navbar/DesktopNavs'
+// import { DesktopNavs } from '../components/navbar/DesktopNavs'
 import { ThemeProvider } from 'styled-components'
 import { dark_mode, light_mode } from '../../libs/theme'
 import { SET_MODE } from '../../store/types'
-import { AppCanvas } from '../components/Canvas/AppCanvas'
+// import { AppCanvas } from '../components/Canvas/AppCanvas'
 import clsx from 'clsx'
-import { Loading } from '../components/Loading/Loading'
-import { Modal } from '../components/Modal/Modal'
-
+// import { Loading } from '../components/Loading/Loading'
+// import { Modal } from '../components/Modal/Modal'
+const StartMenuNavbar = dynamic(
+    () => import('../components/navbar/StartMenuNavbar').then((mod) => mod.StartMenuNavbar),
+    {
+        ssr: false,
+    },
+)
+const Modal = dynamic(() => import('../components/Modal/Modal').then((mod) => mod.Modal), {
+    ssr: false,
+})
+const Loading = dynamic(() => import('../components/Loading/Loading').then((mod) => mod.Loading), {
+    ssr: false,
+})
+const AppCanvas = dynamic(
+    () => import('../components/Canvas/AppCanvas').then((mod) => mod.AppCanvas),
+    {
+        ssr: false,
+    },
+)
+const Home = dynamic(() => import('../components/landing/Home').then((mod) => mod.Home), {
+    ssr: false,
+})
+const DesktopNavs = dynamic(
+    () => import('../components/navbar/DesktopNavs').then((mod) => mod.DesktopNavs),
+    {
+        ssr: false,
+    },
+)
+const Window_ = dynamic(() => import('../components/window/Window').then((mod) => mod.Window_), {
+    ssr: false,
+})
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
 
