@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Button, ListItem, Tooltip } from 'react95'
+import { ListItem, Tooltip } from 'react95'
 import {
     LanguageList,
     NavBar,
@@ -16,7 +16,8 @@ import { CREATE_WINDOW_BOX } from '../../../store/types'
 import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 import { NavAction } from '../../../libs/HelperFunc'
-
+import dynamic from 'next/dynamic'
+const Button = dynamic(() => import('react95').then((mod) => mod.Button), { ssr: false })
 export const StartMenuNavbar: React.FC<NavbarProps> = ({
     navs,
     startMenu,
