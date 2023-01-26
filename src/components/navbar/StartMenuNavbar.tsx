@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { ComponentType, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ListItem, Tooltip } from 'react95'
 import {
@@ -17,7 +17,10 @@ import { imageUrlBuilder } from '../../../utils/sanity'
 import { useCtx } from '../../../store'
 import { NavAction } from '../../../libs/HelperFunc'
 import dynamic from 'next/dynamic'
-const Button = dynamic(() => import('react95').then((mod) => mod.Button), { ssr: false })
+const Button: any = dynamic(() => import('react95').then((mod) => mod.Button), {
+    ssr: false,
+})
+
 export const StartMenuNavbar: React.FC<NavbarProps> = ({
     navs,
     startMenu,

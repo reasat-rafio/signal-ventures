@@ -18,8 +18,6 @@ export const useDate = (_locale: string) => {
         month: 'long',
     })}\n\n`
 
-    const hour = today.getHours()
-
     const time = today.toLocaleTimeString(locale, {
         hour: 'numeric',
         hour12: true,
