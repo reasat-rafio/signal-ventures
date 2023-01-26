@@ -46,7 +46,7 @@ export const useSiteHeightAndWidth = (myRef: any) => {
             setHeight(myRef.current.offsetHeight)
         }
         window.addEventListener('resize', handleResize)
-
+        console.log(myRef)
         return () => {
             window.removeEventListener('resize', handleResize)
         }

@@ -22,39 +22,21 @@ import { SET_MODE } from '../../store/types'
 import clsx from 'clsx'
 // import { Loading } from '../components/Loading/Loading'
 // import { Modal } from '../components/Modal/Modal'
-const StartMenuNavbar = dynamic(
-    () => import('../components/navbar/StartMenuNavbar').then((mod) => mod.StartMenuNavbar),
-    {
-        ssr: false,
-    },
+const StartMenuNavbar = dynamic(() =>
+    import('../components/navbar/StartMenuNavbar').then((mod) => mod.StartMenuNavbar),
 )
-const Modal = dynamic(() => import('../components/Modal/Modal').then((mod) => mod.Modal), {
-    ssr: false,
-})
-const Loading = dynamic(() => import('../components/Loading/Loading').then((mod) => mod.Loading), {
-    ssr: false,
-})
-const AppCanvas = dynamic(
-    () => import('../components/Canvas/AppCanvas').then((mod) => mod.AppCanvas),
-    {
-        ssr: false,
-    },
+const Modal = dynamic(() => import('../components/Modal/Modal').then((mod) => mod.Modal))
+const Loading = dynamic(() => import('../components/Loading/Loading').then((mod) => mod.Loading))
+const AppCanvas = dynamic(() =>
+    import('../components/Canvas/AppCanvas').then((mod) => mod.AppCanvas),
 )
-const Home = dynamic(() => import('../components/landing/Home').then((mod) => mod.Home), {
-    ssr: false,
-})
-const DesktopNavs = dynamic(
-    () => import('../components/navbar/DesktopNavs').then((mod) => mod.DesktopNavs),
-    {
-        ssr: false,
-    },
+const Home = dynamic(() => import('../components/landing/Home').then((mod) => mod.Home))
+const DesktopNavs = dynamic(() =>
+    import('../components/navbar/DesktopNavs').then((mod) => mod.DesktopNavs),
 )
-const Window_ = dynamic(() => import('../components/window/Window').then((mod) => mod.Window_), {
-    ssr: false,
-})
+const Window_ = dynamic(() => import('../components/window/Window').then((mod) => mod.Window_))
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
-
     return {
         props: {
             blog: data,
@@ -98,7 +80,6 @@ export default function Index({ blog, sanityData, locale }) {
 
     return (
         <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
-            <></>
             <Container ref={siteRef} darkMode={darkMode}>
                 <NextSeo title={seo.title} description={seo.description} />
                 <div

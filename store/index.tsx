@@ -10,7 +10,9 @@ export const AppProvider: React.FC<PropIsChildren> = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        localStorage.setItem('signal_ventures_active_mode', JSON.stringify(state.darkMode))
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('signal_ventures_active_mode', JSON.stringify(state.darkMode))
+        }
     }, [state])
 
     return <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
