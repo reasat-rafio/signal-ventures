@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ListItem, Tooltip } from 'react95'
 import {
@@ -197,7 +197,7 @@ export const StartMenuNavbar: React.FC<NavbarProps> = ({
                         style={{
                             position: 'absolute',
                             left: '0',
-                            bottom: '100%',
+                            bottom: '0%',
                         }}
                     >
                         <Button variant="flat" disabled>
