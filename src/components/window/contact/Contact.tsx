@@ -78,7 +78,6 @@ export const Contact: React.FC<ContactProps> = ({
 
             reset({})
         } catch (error) {
-            console.log(error)
             dispatch({
                 type: SHOW_MODAL,
                 payload: {

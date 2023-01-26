@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button } from 'react95'
 import { SanityImg } from 'sanity-react-extra'
 import { NavAction } from '../../../libs/HelperFunc'
@@ -23,13 +23,13 @@ export const Home: React.FC<HomeProps> = ({
     const { logo, key, dark_mode, href } = portfolio[0]
 
     return (
-        <section className="flex flex-col justify-center items-center transform h-screen  px-2 md:px-0 z-10 -translate-y-9 lg:-translate-y-28">
+        <section className="z-10 flex flex-col items-center justify-center h-screen px-2 transform md:px-0 -translate-y-9 lg:-translate-y-28">
             <SanityImg
                 builder={imageUrlBuilder}
                 image={darkMode ? darkLogo : lightLogo}
                 alt={'signal ventures logo'}
                 width={200}
-                className="w-44 h-44 md:w-56 md:h-56 object-center"
+                className="object-center w-44 h-44 md:w-56 md:h-56"
             />
             <h1
                 className={clsx(
