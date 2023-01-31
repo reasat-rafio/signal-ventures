@@ -16,13 +16,8 @@ const config = {
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
     dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
     useCdn: process.env.NODE_ENV === 'production',
-    token: process.env.SANITY_API_TOKEN,
+    token: process.env.NEXT_PUBLIC_SANITY_API_TOKEN,
 }
 
-export const {
-    sanityClient,
-    imageUrlBuilder,
-    PortableText,
-    sanityStaticProps,
-    useSanityQuery,
-} = setupNextSanity(config)
+export const { sanityClient, imageUrlBuilder, PortableText, sanityStaticProps, useSanityQuery } =
+    setupNextSanity(config)

@@ -1,4 +1,12 @@
 import {
+    HIDE_MODAL,
+    LOADING_END,
+    LOADING_START,
+    SET_MODE,
+    SHOW_MODAL,
+    SUB_PORTFOLIO_DATA,
+} from './../types'
+import {
     CREATE_WINDOW_BOX,
     MINIMIZE_WINDOW_BOX,
     CLOSE_WINDOW_BOX,
@@ -9,8 +17,14 @@ import {
 export const initialState: InitalState = {
     openWindows: [],
     activeWindows: [],
+    subPortfolio: {},
     focusWindow: null,
-    darkMode: false,
+    darkMode: true,
+    loading: false,
+    showModal: false,
+    modalData: {
+        success: false,
+    },
 }
 
 export const reducer = (state: InitalState, action: Action) => {
@@ -19,26 +33,24 @@ export const reducer = (state: InitalState, action: Action) => {
             const { openWindows, activeWindows } = state
 
             if (
-                !openWindows
-                    .map((window: WindowsProps) => window.index)
-                    .includes(action.payload.index)
+                !openWindows.map((window: WindowsProps) => window.key).includes(action.payload.key)
             ) {
                 openWindows.push(action.payload)
             }
             if (
                 !activeWindows
-                    .map((window: WindowsProps) => window.index)
-                    .includes(action.payload.index)
+                    .map((window: WindowsProps) => window.key)
+                    .includes(action.payload.key)
             ) {
                 activeWindows.push(action.payload)
             }
 
-            return { ...state, openWindows, activeWindows, focusWindow: action.payload.index }
+            return { ...state, openWindows, activeWindows, focusWindow: action.payload.key }
         }
         case MINIMIZE_WINDOW_BOX: {
             let { activeWindows } = state
             activeWindows = activeWindows.filter(
-                (window: WindowsProps) => window.index !== action.payload,
+                (window: WindowsProps) => window.key !== action.payload,
             )
             return { ...state, activeWindows }
         }
@@ -46,15 +58,24 @@ export const reducer = (state: InitalState, action: Action) => {
         case CLOSE_WINDOW_BOX: {
             let { openWindows, activeWindows } = state
             activeWindows = activeWindows.filter(
-                (window: WindowsProps) => window.index !== action.payload,
+                (window: WindowsProps) => window.key !== action.payload,
             )
             openWindows = openWindows.filter(
-                (window: WindowsProps) => window.index !== action.payload,
+                (window: WindowsProps) => window.key !== action.payload,
             )
-            return {
-                ...state,
-                openWindows,
-                activeWindows,
+            if (action.payload == 'sub') {
+                return {
+                    ...state,
+                    openWindows,
+                    activeWindows,
+                    subPortfolio: {},
+                }
+            } else {
+                return {
+                    ...state,
+                    openWindows,
+                    activeWindows,
+                }
             }
         }
 
@@ -69,6 +90,44 @@ export const reducer = (state: InitalState, action: Action) => {
             return {
                 ...state,
                 darkMode: !darkMode,
+            }
+
+        case SET_MODE:
+            return {
+                ...state,
+                darkMode: action.payload,
+            }
+
+        case LOADING_START:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case LOADING_END:
+            return {
+                ...state,
+                loading: false,
+            }
+
+        case SHOW_MODAL:
+            return {
+                ...state,
+                showModal: true,
+                modalData: action.payload,
+            }
+
+        case HIDE_MODAL:
+            return {
+                ...state,
+                showModal: false,
+                modalData: {},
+            }
+
+        case SUB_PORTFOLIO_DATA:
+            return {
+                ...state,
+                subPortfolio: action.payload,
             }
 
         default:

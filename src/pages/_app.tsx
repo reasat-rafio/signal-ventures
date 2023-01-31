@@ -1,22 +1,31 @@
+// @ts-nocheck
 import { AppProps } from 'next/app'
 import '../styles/globals.css'
-import light_theme from 'react95/dist/themes/original'
-import { ThemeProvider } from 'styled-components'
-import { AppProvider, useCtx } from '../../store'
-import { dark_theme } from '../../libs/theme'
+import { AppProvider } from '../../store'
+import { imageUrlBuilder } from '../../utils/sanity'
+import Head from 'next/head'
 
 export default function App({ Component, pageProps }: AppProps) {
-    const {
-        state: { darkMode },
-    } = useCtx()
+    let faviconImage: string | null = null
+
+    if (pageProps.sanityData?.data?.site.logos.favicon) {
+        faviconImage = imageUrlBuilder
+            .image(pageProps.sanityData?.data?.site.logos.favicon)
+            .width(256)
+            .height(256)
+            .url()
+    }
 
     return (
-        <div>
+        <>
+            {faviconImage && (
+                <Head>
+                    <link rel="icon" type="image/png" href={faviconImage} />
+                </Head>
+            )}
             <AppProvider>
-                <ThemeProvider theme={light_theme}>
-                    <Component {...pageProps} />
-                </ThemeProvider>
+                <Component {...pageProps} />
             </AppProvider>
-        </div>
+        </>
     )
 }

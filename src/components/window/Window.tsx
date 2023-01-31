@@ -1,34 +1,96 @@
-import Image from 'next/image'
+// @ts-nocheck
 import React, { useEffect, useRef, useState } from 'react'
 import Draggable from 'react-draggable'
-import { Button } from 'react95'
+import { useToText } from '../../../libs/hooks'
 import { useCtx } from '../../../store'
-import { CLOSE_WINDOW_BOX, FOCUS_WINDOW_BOX, MINIMIZE_WINDOW_BOX } from '../../../store/types'
-import { WindowWrapper, Header, Body } from '../../styles/Styles'
+import { Articles } from './articles/Articles'
+import { Contact } from './contact/Contact'
+import { Portfolio } from './portfolio/Portfolio'
+import {
+    ArticelWindowWrapper,
+    ContactWindowsWrapper,
+    PorfolioWindowWrapper,
+    SubPorfolioWindowWrapper,
+} from '../../styles/Styles'
+import { FOCUS_WINDOW_BOX } from '../../../store/types'
+import { SubPortfolio } from './sub_portfolio/SubPortfolio'
 
-interface WindowProps {
-    index: string
-    width: number
-}
-
-export const Window_: React.FC<WindowProps> = ({ index, width }) => {
+export const Window_: React.FC<WindowProps> = ({
+    index,
+    width,
+    blogItems,
+    blogFeeds,
+    portfolioItems,
+    contact,
+    navs,
+    articlesPlaceholder,
+    portfolioActionButton,
+}) => {
     const {
         dispatch,
-        state: { focusWindow },
+        state: { focusWindow, activeWindows },
     } = useCtx()
-
+    // State to find out this window is expanded or not
     const [isExpanded, setIsExpanded] = useState<boolean>(false)
     const [windowIsNotUndefined, setWindowIsNotUndefined] = useState<boolean>(false)
+
+    // X and Y axis of the window when its draggable
     const [xaxis, setXaxis] = useState<number>(0)
     const [yaxis, setYaxis] = useState<number>(0)
+
+    // This two state will keep the x and y value of the window position right before it expended
+    const [positionX, setPositionX] = useState<number>(0)
+    const [positionY, setPositionY] = useState<number>(0)
+
+    //Window that is focused right now | clicked (for stylings and setting the window header active)
     const [windowIsFocused, setWindowIsFocused] = useState<boolean>(false)
+
+    // Md screen (992) or less breakpoint (for stylings)
     const [mdScreenBreakpoint, setMdScreenBreakpoint] = useState<boolean>(false)
 
+    // THIS windows name icon and key
+    const [windowName, setWindowName] = useState<string>('')
+    const [windowIcon, setWindowIcon] = useState<Logo | undefined | any>()
+    const [windowKey, setWindowKey] = useState<string>('')
+
+    const findWindowDetails = (key: string) => {
+        // Finding THIS windows info from global store by key and setting them to state
+        const findWinFromStore: WindowsProps[] = [...activeWindows].filter((i) => i.key == key)
+
+        const findWin = [...navs, { title: 'sub', logo: '', key: 'sub' }].filter(
+            ({ key }) => key == findWinFromStore[0].key,
+        )
+        setWindowName(findWin[0].title)
+        setWindowIcon(findWin[0].logo)
+        setWindowKey(findWin[0].key)
+    }
+
+    // This will return an array of all the blogs from clients medium
+
+    const { blogInfo } = useToText(blogItems, blogFeeds, width, isExpanded)
     useEffect(() => {
         if (window !== undefined) {
             setWindowIsNotUndefined(true)
         }
-    }, [])
+        // This will find the info of THIS window and set it in the states
+        switch (index) {
+            case 'articles':
+                findWindowDetails('articles')
+                break
+            case 'portfolio':
+                findWindowDetails('portfolio')
+                break
+            case 'contact':
+                findWindowDetails('contact')
+                break
+            case 'sub':
+                findWindowDetails('sub')
+                break
+            default:
+                setWindowName('...')
+                break
+        }
+    }, [activeWindows, navs])
 
     useEffect(() => {
         width >= 992 ? setMdScreenBreakpoint(false) : setMdScreenBreakpoint(true)
@@ -38,76 +100,123 @@ export const Window_: React.FC<WindowProps> = ({ index, width }) => {
         focusWindow === index ? setWindowIsFocused(true) : setWindowIsFocused(false)
     }, [focusWindow])
 
-    const draggable = (e: any, data: DraggableData) => {
+    // This will set the window X and Y axis to state
+    const draggable = (e, data: DraggableData) => {
         setXaxis(data.x)
         setYaxis(data.y)
     }
 
+    const props = {
+        windowIsFocused,
+        isExpanded,
+        index,
+        windowName,
+        windowIcon,
+        setIsExpanded,
+        xaxis,
+        yaxis,
+        positionX,
+        positionY,
+        setPositionX,
+        setPositionY,
+    }
+
+    const draggableProps = {
+        handle: 'strong',
+        onDrag: draggable,
+        onStart: draggable,
+        onStop: draggable,
+        bounds: 'body',
+        position: {
+            x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
+            y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
+        },
+    }
+
+    const portfolioRef = useRef<HTMLDivElement | null>(null)
+    const contactRef = useRef<HTMLDivElement | null>(null)
+    const articlesRef = useRef<HTMLDivElement | null>(null)
+    const subPortfolioRef = useRef<HTMLDivElement | null>(null)
     return (
         <>
-            {windowIsNotUndefined && (
+            {windowIsNotUndefined && windowKey === 'portfolio' && (
                 <Draggable
-                    onDrag={draggable}
-                    onStart={draggable}
-                    onStop={draggable}
-                    bounds="body"
-                    position={{
-                        x: mdScreenBreakpoint ? 0 : isExpanded ? 0 : xaxis,
-                        y: mdScreenBreakpoint ? 0 : isExpanded ? 0 : yaxis,
-                    }}
+                    {...draggableProps}
+                    disabled={mdScreenBreakpoint || isExpanded ? true : false}
                 >
-                    <WindowWrapper
+                    <PorfolioWindowWrapper
+                        ref={portfolioRef}
+                        windowKey={windowKey}
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        onClick={(e) => {
+                            dispatch({ type: FOCUS_WINDOW_BOX, payload: index })
+                        }}
+                    >
+                        <Portfolio
+                            {...props}
+                            portfolioItems={portfolioItems}
+                            portfolioRef={portfolioRef}
+                            mdScreenBreakpoint={mdScreenBreakpoint}
+                            setWindowIsFocused={setWindowIsFocused}
+                        />
+                    </PorfolioWindowWrapper>
+                </Draggable>
+            )}
+
+            {windowIsNotUndefined && windowKey === 'contact' && (
+                <Draggable {...draggableProps} disabled={mdScreenBreakpoint ? true : false}>
+                    <ContactWindowsWrapper
+                        ref={contactRef}
                         windowIsFocused={windowIsFocused}
                         isExpanded={isExpanded}
                         onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
                     >
-                        <Header active={windowIsFocused ? true : false}>
-                            <strong className="cursor">
-                                <div>{focusWindow}</div>
-                            </strong>
-                            <div className="flex justify-end flex-1">
-                                <Button
-                                    size="sm"
-                                    onClick={() =>
-                                        dispatch({ type: MINIMIZE_WINDOW_BOX, payload: index })
-                                    }
-                                >
-                                    <Image
-                                        src="/img/static/close.png"
-                                        layout="intrinsic"
-                                        width="27%"
-                                        height="27%"
-                                        alt="minimize"
-                                    />
-                                </Button>
-                                <Button size="sm" onClick={() => setIsExpanded((prev) => !prev)}>
-                                    <Image
-                                        src="/img/static/maximize.png"
-                                        layout="intrinsic"
-                                        width="18"
-                                        height="18"
-                                        alt="maximize"
-                                    />
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    onClick={() =>
-                                        dispatch({ type: CLOSE_WINDOW_BOX, payload: index })
-                                    }
-                                >
-                                    <Image
-                                        src="/img/static/cross.png"
-                                        layout="intrinsic"
-                                        width="30%"
-                                        height="27%"
-                                        alt="close"
-                                    />
-                                </Button>
-                            </div>
-                        </Header>
-
-                        <Body isExpanded={isExpanded}>Demo Body</Body>
-                    </WindowWrapper>
+                        <Contact {...props} contact={contact} contactRef={contactRef} />
+                    </ContactWindowsWrapper>
+                </Draggable>
+            )}
+            {/*  */}
+            {windowIsNotUndefined && windowKey === 'articles' && (
+                <Draggable {...draggableProps} disabled={mdScreenBreakpoint ? true : false}>
+                    <ArticelWindowWrapper
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        ref={articlesRef}
+                        onClick={(e) => dispatch({ type: FOCUS_WINDOW_BOX, payload: index })}
+                    >
+                        <Articles
+                            {...props}
+                            blogInfo={blogInfo}
+                            articlesPlaceholder={articlesPlaceholder}
+                            articlesRef={articlesRef}
+                        />
+                    </ArticelWindowWrapper>
+                </Draggable>
+            )}
+            {/*  */}
+            {windowIsNotUndefined && windowKey === 'sub' && (
+                <Draggable
+                    {...draggableProps}
+                    disabled={mdScreenBreakpoint || isExpanded ? true : false}
+                >
+                    <SubPorfolioWindowWrapper
+                        ref={portfolioRef}
+                        windowKey={windowKey}
+                        windowIsFocused={windowIsFocused}
+                        isExpanded={isExpanded}
+                        onClick={(e) => {
+                            dispatch({ type: FOCUS_WINDOW_BOX, payload: index })
+                        }}
+                    >
+                        <SubPortfolio
+                            {...props}
+                            subPortfolioRef={subPortfolioRef}
+                            mdScreenBreakpoint={mdScreenBreakpoint}
+                            setWindowIsFocused={setWindowIsFocused}
+                            portfolioActionButton={portfolioActionButton}
+                        />
+                    </SubPorfolioWindowWrapper>
                 </Draggable>
             )}
         </>

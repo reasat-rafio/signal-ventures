@@ -3,11 +3,34 @@ import createSchema from 'part:@sanity/base/schema-creator'
 
 // Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
-import site from './site'
-import seo from './seo'
+//
+
+//site
+import logos from './site/logos'
+import navs from './site/nav'
+import startButton from './site/startButton'
+import languageSwitcher from './site/languageSwitcher'
+import more from './site/more'
+
+//landing page
 import landingPage from './landingPage'
-import menuItem from './menuItem'
-import nav from './nav'
+import seo from './seo'
+
+//portfolio
+import portfolioItem from './portfolioItem'
+
+//contact window
+import contact from './contact'
+
+// articles window
+import articles from './articles'
+
+//types = object
+import ctaButton from './ctaButton'
+import navItems from './navItems'
+
+//
+import modal from './modal'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -15,5 +38,19 @@ export default createSchema({
     name: 'default',
     // Then proceed to concatenate our document type
     // to the ones provided by any plugins that are installed
-    types: schemaTypes.concat([site, seo, landingPage, menuItem]),
+    types: schemaTypes.concat([
+        logos,
+        navs,
+        startButton,
+        seo,
+        landingPage,
+        navItems,
+        ctaButton,
+        portfolioItem,
+        contact,
+        languageSwitcher,
+        modal,
+        articles,
+        more,
+    ]),
 })

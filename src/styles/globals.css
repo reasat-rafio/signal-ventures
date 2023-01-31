@@ -1,8 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark_scrollbar {
+    scrollbar-color: #39f5e6 #1f0220;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #1f0220;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #39f5e6;
+        border-radius: 5px;
+    }
+}
+
+.light_scrollbar {
+    scrollbar-color: #a9a9a9 #ffff;
+    scrollbar-width: thin;
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: #ffff;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #a9a9a9;
+        border-radius: 5px;
+    }
+}
 
 html {
     cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAh0lEQVRYhe2WSwrAIAxEJ6H3v3K6MaX110WbzCYPRNTFPKOIAGAgoq2nSSgAmBlNwitAk9D7gCGh/US2xCCQLTEVyJRYCmRJbAUyJI7VgogMLgCGya88KjAJla79ziXQwsUlUi+hh0eHLQW68NQqKEg7d3bh1ioQekSv7wAbA/nHVBRFURThnD/uMROGdeAFAAAAAElFTkSuQmCC'),

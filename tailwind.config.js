@@ -6,6 +6,15 @@ module.exports = {
             opacity: {
                 99: '.99',
             },
+            gridTemplateColumns: {
+                20: 'repeat(20, minmax(0, 1fr))',
+            },
+            fontFamily: {
+                header: ['Audiowide', 'cursive'],
+            },
+            fontSize: {
+                big: '3.5rem',
+            },
         },
     },
     variants: {

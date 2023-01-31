@@ -1,58 +1,129 @@
-import { groq } from 'next-sanity'
+//@ts-nocheck
+// TODO fix typescript errors
 import { GetStaticProps, GetStaticPropsContext } from 'next'
 import { NextSeo } from 'next-seo'
-import { SanityProps } from 'next-sanity-extra'
-import { Window_ } from '../components/window/Window'
-import { Home } from '../components/landing/Home'
-import { Navbar } from '../components/navbar/Navbar'
-import { useCtx } from '../../store'
-import { siteQuery } from '../../libs/query'
-import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
-import { useRef } from 'react'
+// import { Window_ } from '../components/window/Window'
+// import { Home } from '../components/landing/Home'
+import dynamic from 'next/dynamic'
+
+import axios from 'axios'
+import { useEffect, useRef } from 'react'
 import { useSiteHeightAndWidth } from '../../libs/hooks'
+import { query } from '../../libs/query'
+import { useCtx } from '../../store'
+import { sanityStaticProps, useSanityQuery } from '../../utils/sanity'
+// import { StartMenuNavbar } from '../components/navbar/StartMenuNavbar'
 import { Container } from '../styles/Styles'
+// import { DesktopNavs } from '../components/navbar/DesktopNavs'
+import { ThemeProvider } from 'styled-components'
+import { dark_mode, light_mode } from '../../libs/theme'
+import { SET_MODE } from '../../store/types'
+// import { AppCanvas } from '../components/Canvas/AppCanvas'
+import clsx from 'clsx'
+// import { Loading } from '../components/Loading/Loading'
+// import { Modal } from '../components/Modal/Modal'
+const StartMenuNavbar = dynamic(() =>
+    import('../components/navbar/StartMenuNavbar').then((mod) => mod.StartMenuNavbar),
+)
+const Modal = dynamic(() => import('../components/Modal/Modal').then((mod) => mod.Modal))
+const Loading = dynamic(() => import('../components/Loading/Loading').then((mod) => mod.Loading))
+const AppCanvas = dynamic(() =>
+    import('../components/Canvas/AppCanvas').then((mod) => mod.AppCanvas),
+)
+const Home = dynamic(() => import('../components/landing/Home').then((mod) => mod.Home))
+const DesktopNavs = dynamic(() =>
+    import('../components/navbar/DesktopNavs').then((mod) => mod.DesktopNavs),
+)
+const Window_ = dynamic(() => import('../components/window/Window').then((mod) => mod.Window_))
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_MEDIUM_URL}`)
+    return {
+        props: {
+            blog: data,
+            locale: context.locale,
+            sanityData: await sanityStaticProps({
+                query,
+                context,
+                params: {
+                    locale: context.locale,
+                },
+                authenticated: true,
+            }),
+        },
+        revalidate: 10,
+    }
+}
 
-const query = groq`{
-  "site": ${siteQuery},
-  "landingPage": *[_id == "landingPage"][0]{
-    seo,
-    heading,
-    description
-  }
-}`
-
-export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => ({
-    props: await sanityStaticProps({ query, context }),
-})
-
-export default function Index(props: SanityProps) {
+export default function Index({ blog, sanityData, locale }) {
     const {
-        data: { site, landingPage },
-    } = useSanityQuery(query, props)
-
+        data: { site, landingPage, portfolio, contact, modal, articles, seo, more },
+    } = useSanityQuery(query, sanityData)
     const {
+        dispatch,
         state: { activeWindows, darkMode },
     } = useCtx()
-    console.log('darkMode:', darkMode)
 
-    const siteRef = useRef<HTMLDivElement>(null)
-    const { height, width } = useSiteHeightAndWidth(siteRef)
+    useEffect(() => {
+        const localData = localStorage.getItem('signal_ventures_active_mode')
+        if (localData) {
+            const mode = JSON.parse(localData)
+            dispatch({
+                type: SET_MODE,
+                payload: mode,
+            })
+        }
+    }, [])
+
+    // This will return current page width
+    const siteRef = useRef<HTMLDivElement | null>(null)
+    const { width } = useSiteHeightAndWidth(siteRef)
 
     return (
-        <Container ref={siteRef} darkMode={darkMode}>
-            <NextSeo title={landingPage.seo.title} description={landingPage.seo.description} />
-            <div className="container mx-auto flex flex-col items-center ">
-                <Home
-                    title={landingPage.heading}
-                    description={landingPage.description}
-                    logo={site.sites.logo.asset.url}
-                />
+        <ThemeProvider theme={darkMode ? dark_mode : light_mode}>
+            <Container ref={siteRef} darkMode={darkMode}>
+                <NextSeo title={seo.title} description={seo.description} />
+                <div
+                    className={clsx(
+                        'container mx-auto flex flex-col items-center',
+                        darkMode ? 'dark_scrollbar' : 'light_scrollbar',
+                    )}
+                >
+                    <Home
+                        title={landingPage.heading}
+                        description={landingPage.description}
+                        darkLogo={site.logos.dark_logo}
+                        lightLogo={site.logos.light_logo}
+                        button={landingPage.ctaButton}
+                        navs={site.nav.menu}
+                    />
 
-                {activeWindows.map(({ index }: WindowsProps) => (
-                    <Window_ key={index} index={index} width={width} />
-                ))}
-                <Navbar nav={site.sites.nav} />
-            </div>
-        </Container>
+                    {activeWindows.length > 0 &&
+                        activeWindows.map(({ key }: WindowsProps, index: number) => (
+                            <Window_
+                                key={index}
+                                index={key}
+                                width={width}
+                                portfolioItems={portfolio}
+                                contact={contact}
+                                blogItems={blog.items}
+                                blogFeeds={blog.feed}
+                                navs={site.nav.menu}
+                                articlesPlaceholder={articles}
+                                portfolioActionButton={more.portfolioActionButton}
+                            />
+                        ))}
+                    <DesktopNavs navs={site.nav.menu} />
+                    <StartMenuNavbar
+                        navs={site.nav.menu}
+                        startMenu={site.startButton}
+                        languageSwitcher={site.languageSwitcher}
+                        locale={locale}
+                    />
+                    <AppCanvas />
+                    <Loading />
+                    <Modal modal={modal} />
+                </div>
+            </Container>
+        </ThemeProvider>
     )
 }
